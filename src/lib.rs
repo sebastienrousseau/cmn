@@ -118,8 +118,8 @@ pub mod constants;
 /// collection of words that are used throughout the library.
 pub mod words;
 
-use constants::Constants;
-use words::Words;
+pub use constants::Constants;
+pub use words::Words;
 
 /// The `Common` structure provides a central location to store data
 /// that is commonly used throughout the library. The structure
