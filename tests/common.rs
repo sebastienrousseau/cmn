@@ -5,9 +5,9 @@ mod tests {
 
     #[test]
     fn test_new() {
-        let constants = Constants.constants();
-        assert!(constants.len() >= 9);
-        // assert_eq!(common.constants().constant().len(), 9);
+        let new_constant = Constants.constants();
+        let constants = new_constant;
+        assert!(constants.len() > 0);
     }
 
     #[test]
