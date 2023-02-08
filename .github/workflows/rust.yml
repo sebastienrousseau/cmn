@@ -201,7 +201,7 @@ jobs:
           # Append version information to CHANGELOG.md
           echo "## [${{ env.VERSION }}] - $(date +'%Y-%m-%d')" >> ${{ github.workspace }}/CHANGELOG.md
           # Copy content of template file to CHANGELOG.md
-          cat TEMPLATE.md > ${{ github.workspace }}/CHANGELOG.md
+          cat README.md > ${{ github.workspace }}/CHANGELOG.md
           # Append git log to CHANGELOG.md
           echo "$(git log --pretty=format:'%s' --reverse $(git describe --tags --abbrev=0)..HEAD)" >> ${{ github.workspace }}/CHANGELOG.md
           # Append empty line to CHANGELOG.md
