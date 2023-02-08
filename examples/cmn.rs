@@ -5,7 +5,7 @@ pub use cmn::Words;
 
 fn main() {
     // Create a Constants instance
-    let c = Constants {};
+    let c = Constants::new();
 
     // Retrieve the list of constants
     let constants = c.constants();

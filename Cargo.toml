@@ -15,7 +15,7 @@ license = "MIT OR Apache-2.0"
 name = "cmn"
 repository = "https://github.com/sebastienrousseau/cmn/"
 rust-version = "1.67"
-version = "0.0.1"
+version = "0.0.2"
 include = [
     "../../LICENSE-APACHE",
     "../../LICENSE-MIT",

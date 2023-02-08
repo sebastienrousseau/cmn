@@ -11,7 +11,7 @@
 //!
 //! [![Rust](https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust)](https://www.rust-lang.org)
 //! [![Crates.io](https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=success&labelColor=27A006)](https://crates.io/crates/cmn)
-//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.1-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
+//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.2-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
 //! [![GitHub](https://img.shields.io/badge/github-555555?style=for-the-badge&labelColor=000000&logo=github)](https://github.com/sebastienrousseau/cmn)
 //! [![License](https://img.shields.io/crates/l/cmn.svg?style=for-the-badge&color=007EC6&labelColor=03589B)](http://opensource.org/licenses/MIT)
 //!
@@ -71,10 +71,9 @@
 //! use cmn::Words;
 //!
 //! // Constants
-//! let constants = Constants.constants();
-//! for constant in constants {
-//!     println!("Name: {} Value: {}", constant.name, constant.value);
-//! }
+//! let constants = Constants::new();
+//! let constant = constants.constant("EULER");
+//! assert_eq!(constant.unwrap().name, "EULER");
 //!
 //! // Words
 //! let words = Words::new();
@@ -113,12 +112,11 @@ use serde::{Deserialize, Serialize};
 /// provides a collection of constant values that are used throughout
 /// the library.
 pub mod constants;
+pub use constants::Constants;
 
 /// The `words` module contains the `Words` structure, which provides a
 /// collection of words that are used throughout the library.
 pub mod words;
-
-pub use constants::Constants;
 pub use words::Words;
 
 /// The `Common` structure provides a central location to store data
@@ -135,7 +133,9 @@ impl Common {
     }
     /// Returns the `Constants` instance.
     pub fn constants(&self) -> Constants {
-        Constants
+        Constants {
+            ..Default::default()
+        }
     }
     /// Returns a new instance of the `Words` structure.
     pub fn words(&self) -> Words {

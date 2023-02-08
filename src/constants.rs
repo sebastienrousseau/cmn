@@ -4,8 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 
-/// Contains several commonly used mathematical and cryptographic
-/// constants.
+/// Contains several commonly used mathematical and cryptographic constants.
 #[derive(Clone, Serialize, Deserialize, Debug, Default, PartialEq)]
 pub struct Constant {
     /// The name of the constant.
@@ -14,9 +13,13 @@ pub struct Constant {
     /// The value of the constant.
     pub value: String,
 }
+
 /// The `Constants` structure holds mathematical and hash constants.
-#[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct Constants;
+#[derive(Clone, Serialize, Debug)]
+pub struct Constants {
+    /// A vector of constants.
+    pub constants: Vec<Constant>,
+}
 
 impl Constants {
     /// Returns a vector of tuples with the constant name and its value.
@@ -38,14 +41,12 @@ impl Constants {
     /// ```
     ///
     pub fn constant(&self, name: &str) -> Option<Constant> {
-        let constants = self.constants();
-        for constant in &constants {
-            if constant.name == name {
-                return Some(constant.clone());
-            }
-        }
-        constants.into_iter().find(|constant| constant.name == name)
+        self.constants
+            .iter()
+            .find(|constant| constant.name == name)
+            .cloned()
     }
+
     /// Returns a vector of tuples with the constant name and its value.
     ///
     /// # Examples
@@ -54,12 +55,29 @@ impl Constants {
     /// extern crate cmn;
     /// use cmn::constants::Constants;
     ///
-    /// let constants = Constants.constants();
-    /// assert!(constants.len() >= 9);
+    /// let constants = Constants::new();
+    /// assert!(constants.constants().len() >= 9);
     ///
     /// ```
-    pub fn constants(&self) -> Vec<Constant> {
-        vec![
+    pub fn constants(&self) -> &Vec<Constant> {
+        &self.constants
+    }
+
+    /// Create a new instance of the `Constants` structure.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// extern crate cmn;
+    /// use cmn::constants::Constants;
+    ///
+    /// let constants = Constants::new();
+    /// assert_eq!(constants.constants().len(), 13);
+    ///
+    /// ```
+    ///
+    pub fn new() -> Self {
+        let constants = vec![
             Constant {
                 name: "EULER",
                 value: EULER.to_string(),
@@ -98,33 +116,31 @@ impl Constants {
             },
             Constant {
                 name: "SPECIAL_CHARS",
-                value: format!("{SPECIAL_CHARS:?}"),
+                value: SPECIAL_CHARS.iter().collect::<String>(),
             },
             Constant {
                 name: "SQRT2",
                 value: SQRT2.to_string(),
             },
             Constant {
+                name: "SQRT3",
+                value: SQRT3.to_string(),
+            },
+            Constant {
                 name: "SQRT5",
                 value: SQRT5.to_string(),
             },
-        ]
+        ];
+
+        Self { constants }
     }
-    /// Create a new instance of the `Constants` structure.
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// extern crate cmn;
-    /// use cmn::constants::Constants;
-    ///
-    /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 12);
-    ///
-    /// ```
-    ///
-    pub fn new() -> Self {
-        Self {}
+
+    /// Returns `true` if the `Constants` structure is valid.
+    /// Otherwise, returns `false`.
+    pub fn is_valid(&self) -> bool {
+        self.constants()
+            .iter()
+            .all(|constant| !constant.name.is_empty() && !constant.value.is_empty())
     }
 }
 

@@ -5,15 +5,24 @@ mod tests {
 
     #[test]
     fn test_new() {
-        let new_constant = Constants.constants();
+        let new_constant = Constants::new();
         let constants = new_constant;
-        assert!(constants.len() > 0);
+        assert!(constants.is_valid());
+        assert!(constants.constants().len() >= 9);
+        assert!(constants.constants().len() <= 16);
+    }
+
+    #[test]
+    fn test_common_new() {
+        let common = Common::new();
+        assert!(common.constants().is_valid());
+        assert!(common.constants().constants().len() >= 9);
     }
 
     #[test]
     fn test_constants() {
-        let constants = Constants.constants();
-        assert!(constants.len() >= 9);
+        let constants = Constants::new();
+        assert!(constants.constants.len() >= 9);
     }
 
     #[test]
@@ -26,6 +35,6 @@ mod tests {
     #[test]
     fn test_default() {
         let common = Common::default();
-        assert_eq!(common.constants().constants().len(), 12);
+        assert_eq!(common.constants().constants().len(), 13);
     }
 }

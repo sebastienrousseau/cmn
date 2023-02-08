@@ -18,7 +18,7 @@ mod tests {
     fn test_constants() {
         let new_constant = Constants::new();
         let constants = new_constant.constants();
-        assert_eq!(constants.len(), 12);
+        assert_eq!(constants.len(), 13);
 
         let names = constants.iter().map(|c| c.name).collect::<Vec<_>>();
         assert!(names.contains(&"EULER"));
@@ -38,12 +38,12 @@ mod tests {
     fn test_new() {
         let new_constant = Constants::new();
         let constants = new_constant.constants();
-        assert!(constants.len() > 0);
+        assert!(!constants.is_empty());
     }
     #[test]
     fn test_default() {
         let default_constant = Constants::default();
         let constants = default_constant.constants();
-        assert!(constants.len() > 0);
+        assert!(!constants.is_empty());
     }
 }

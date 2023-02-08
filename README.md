@@ -2,12 +2,7 @@
 
 A Rust library for accessing a collection of mathematical and cryptographic constants
 
-[![Made With Love][made-with-rust]][6]
-[![Crates.io][crates-badge]][8]
-[![Lib.rs][libs-badge]][10]
-[![Docs.rs][docs-badge]][9]
-[![License][license-badge]][2]
-[![Codecov][codecov-badge]][11]
+[![Made With Love][made-with-rust]][6] [![Crates.io][crates-badge]][8] [![Lib.rs][libs-badge]][10] [![Docs.rs][docs-badge]][9] [![License][license-badge]][2] [![Codecov][codecov-badge]][11]
 
 ![divider][divider]
 
@@ -77,7 +72,7 @@ To use `cmn` in your project, add the following to your
 
 ```toml
 [dependencies]
-cmn = "0.0.1"
+cmn = "0.0.2"
 ```
 
 Add the following to your `main.rs` file:
@@ -146,6 +141,6 @@ lot of useful suggestions on how to improve this project.
 [crates-badge]: https://img.shields.io/crates/v/cmn.svg?style=for-the-badge 'Crates.io'
 [divider]: https://raw.githubusercontent.com/sebastienrousseau/vault/main/assets/elements/divider.svg "divider"
 [docs-badge]: https://img.shields.io/docsrs/cmn.svg?style=for-the-badge 'Docs.rs'
-[libs-badge]: https://img.shields.io/badge/lib.rs-v0.0.1-orange.svg?style=for-the-badge 'Lib.rs'
+[libs-badge]: https://img.shields.io/badge/lib.rs-v0.0.2-orange.svg?style=for-the-badge 'Lib.rs'
 [license-badge]: https://img.shields.io/crates/l/cmn.svg?style=for-the-badge 'License'
 [made-with-rust]: https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust 'Made With Rust'

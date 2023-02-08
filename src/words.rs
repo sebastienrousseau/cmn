@@ -2,7 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
+/// The `serde` crate provides the `Serialize` and `Deserialize` traits
+/// that are used to serialize and deserialize the data.
+extern crate serde;
+use serde::{Deserialize, Serialize};
+
 /// Contains several words for use in generating passphrases.
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Words;
 
 impl Words {

@@ -22,12 +22,12 @@ jobs:
           - armv7-unknown-linux-gnueabihf # ARMv7 Linux, hardfloat (kernel 3.2, glibc 2.17)     ✅ Tested
           - i686-unknown-linux-gnu # 32-bit Linux (kernel 3.2+, glibc 2.17+)                    ✅ Tested
           - i686-unknown-linux-musl # 32-bit Linux (kernel 3.2+, musl libc)                     ✅ Tested
-          # - mips-unknown-linux-gnu # MIPS Linux (kernel 2.6.32+, glibc 2.11+)                   ❌ Tested
-          # - mips-unknown-linux-musl # MIPS Linux (kernel 2.6.32+, musl libc)                    ❌ Tested
-          # - mips64-unknown-linux-gnuabi64 # MIPS64 Linux (kernel 2.6.32+, glibc 2.11+)          ❌ Tested
-          # - mips64el-unknown-linux-gnuabi64 # MIPS64el Linux (kernel 2.6.32+, glibc 2.11+)      ❌ Tested
-          # - mipsel-unknown-linux-gnu # MIPSel Linux (kernel 2.6.32+, glibc 2.11+)               ❌ Tested
-          # - powerpc64le-unknown-linux-gnu # 64-bit PowerPC Linux (kernel 2.6.32+, glibc 2.11+)  ❌ Tested
+          # - mips-unknown-linux-gnu # MIPS Linux (kernel 2.6.32+, glibc 2.11+)                 ❌ Tested
+          # - mips-unknown-linux-musl # MIPS Linux (kernel 2.6.32+, musl libc)                  ❌ Tested
+          # - mips64-unknown-linux-gnuabi64 # MIPS64 Linux (kernel 2.6.32+, glibc 2.11+)        ❌ Tested
+          # - mips64el-unknown-linux-gnuabi64 # MIPS64el Linux (kernel 2.6.32+, glibc 2.11+)    ❌ Tested
+          # - mipsel-unknown-linux-gnu # MIPSel Linux (kernel 2.6.32+, glibc 2.11+)             ❌ Tested
+          # - powerpc64le-unknown-linux-gnu # 64-bit PowerPC Linux (kernel 2.6.32+, glibc 2.11+)❌ Tested
           - x86_64-unknown-linux-gnu # 64-bit Linux (kernel 2.6.32+, glibc 2.11+)               ✅ Tested
           - x86_64-unknown-linux-musl # 64-bit Linux (kernel 2.6.32+, musl libc)                ✅ Tested
 
@@ -35,8 +35,8 @@ jobs:
           - x86_64-apple-darwin # 64-bit macOS (10.7 Lion or later)                             ✅ Tested
 
           # Windows targets 🪟
-          # - i686-pc-windows-msvc # 32-bit Windows                                               ❌ Tested
-          # - x86_64-pc-windows-msvc # 64-bit Windows                                             ❌ Tested
+          # - i686-pc-windows-msvc # 32-bit Windows                                             ❌ Tested
+          # - x86_64-pc-windows-msvc # 64-bit Windows                                           ❌ Tested
 
         include:
           # Linux targets 🐧
@@ -138,19 +138,17 @@ jobs:
 
       - name: Run Cargo Format 🦀
         id: run-check-format
-        if: github.ref == !github.event.check_run.conclusion
         run: |
           cargo check --all --all-features --release --verbose
 
       - name: Run Clippy 🦀
         id: run-check-clippy
-        if: github.ref == !github.event.check_run.conclusion
         run: |
           cargo clippy --all-targets --all-features --release -- -D warnings
 
       - name: Run Cargo Doc 🦀
         id: run-check-doc
-        if: github.ref == 'refs/heads/main' && !github.event.check_run.conclusion
+        if: github.ref == 'refs/heads/main'
         run: |
           cargo doc --color always --no-deps --all-features --release --verbose
 
@@ -162,7 +160,7 @@ jobs:
 
       - name: Run Cargo Code Coverage 🦀
         id: run-check-code-coverage
-        if: github.ref == 'refs/heads/main' && !github.event.check_run.conclusion
+        if: github.ref == 'refs/heads/main'
         run: |
           # Install tarpaulin
           cargo install cargo-tarpaulin
@@ -172,7 +170,7 @@ jobs:
 
       - name: Upload to codecov.io 📊
         id: upload-codecov
-        if: github.ref == 'refs/heads/main' && !github.event.check_run.conclusion
+        if: github.ref == 'refs/heads/main'
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -196,7 +194,7 @@ jobs:
 
       - name: Generate Changelog 📜
         id: generate-changelog
-        if: github.ref == 'refs/heads/main' && !github.event.check_run.conclusion
+        if: github.ref == 'refs/heads/main'
         run: |
           # Append version information to CHANGELOG.md
           echo "## [${{ env.VERSION }}] - $(date +'%Y-%m-%d')" >> ${{ github.workspace }}/CHANGELOG.md
@@ -211,7 +209,7 @@ jobs:
 
       - name: Create Release 🚀
         id: create_release
-        if: github.ref == 'refs/heads/main' && !github.event.check_run.conclusion
+        if: github.ref == 'refs/heads/main'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
