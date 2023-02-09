@@ -137,7 +137,7 @@ lot of useful suggestions on how to improve this project.
 [11]: https://codecov.io/github/sebastienrousseau/cmn
 
 [banner]: https://raw.githubusercontent.com/sebastienrousseau/vault/main/assets/cmn/banners/banner-cmn-1597x377.svg "CMN Banner"
-[codecov-badge]: https://img.shields.io/codecov/c/github/sebastienrousseau/mini-functions?style=for-the-badge&token=0FZQGHLMOP 'Codecov'
+[codecov-badge]: https://img.shields.io/codecov/c/github/sebastienrousseau/cmn?style=for-the-badge&token=0FZQGHLMOP 'Codecov'
 [crates-badge]: https://img.shields.io/crates/v/cmn.svg?style=for-the-badge 'Crates.io'
 [divider]: https://raw.githubusercontent.com/sebastienrousseau/vault/main/assets/elements/divider.svg "divider"
 [docs-badge]: https://img.shields.io/docsrs/cmn.svg?style=for-the-badge 'Docs.rs'
