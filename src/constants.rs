@@ -1,11 +1,21 @@
-// Copyright © 2022-2023 Mini Functions. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
-// SPDX-License-Identifier: MIT
+// Copyright © 2023 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
 
 use serde::{Deserialize, Serialize};
 
 /// Contains several commonly used mathematical and cryptographic constants.
-#[derive(Clone, Serialize, Deserialize, Debug, Default, PartialEq)]
+#[non_exhaustive]
+#[derive(
+    Clone,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    Serialize,
+    Deserialize,
+)]
 pub struct Constant {
     /// The name of the constant.
     pub name: &'static str,
@@ -72,12 +82,20 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 13);
+    /// assert_eq!(constants.constants().len(), 16);
     ///
     /// ```
     ///
     pub fn new() -> Self {
         let constants = vec![
+            Constant {
+                name: "AVOGADRO",
+                value: AVOGADRO.to_string(),
+            },
+            Constant {
+                name: "BOLTZMANN",
+                value: BOLTZMANN.to_string(),
+            },
             Constant {
                 name: "EULER",
                 value: EULER.to_string(),
@@ -130,6 +148,10 @@ impl Constants {
                 name: "SQRT5",
                 value: SQRT5.to_string(),
             },
+            Constant {
+                name: "TAU",
+                value: TAU.to_string(),
+            },
         ];
 
         Self { constants }
@@ -138,9 +160,9 @@ impl Constants {
     /// Returns `true` if the `Constants` structure is valid.
     /// Otherwise, returns `false`.
     pub fn is_valid(&self) -> bool {
-        self.constants()
-            .iter()
-            .all(|constant| !constant.name.is_empty() && !constant.value.is_empty())
+        self.constants().iter().all(|constant| {
+            !constant.name.is_empty() && !constant.value.is_empty()
+        })
     }
 }
 
@@ -166,18 +188,22 @@ pub enum ConstantValue {
     CharArray(&'static [char]),
 }
 
-/// The mathematical Euler number (e), Napier's constant, the base of
-/// the natural logarithm.
-/// e^{\ln x}=x
-/// - `ln` being the natural logarithm
-/// - `e` being the natural exponent
-/// - `x` being the real number
+/// Avogadro's constant
+/// Approximately 6.02214076 x 10^23
+pub const AVOGADRO: f64 = 602214076000000000000000.0;
+
+/// Boltzmann's constant
+/// Approximately 1.380648 x 10^-23
+pub const BOLTZMANN: f64 = 1.380648e-23;
+
+/// The base of the natural logarithm, Euler's number (e).
+/// e ≈ 2.7182818284590452353602874713527
 pub const EULER: f64 = std::f64::consts::E;
 
 /// The mathematical constant `γ` or the Euler–Mascheroni constant. It
 /// is the limit of the difference between the harmonic series and the
 /// natural logarithm of the natural numbers.
-pub const GAMMA: f64 = 0.577_215_664_901_532_9_f64;
+pub const GAMMA: f64 = 0.5772156649015329;
 
 /// The hash algorithm used. The default is Blake3.
 pub const HASH_ALGORITHM: &str = "Blake3";
@@ -201,7 +227,7 @@ pub const PHI: f64 = (1.0 + SQRT5) / 2.0;
 pub const PI: f64 = std::f64::consts::PI;
 
 /// The Planck constant, `h`.
-pub const PLANCK: f64 = 6.626_070_15e-34_f64;
+pub const PLANCK: f64 = 6.62607015e-34;
 
 /// The mathematical constant `δs' or the silver ratio (or silver mean).
 /// δs = 1+√2. One of the silver means (n+sqrt(n2+1))/2 for n>0.
@@ -209,8 +235,9 @@ pub const SILVER_RATIO: f64 = 1.0 + SQRT2;
 
 /// A set of special characters.
 pub const SPECIAL_CHARS: &[char] = &[
-    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '[', ']', '{', '}', '|', ';',
-    ':', '"', '<', '>', ',', '.', '?', '/', '~', '`',
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=',
+    '[', ']', '{', '}', '|', ';', ':', '"', '<', '>', ',', '.', '?',
+    '/', '~', '`',
 ];
 
 /// The mathematical constant `√2` or the Pythagora's constant or the
@@ -223,10 +250,14 @@ pub const SQRT2: f64 = std::f64::consts::SQRT_2;
 /// It is the length of the side of an equilateral triangle with unit
 /// side length.
 /// 3 = 1 + √3
-pub const SQRT3: f64 = 1.732_050_807_568_877_2_f64;
+pub const SQRT3: f64 = 1.732_050_807_568_877_2;
 
 /// The mathematical constant `√5` or the principal square root of 5.
 /// It is the length of the diagonal of a regular pentagon with unit
 /// side length.
 /// 5 = 2 + 2√5
-pub const SQRT5: f64 = 2.236_067_977_499_79_f64;
+pub const SQRT5: f64 = 2.236_067_977_499_79;
+
+/// The mathematical constant `τ` or the ratio of a circle's
+/// circumference to its radius.
+pub const TAU: f64 = std::f64::consts::TAU;
