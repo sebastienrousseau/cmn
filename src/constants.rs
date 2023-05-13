@@ -4,7 +4,18 @@
 use serde::{Deserialize, Serialize};
 
 /// Contains several commonly used mathematical and cryptographic constants.
-#[derive(Clone, Serialize, Deserialize, Debug, Default, PartialEq)]
+#[non_exhaustive]
+#[derive(
+    Clone,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    Serialize,
+    Deserialize,
+)]
 pub struct Constant {
     /// The name of the constant.
     pub name: &'static str,
@@ -71,12 +82,20 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 13);
+    /// assert_eq!(constants.constants().len(), 16);
     ///
     /// ```
     ///
     pub fn new() -> Self {
         let constants = vec![
+            Constant {
+                name: "AVOGADRO",
+                value: AVOGADRO.to_string(),
+            },
+            Constant {
+                name: "BOLTZMANN",
+                value: BOLTZMANN.to_string(),
+            },
             Constant {
                 name: "EULER",
                 value: EULER.to_string(),
@@ -129,6 +148,10 @@ impl Constants {
                 name: "SQRT5",
                 value: SQRT5.to_string(),
             },
+            Constant {
+                name: "TAU",
+                value: TAU.to_string(),
+            },
         ];
 
         Self { constants }
@@ -165,13 +188,19 @@ pub enum ConstantValue {
     CharArray(&'static [char]),
 }
 
-/// The mathematical Euler number (e), Napier's constant, the base of
-/// the natural logarithm.
-/// e^{\ln x}=x
-/// - `ln` being the natural logarithm
-/// - `e` being the natural exponent
-/// - `x` being the real number
-pub const EULER: f64 = std::f64::consts::E;
+/// The Avogadro constant, `N_A`.
+/// N_A = 6.022_140_76e23
+pub const AVOGADRO: f64 = 6.022_140_76e23_f64;
+
+/// The Boltzmann constant, `k_B`.
+/// k_B = 1.380_649e-23
+/// k_B = R/N_A
+/// R = 8.314_462_618_153_24
+pub const BOLTZMANN: f64 = 1.380_649e-23_f64;
+
+/// The Euler–Mascheroni constant, `γ`.
+/// γ = 0.577_215_664_901_532_9
+pub const EULER: f64 = 0.577_215_664_901_532_9_f64;
 
 /// The mathematical constant `γ` or the Euler–Mascheroni constant. It
 /// is the limit of the difference between the harmonic series and the
@@ -230,3 +259,7 @@ pub const SQRT3: f64 = 1.732_050_807_568_877_2_f64;
 /// side length.
 /// 5 = 2 + 2√5
 pub const SQRT5: f64 = 2.236_067_977_499_79_f64;
+
+/// The mathematical constant `τ` or the ratio of a circle's
+/// circumference to its radius.
+pub const TAU: f64 = 2.0 * PI;
