@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["AVOGADRO","BOLTZMANN","EULER","GAMMA","HASH_ALGORITHM","HASH_COST","HASH_LENGTH","PHI","PI","PLANCK","SILVER_RATIO","SPECIAL_CHARS","SQRT2","SQRT3","SQRT5","TAU"],"enum":["ConstantValue"],"struct":["Constant","Constants"]};

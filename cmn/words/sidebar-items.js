@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["WORD_LIST"],"struct":["Words"]};
