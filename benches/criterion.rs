@@ -1,6 +1,7 @@
 // Copyright © 2023 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
+//! Benchmarks for the Common (CMN) library.
 use criterion::{
     black_box, criterion_group, criterion_main, Criterion,
 };

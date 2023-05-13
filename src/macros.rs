@@ -34,8 +34,7 @@
 #[macro_export]
 macro_rules! cmn {
     ($($tt:tt)*) => {
-        // Parse the arguments into a Rust value.
-        $crate::parse!($($tt)*)
+        cmn::Common::parse($($tt)*)
     };
 }
 
@@ -153,3 +152,35 @@ macro_rules! cmn_parse {
         Common::parse($input)
     };
 }
+
+/// This macro defines a set of constants with their corresponding
+/// values. The macros can be used to define constants in a concise
+/// and easy-to-read way.
+#[macro_export]
+macro_rules! cmn_constants {
+    ($($name:ident = $value:expr),*) => {
+        $(
+            /// The value of the constant.
+            pub const $name: f64 = $value;
+        )*
+    };
+}
+
+// cmn_constants! {
+//     AVOGADRO = super::constants::AVOGADRO,
+//     BOLTZMANN = super::constants::BOLTZMANN,
+//     EULER = super::constants::EULER,
+//     GAMMA = super::constants::GAMMA,
+//     HASH_ALGORITHM = super::constants::HASH_ALGORITHM,
+//     HASH_COST = super::constants::HASH_COST,
+//     HASH_LENGTH = super::constants::HASH_LENGTH,
+//     PHI = super::constants::PHI,
+//     PI = super::constants::PI,
+//     PLANCK = super::constants::PLANCK,
+//     SILVER_RATIO = super::constants::SILVER_RATIO,
+//     SPECIAL_CHARS = super::constants::SPECIAL_CHARS,
+//     SQRT2 = super::constants::SQRT2,
+//     SQRT3 = super::constants::SQRT3,
+//     SQRT5 = super::constants::SQRT5,
+//     TAU = super::constants::TAU
+// }

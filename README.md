@@ -29,25 +29,40 @@ A Rust library for accessing a collection of mathematical and cryptographic cons
 
 ## Overview 📖
 
-`Common (CMN)`, a Rust library designed for developers who are looking for a comprehensive collection of mathematical and cryptographic constants.
-
-`Common (CMN)` is a modern, fast, and user-friendly library that makes it easy to access a wide range of mathematical and cryptographic constants, including the mathematical constant `Euler`, the `hash` algorithm used, the `cost` of the hash algorithm, the `length` of the hash, the mathematical constant `Phi`, the mathematical constant `Pi`, the `Planck` constant, a set of `special` characters, and much more.
+`Common (CMN)` is a modern, fast, and user-friendly library that makes it easy to access a wide range of mathematical and cryptographic constants.
 
 ## Features ✨
 
-The library includes two main structures: `Constant` and `Constants`.
+The `Common (CMN)` uses the `serde` crate to serialize and deserialize the data.
 
-- The `Constant` structure holds the name and value of each constant as
-a `&'static str` and a `String`, respectively.
-- The Constants structure implements a method constants that returns a
-`Vec<Constant>` containing all the available constants.
-- The available constants include the mathematical constants `EULER`,
-`PHI`, `PI`, `PLANCK`, and `SQRT5`, and the cryptographic constants
-`HASH_ALGORITHM`, `HASH_COST`, `HASH_LENGTH`, and `SPECIAL_CHARS`.
-- The library also includes an enumeration `ConstantValue` that
-represents the different constant values. The values can be an
-`f64 float`, a `String`, a `u32`, a `usize`, or a `&'static [char]`
-array of characters.
+The library has three modules:
+
+- **Macros**: This module contains functions for generating macros that can be used to access the constants.
+- **Constants**: This module contains the Constants structure, which provides a collection of constant values that are used throughout the library.
+- **Words**: This module contains the Words structure, which provides a collection of words that are used throughout the library.
+
+### Mathematical and Cryptographic Constants
+
+The following table lists the most important mathematical and cryptographic constants available in the `Common (CMN)` library:
+
+| Constants | Description | Example |
+| --- | --- | --- |
+| AVOGADRO | Avogadro's constant is the number of atoms or molecules in one mole of a substance. | The number of atoms in 12 grams of carbon-12 is 6.02214076 × 10^23. This can be used to calculate the number of atoms or molecules in a given sample. |
+| BOLTZMANN | Boltzmann's constant is the physical constant relating the temperature of a system to the average kinetic energy of its constituent particles. | The kinetic energy of an atom at room temperature is about 2.0 × 10^-21 joules. This can be used to calculate the temperature of a system, or to calculate the average kinetic energy of its particles. |
+| EULER | Euler's constant is a mathematical constant approximately equal to 2.71828. | The sum of the infinite series 1 + 1/2 + 1/3 + ... is equal to Euler's constant, e. This can be used to calculate the sum of an infinite series, or to calculate the logarithm of a number. |
+| GAMMA | The gamma constant is a mathematical constant approximately equal to 0.57721. | The gamma function of 2 is equal to 1. This can be used to calculate the gamma function of a number, or to calculate the factorial of a number. |
+| HASH_ALGORITHM | The hash algorithm used to generate the hash. The default is Blake3. | The hash of the string "Hello, world!" is 5eb63bbbe01eeed093cb22bb8f5acdc32790160b123138d53f2173b8d3dc3eee. This can be used to verify the integrity of data, or to create a unique identifier for a file. |
+| HASH_COST | The cost of the hash. | The hash cost of Blake3 is 2^128. This can be used to determine how secure a hash algorithm is. |
+| HASH_LENGTH | The length of the hash. | The hash length of Blake3 is 32 bytes. This can be used to determine how much space is required to store the hash output. |
+| PHI | The golden ratio is a number approximately equal to 1.618033988749895. | The golden ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
+| Pi (π) | Pi is the ratio of a circle's circumference to its diameter. | The circumference of a circle with a radius of 1 is equal to pi. This can be used to calculate the circumference, area, and volume of circles, spheres, and other geometric shapes. |
+| PLANCK | Planck's constant is a physical constant that is approximately equal to 6.62607015 × 10^−34 joule seconds. | The energy of a photon of light with a wavelength of 500 nanometers is equal to Planck's constant multiplied by the frequency of the light. This can be used to calculate the energy of photons and other elementary particles. |
+| SILVER_RATIO | The silver ratio is a number approximately equal to 1.414213562373095. | The silver ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
+| SPECIAL_CHARS | A list of special characters. | The special characters are: !@#$%^&*()_+-={}[]|\:;"'<>,.? |
+| SQRT2 | The square root of 2 is a number approximately equal to 1.414213562373095. | The area of a circle with a radius of 1 is equal to the square root of 2. This can be used to calculate the area and volume of circles, spheres, and other geometric shapes. |
+| SQRT3 | The square root of 3 is a number approximately equal to 1.732050807568877. | The area of a circle with a radius of 1 is equal to the square root of 3. This can be used to calculate the area and volume of circles
+| SQRT5 | The square root of 5 is a number approximately equal to 2.23606797749979. | The area of a circle with a radius of 1 is equal to the square root of 5. |
+| TAU | Tau is a number approximately equal to 6.283185307179586. | The circumference of a circle with a radius of 1 is equal to tau. |
 
 ## Getting Started 🚀
 

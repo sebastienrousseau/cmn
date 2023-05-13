@@ -19,16 +19,23 @@
 //!
 //! </center>
 //!
-//! ## Overview
+//! ## Overview 📖
 //!
-//!`Common (CMN)` is a modern, fast, and user-friendly library that
-//! makes it easy to access a wide range of mathematical and
-//! cryptographic constants, including the following constants.
+//! `Common (CMN)` is a modern, fast, and user-friendly library that makes it easy to access a wide range of mathematical and cryptographic constants.
 //!
-//! ## Features
+//! ## Features ✨
 //!
-//! The following table lists the features available in the Common (CMN)
-//! library.
+//! The `Common (CMN)` uses the `serde` crate to serialize and deserialize the data.
+//!
+//! The library has three modules:
+//!
+//! - **Macros**: This module contains functions for generating macros that can be used to access the constants.
+//! - **Constants**: This module contains the Constants structure, which provides a collection of constant values that are used throughout the library.
+//! - **Words**: This module contains the Words structure, which provides a collection of words that are used throughout the library.
+//!
+//! ### Mathematical and Cryptographic Constants
+//!
+//! The following table lists the most important mathematical and cryptographic constants available in the `Common (CMN)` library:
 //!
 //!| Constants | Description | Example |
 //!| --- | --- | --- |
@@ -153,6 +160,14 @@ impl Common {
     /// Returns a new instance of the `Words` structure.
     pub fn words(&self) -> Words {
         Words::new()
+    }
+    /// Parses a string of JSON data and returns a new instance of the
+    /// `Common` structure.
+    pub fn parse(
+        input: &str,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
+        let common: Common = serde_json::from_str(input)?;
+        Ok(common)
     }
 }
 

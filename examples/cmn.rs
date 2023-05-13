@@ -1,10 +1,11 @@
 // Copyright © 2023 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-extern crate cmn;
-
-use cmn::constants::{Constant, ConstantValue, Constants};
-pub use cmn::Words;
+//! Examples of how to use the Common (CMN) library.
+use cmn::{
+    cmn_constants,
+    constants::{Constant, ConstantValue, Constants},
+};
 
 fn main() {
     // Create a Constants instance
@@ -36,4 +37,33 @@ fn main() {
     // Retrieve a constant by name and print it (in this case, EULER)
     let euler_constant = c.constant("EULER");
     println!("🦀 ConstantValue of EULER: ✅ {euler_constant:?}");
+
+    // Retrieve a constant by name and print it (in this case, PI)
+    cmn_constants! {
+        AVOGADRO = cmn::constants::AVOGADRO,
+        BOLTZMANN = cmn::constants::BOLTZMANN,
+        EULER = cmn::constants::EULER,
+        GAMMA = cmn::constants::GAMMA,
+        PHI = cmn::constants::PHI,
+        PI = cmn::constants::PI,
+        PLANCK = cmn::constants::PLANCK,
+        SILVER_RATIO = cmn::constants::SILVER_RATIO,
+        SQRT2 = cmn::constants::SQRT2,
+        SQRT3 = cmn::constants::SQRT3,
+        SQRT5 = cmn::constants::SQRT5,
+        TAU = cmn::constants::TAU
+    }
+    println!("🦀 Using cmn_constants! macro:");
+    println!("- Avogadro's constant:     ✅ {}", &AVOGADRO);
+    println!("- Boltzmann's constant:    ✅ {}", &BOLTZMANN);
+    println!("- Euler's constant:        ✅ {}", &EULER);
+    println!("- Gamma's constant:        ✅ {}", &GAMMA);
+    println!("- Phi's constant:          ✅ {}", &PHI);
+    println!("- Pi's constant:           ✅ {}", &PI);
+    println!("- Planck's constant:       ✅ {}", &PLANCK);
+    println!("- Silver ratio's constant: ✅ {}", &SILVER_RATIO);
+    println!("- Sqrt2's constant:        ✅ {}", &SQRT2);
+    println!("- Sqrt3's constant:        ✅ {}", &SQRT3);
+    println!("- Sqrt5's constant:        ✅ {}", &SQRT5);
+    println!("- Tau's constant:          ✅ {}", &TAU);
 }
