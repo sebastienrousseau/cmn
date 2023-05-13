@@ -1,3 +1,6 @@
+// Copyright © 2023 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 #[cfg(test)]
 mod tests {
     extern crate cmn;
@@ -20,7 +23,8 @@ mod tests {
         let constants = new_constant.constants();
         assert_eq!(constants.len(), 13);
 
-        let names = constants.iter().map(|c| c.name).collect::<Vec<_>>();
+        let names =
+            constants.iter().map(|c| c.name).collect::<Vec<_>>();
         assert!(names.contains(&"EULER"));
         assert!(names.contains(&"GAMMA"));
         assert!(names.contains(&"HASH_ALGORITHM"));

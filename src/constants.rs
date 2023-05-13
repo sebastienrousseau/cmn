@@ -1,6 +1,5 @@
-// Copyright © 2022-2023 Mini Functions. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
-// SPDX-License-Identifier: MIT
+// Copyright © 2023 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
 
 use serde::{Deserialize, Serialize};
 
@@ -138,9 +137,9 @@ impl Constants {
     /// Returns `true` if the `Constants` structure is valid.
     /// Otherwise, returns `false`.
     pub fn is_valid(&self) -> bool {
-        self.constants()
-            .iter()
-            .all(|constant| !constant.name.is_empty() && !constant.value.is_empty())
+        self.constants().iter().all(|constant| {
+            !constant.name.is_empty() && !constant.value.is_empty()
+        })
     }
 }
 
@@ -209,8 +208,9 @@ pub const SILVER_RATIO: f64 = 1.0 + SQRT2;
 
 /// A set of special characters.
 pub const SPECIAL_CHARS: &[char] = &[
-    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '[', ']', '{', '}', '|', ';',
-    ':', '"', '<', '>', ',', '.', '?', '/', '~', '`',
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=',
+    '[', ']', '{', '}', '|', ';', ':', '"', '<', '>', ',', '.', '?',
+    '/', '~', '`',
 ];
 
 /// The mathematical constant `√2` or the Pythagora's constant or the

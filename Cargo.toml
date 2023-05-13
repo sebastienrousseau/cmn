@@ -1,24 +1,34 @@
 [package]
-authors = ["Sebastian Rousseau <sebastian.rousseau@gmail.com"]
+authors = ["Sebastien Rousseau <sebastian.rousseau@gmail.com>"]
+build = "build.rs"
 categories = [
     "config",
     "cryptography",
-    "mathematics",
     "data-structures",
     "development-tools",
+    "mathematics",
 ]
 description = "A Rust library for accessing a collection of mathematical and cryptographic constants"
+documentation = "https://docs.rs/cmn"
 edition = "2021"
+exclude = [
+    "/.git/*",
+    "/.github/*",
+    "/.gitignore",
+    "/.vscode/*"
+    ]
 homepage = "https://minifunctions.com/"
 keywords = ["cmn", "common", "config", "configurations", "constants"]
 license = "MIT OR Apache-2.0"
 name = "cmn"
+readme = "README.md"
 repository = "https://github.com/sebastienrousseau/cmn/"
-rust-version = "1.67"
-version = "0.0.2"
+rust-version = "1.69.0"
+version = "0.0.3"
 include = [
-    "../../LICENSE-APACHE",
-    "../../LICENSE-MIT",
+    "/CONTRIBUTING.md",
+    "/LICENSE-APACHE",
+    "/LICENSE-MIT",
     "/benches/**",
     "/build.rs",
     "/Cargo.toml",
@@ -26,22 +36,30 @@ include = [
     "/README.md",
     "/src/**",
     "/tests/**",
+    "/xtask/**",
 ]
 
+[workspace]
+members = ["xtask"]
+
 [[bench]]
-name = "cmn"
+name = "benchmark"
 harness = false
-path = "benches/cmn.rs"
+path = "benches/criterion.rs"
+
+[profile.bench]
+debug = true
 
 [[example]]
 name = "cmn"
 path = "examples/cmn.rs"
 
 [dependencies]
-serde = { version = "1.0.152", features = ["derive"] }
-serde_json = "1.0.92"
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = "1.0.96"
 
 [dev-dependencies]
+assert_cmd = "2.0.11"
 criterion = "0.4.0"
 
 [lib]

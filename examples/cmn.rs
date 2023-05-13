@@ -1,3 +1,6 @@
+// Copyright © 2023 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 extern crate cmn;
 
 use cmn::constants::{Constant, ConstantValue, Constants};
@@ -20,7 +23,8 @@ fn main() {
     static JSON: &str = r#"[{"name":"EULER","value":"2.718281828459045"},{"name":"PI","value":"3.141592653589793"},{"name":"TAU","value":"6.283185307179586"},{"name":"SQRT2","value":"1.4142135623730951"},{"name":"SQRT1_2","value":"0.7071067811865476"},{"name":"LN2","value":"0.6931471805599453"},{"name":"LN10","value":"2.302585092994046"},{"name":"LOG2E","value":"1.4426950408889634"},{"name":"LOG10E","value":"0.4342944819032518"},{"name":"PHI","value":"1.618033988749895"},{"name":"GOLDEN_RATIO","value":"1.618033988749895"},{"name":"INFINITY","value":"Infinity"},{"name":"NEG_INFINITY","value":"-Infinity"},{"name":"NAN","value":"NaN"}]"#;
 
     // Deserialize the constants from the JSON string
-    let deserialized: Vec<Constant> = serde_json::from_str(JSON).unwrap();
+    let deserialized: Vec<Constant> =
+        serde_json::from_str(JSON).unwrap();
 
     // Print the deserialized constants
     println!("🦀 Deserialized: ✅ {deserialized:?}");

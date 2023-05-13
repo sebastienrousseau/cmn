@@ -1,6 +1,6 @@
-// Copyright © 2022-2023 Mini Functions. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
-// SPDX-License-Identifier: MIT
+// Copyright © 2023 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 //!
 //! A Rust library for accessing a collection of mathematical and
 //! cryptographic constants
@@ -11,7 +11,7 @@
 //!
 //! [![Rust](https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust)](https://www.rust-lang.org)
 //! [![Crates.io](https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=success&labelColor=27A006)](https://crates.io/crates/cmn)
-//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.2-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
+//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.3-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
 //! [![GitHub](https://img.shields.io/badge/github-555555?style=for-the-badge&labelColor=000000&logo=github)](https://github.com/sebastienrousseau/cmn)
 //! [![License](https://img.shields.io/crates/l/cmn.svg?style=for-the-badge&color=007EC6&labelColor=03589B)](http://opensource.org/licenses/MIT)
 //!
@@ -23,7 +23,7 @@
 //! for a comprehensive collection of mathematical and cryptographic
 //! constants.
 //!
-//!`CMN` is a modern, fast, and user-friendly library that makes it easy
+//!`Common (CMN)` is a modern, fast, and user-friendly library that makes it easy
 //! to access a wide range of mathematical and cryptographic constants,
 //! including the mathematical constant "Euler", the hash algorithm
 //! used, the cost of the hash algorithm, the length of the hash, the
@@ -108,6 +108,9 @@
 extern crate serde;
 use serde::{Deserialize, Serialize};
 
+/// The `macros` module contains functions for generating macros.
+pub mod macros;
+
 /// The `constants` module contains the `Constants` structure, which
 /// provides a collection of constant values that are used throughout
 /// the library.
@@ -149,4 +152,17 @@ impl Default for Common {
     fn default() -> Self {
         Self::new()
     }
+}
+
+/// This is the main entry point for the `Common (CMN)` library.
+pub fn run() -> Result<(), Box<dyn std::error::Error>> {
+    if std::env::var("CMN_TEST_MODE").unwrap_or_default() == "1" {
+        return Err("Simulated error".into());
+    }
+    let name = "cmn";
+    println!("Welcome to `{}` 👋!", { name }.to_uppercase());
+    println!(
+        "A Rust library for accessing a collection of mathematical and cryptographic constants."
+    );
+    Ok(())
 }
