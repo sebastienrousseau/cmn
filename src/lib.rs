@@ -119,6 +119,7 @@
 /// that are used to serialize and deserialize the data.
 extern crate serde;
 use serde::{Deserialize, Serialize};
+use serde_json;
 
 /// The `macros` module contains functions for generating macros.
 pub mod macros;
@@ -144,12 +145,17 @@ pub use words::Words;
 /// * `constants`: A reference to the `Constants` structure.
 /// * `words`: A reference to the `Words` structure.
 #[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct Common;
+pub struct Common {
+    #[serde(flatten)]
+    fields: serde_json::Value,
+}
 
 impl Common {
     /// Creates a new instance of the `Common` structure.
     pub fn new() -> Self {
-        Self
+        Self {
+            fields: serde_json::Value::Null,
+        }
     }
     /// Returns the `Constants` instance.
     pub fn constants(&self) -> Constants {

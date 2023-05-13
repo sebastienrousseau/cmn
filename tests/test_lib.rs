@@ -43,7 +43,10 @@ mod tests {
         let constants = common.constants();
 
         assert_eq!(constants.constants().len(), 16);
-        assert_eq!(constants.constants(), Constants::default().constants());
+        assert_eq!(
+            constants.constants(),
+            Constants::default().constants()
+        );
     }
 
     #[test]
@@ -82,5 +85,23 @@ mod tests {
 
         assert_eq!(default_constants.len(), 16);
         assert_eq!(default_constants, constants.constants());
+    }
+
+    #[test]
+    fn test_parse_valid_input() {
+        let input = r#"{"field1": "value1", "field2": "value2"}"#;
+        let result = Common::parse(input);
+        assert!(
+            result.is_ok(),
+            "Parsing should succeed: {:?}",
+            result.unwrap_err()
+        );
+    }
+
+    #[test]
+    fn test_parse_invalid_input() {
+        let input = "invalid input";
+        let result = Common::parse(input);
+        assert!(result.is_err(), "Parsing should fail");
     }
 }
