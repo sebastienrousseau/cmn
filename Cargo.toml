@@ -55,7 +55,7 @@ name = "cmn"
 path = "examples/cmn.rs"
 
 [dependencies]
-serde = { version = "1.0.163", features = ["derive"] }
+serde = { version = "1.0.175", features = ["derive"] }
 serde_json = "1.0.96"
 
 [dev-dependencies]
