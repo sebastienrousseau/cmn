@@ -3,7 +3,6 @@
 
 #[cfg(test)]
 mod tests {
-    extern crate cmn;
     use cmn::constants::Constants;
 
     #[test]

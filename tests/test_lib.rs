@@ -3,7 +3,6 @@
 
 #[cfg(test)]
 mod tests {
-    pub use cmn::Words;
     use cmn::*;
 
     #[test]

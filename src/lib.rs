@@ -7,13 +7,13 @@
 //!
 //! *Part of the [Mini Functions][0] family of libraries.*
 //!
-//! [![Common (CMN)](https://kura.pro/cmn/images/titles/title-cmn.svg)](https://minifunctions.com/cmn)
+//! [![Common (CMN)](https://kura.pro/cmn/images/titles/title-cmn.svg)](https://cmnlib.com/cmn)
 //!
 //! <center>
 //!
 //! [![Crates.io](https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=success&labelColor=27A006)](https://crates.io/crates/cmn)
 //! [![GitHub](https://img.shields.io/badge/github-555555?style=for-the-badge&labelColor=000000&logo=github)](https://github.com/sebastienrousseau/cmn)
-//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.3-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
+//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.4-success.svg?style=for-the-badge&color=8A48FF&labelColor=6F36E4)](https://lib.rs/crates/cmn)
 //! [![License](https://img.shields.io/crates/l/cmn.svg?style=for-the-badge&color=007EC6&labelColor=03589B)](http://opensource.org/licenses/MIT)
 //! [![Rust](https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust)](https://www.rust-lang.org)
 //!
@@ -99,14 +99,9 @@
 //! defined in the Apache-2.0 license, shall be dual licensed as above,
 //! without any additional terms or conditions.
 //!
-//! [0]: https://minifunctions.com/ "MiniFunctions"
+//! [0]: https://cmnlib.com/ "MiniFunctions"
 //!
 #![cfg_attr(feature = "bench", feature(test))]
-#![deny(dead_code)]
-#![deny(missing_debug_implementations)]
-#![deny(missing_docs)]
-#![forbid(unsafe_code)]
-#![warn(unreachable_pub)]
 #![doc(
     html_favicon_url = "https://kura.pro/cmn/images/favicon.ico",
     html_logo_url = "https://kura.pro/cmn/images/logos/cmn.svg",
@@ -117,9 +112,7 @@
 
 /// The `serde` crate provides the `Serialize` and `Deserialize` traits
 /// that are used to serialize and deserialize the data.
-extern crate serde;
 use serde::{Deserialize, Serialize};
-use serde_json;
 
 /// The `macros` module contains functions for generating macros.
 pub mod macros;

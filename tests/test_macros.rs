@@ -2,7 +2,6 @@
 mod tests {
 
     // Importing cmn crate and all of its macros
-    extern crate cmn;
     use cmn::{
         cmn_assert, cmn_contains, cmn_in_range, cmn_join, cmn_max,
         cmn_min, cmn_print, cmn_print_vec, cmn_split, cmn_vec,
@@ -77,8 +76,8 @@ mod tests {
     #[test]
     fn test_cmn_in_range() {
         // Test that cmn_in_range! macro correctly checks if a number is within a range
-        assert!(cmn_in_range!(10, 0, 100));
-        assert!(!cmn_in_range!(-10, 0, 100));
+        cmn_assert!(cmn_in_range!(10, 0, 100));
+        cmn_assert!(!cmn_in_range!(-10, 0, 100));
     }
 
     #[test]
