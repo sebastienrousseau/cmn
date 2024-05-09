@@ -3,9 +3,8 @@ mod tests {
 
     // Importing cmn crate and all of its macros
     use cmn::{
-        cmn_assert, cmn_contains, cmn_in_range, cmn_join, cmn_max,
-        cmn_min, cmn_print, cmn_print_vec, cmn_split, cmn_vec,
-        constants::*,
+        cmn_assert, cmn_contains, cmn_join, cmn_max, cmn_min,
+        cmn_print, cmn_print_vec, cmn_split, cmn_vec, constants::*,
     };
 
     #[test]
@@ -74,15 +73,12 @@ mod tests {
     }
 
     #[test]
-    fn test_cmn_in_range() {
-        // Test that cmn_in_range! macro correctly checks if a number is within a range
-        cmn_assert!(cmn_in_range!(10, 0, 100));
-        cmn_assert!(!cmn_in_range!(-10, 0, 100));
-    }
-
-    #[test]
     fn test_cmn_constants() {
         // Test that each constant defined by the cmn_constants! macro has the expected value or is not empty
+        assert_eq!(
+            APERY, 1.2020569031595942,
+            "APERY should have a specific value"
+        );
         assert_eq!(
             AVOGADRO, 6.02214076e23,
             "AVOGADRO should have a specific value"
@@ -92,12 +88,37 @@ mod tests {
             "BOLTZMANN should have a specific value"
         );
         assert_eq!(
-            EULER, std::f64::consts::E,
+            CATALAN, 0.9159655941772190,
+            "CATALAN should have a specific value"
+        );
+        assert_eq!(
+            COULOMB, 8.9875517923e9,
+            "COULOMB should have a specific value"
+        );
+        assert_eq!(
+            EULER,
+            std::f64::consts::E,
             "EULER should have a specific value"
+        );
+        assert_eq!(
+            FARADAY, 96485.33212,
+            "FARADAY should have a specific value"
         );
         assert_eq!(
             GAMMA, 0.5772156649015329,
             "GAMMA should have a specific value"
+        );
+        assert_eq!(
+            GAS_CONSTANT, 8.314462618,
+            "GAS_CONSTANT should have a specific value"
+        );
+        assert_eq!(
+            GLAISHER_KINKELIN, 1.2824271291006226,
+            "GLAISHER_KINKELIN should have a specific value"
+        );
+        assert_eq!(
+            GRAVITATIONAL_CONSTANT, 6.67430e-11,
+            "GRAVITATIONAL_CONSTANT should have a specific value"
         );
         assert_eq!(
             HASH_ALGORITHM, "Blake3",
@@ -110,6 +131,10 @@ mod tests {
         assert_eq!(
             HASH_LENGTH, 32,
             "HASH_LENGTH should have a specific value"
+        );
+        assert_eq!(
+            KHINCHIN, 2.6854520010653064,
+            "KHINCHIN should have a specific value"
         );
         assert_eq!(
             PHI,
@@ -126,9 +151,17 @@ mod tests {
             "PLANCK should have a specific value"
         );
         assert_eq!(
+            PLANCK_REDUCED, 1.0545718176461565e-34,
+            "PLANCK_REDUCED should have a specific value"
+        );
+        assert_eq!(
             SILVER_RATIO,
             1.0 + SQRT2,
             "SILVER_RATIO should have a specific value"
+        );
+        assert_eq!(
+            SPEED_OF_LIGHT, 299_792_458.0,
+            "SPEED_OF_LIGHT should have a specific value"
         );
         assert_eq!(
             SPECIAL_CHARS,
@@ -149,9 +182,17 @@ mod tests {
             "SQRT3 should have a specific value"
         );
         assert_eq!(
-            SQRT5, 2.23606797749979,
+            SQRT5, 2.2360679774997896,
             "SQRT5 should have a specific value"
         );
         assert_eq!(TAU, 2.0 * PI, "TAU should have a specific value");
+        assert_eq!(
+            VACUUM_PERMEABILITY, 1.25663706212e-6,
+            "VACUUM_PERMEABILITY should have a specific value"
+        );
+        assert_eq!(
+            VACUUM_PERMITTIVITY, 8.8541878128e-12,
+            "VACUUM_PERMITTIVITY should have a specific value"
+        );
     }
 }

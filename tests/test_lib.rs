@@ -10,7 +10,7 @@ mod tests {
         let constants = Constants::new();
         assert!(constants.is_valid());
         assert!(constants.constants.len() >= 9);
-        assert!(constants.constants.len() <= 16);
+        assert!(constants.constants.len() <= 28);
     }
 
     #[test]
@@ -25,7 +25,7 @@ mod tests {
         let constants = Constants::new();
         let new_constants = constants.constants();
 
-        assert_eq!(new_constants.len(), 16);
+        assert_eq!(new_constants.len(), 28);
         assert_eq!(new_constants, constants.constants());
     }
 
@@ -41,7 +41,7 @@ mod tests {
         let common = Common::default();
         let constants = common.constants();
 
-        assert_eq!(constants.constants().len(), 16);
+        assert_eq!(constants.constants().len(), 28);
         assert_eq!(
             constants.constants(),
             Constants::default().constants()
@@ -53,7 +53,7 @@ mod tests {
         let constants = Constants::new();
         let new_constants = constants.constants();
 
-        assert_eq!(new_constants.len(), 16);
+        assert_eq!(new_constants.len(), 28);
         assert_eq!(new_constants, Constants::default().constants());
     }
 
@@ -62,8 +62,8 @@ mod tests {
         let constants = Constants::new();
         let new_constants = constants.constants().to_vec();
 
-        assert_eq!(new_constants.len(), 16);
-        assert_eq!(constants.constants().len(), 16);
+        assert_eq!(new_constants.len(), 28);
+        assert_eq!(constants.constants().len(), 28);
         assert_eq!(new_constants, constants.constants().to_vec());
     }
 
@@ -72,7 +72,7 @@ mod tests {
         let constants = Constants::new();
         let new_constants = constants.constants();
 
-        assert_eq!(new_constants.len(), 16);
+        assert_eq!(new_constants.len(), 28);
         assert_eq!(new_constants, Constants::default().constants());
     }
 
@@ -82,7 +82,7 @@ mod tests {
         let binding = Constants::default();
         let default_constants = binding.constants();
 
-        assert_eq!(default_constants.len(), 16);
+        assert_eq!(default_constants.len(), 28);
         assert_eq!(default_constants, constants.constants());
     }
 
