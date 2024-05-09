@@ -57,20 +57,30 @@ impl Constants {
     /// ```
     pub fn get_value(&self, name: &str) -> Option<ConstantValue> {
         if let Some(constant) = self.constant(name) {
-            if let Ok(float_value) = constant.value.parse::<f64>() {
-                Some(ConstantValue::Float(float_value))
-            } else if let Ok(u32_value) = constant.value.parse::<u32>()
-            {
-                Some(ConstantValue::U32(u32_value))
-            } else if let Ok(usize_value) =
-                constant.value.parse::<usize>()
-            {
-                Some(ConstantValue::Usize(usize_value))
-            } else if let Some(char_array) = Self::get_char_array(name)
-            {
-                Some(ConstantValue::CharArray(char_array))
-            } else {
-                Some(ConstantValue::String(constant.value.clone()))
+            match name {
+                "HASH_COST" => {
+                    constant.value.parse().map(ConstantValue::U32).ok()
+                }
+                "HASH_LENGTH" => constant
+                    .value
+                    .parse()
+                    .map(ConstantValue::Usize)
+                    .ok(),
+                _ => {
+                    if let Ok(float_value) =
+                        constant.value.parse::<f64>()
+                    {
+                        Some(ConstantValue::Float(float_value))
+                    } else if let Some(char_array) =
+                        Self::get_char_array(name)
+                    {
+                        Some(ConstantValue::CharArray(char_array))
+                    } else {
+                        Some(ConstantValue::String(
+                            constant.value.clone(),
+                        ))
+                    }
+                }
             }
         } else {
             None
@@ -190,7 +200,7 @@ impl Constants {
             },
             Constant {
                 name: "HASH_COST",
-                value: HASH_COST.to_string(),
+                value: HASH_COST.to_string(), // Remove this line
             },
             Constant {
                 name: "HASH_LENGTH",
