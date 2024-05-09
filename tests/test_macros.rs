@@ -88,7 +88,7 @@ mod tests {
             "BOLTZMANN should have a specific value"
         );
         assert_eq!(
-            CATALAN, 0.9159655941772190,
+            CATALAN, 0.915_965_594_177_219,
             "CATALAN should have a specific value"
         );
         assert_eq!(
@@ -182,7 +182,7 @@ mod tests {
             "SQRT3 should have a specific value"
         );
         assert_eq!(
-            SQRT5, 2.2360679774997896,
+            SQRT5, 2.236_067_977_499_79,
             "SQRT5 should have a specific value"
         );
         assert_eq!(TAU, 2.0 * PI, "TAU should have a specific value");

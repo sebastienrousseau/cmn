@@ -301,8 +301,8 @@ pub const AVOGADRO: f64 = 6.02214076e23;
 pub const BOLTZMANN: f64 = 1.380648e-23;
 
 /// Catalan's constant, which is the sum of the alternating harmonic series.
-/// C ≈ 0.9159655942
-pub const CATALAN: f64 = 0.9159655941772190;
+/// C ≈ 0.915965594177219
+pub const CATALAN: f64 = 0.915_965_594_177_219;
 
 /// Coulomb's constant, which is the proportionality constant in Coulomb's law.
 /// k_e ≈ 8.9875517923 x 10^9 N m^2 C^-2
@@ -388,8 +388,8 @@ pub const SQRT2: f64 = std::f64::consts::SQRT_2;
 pub const SQRT3: f64 = 1.7320508075688772;
 
 /// The square root of 5.
-/// √5 ≈ 2.2360679774997896964091736687313
-pub const SQRT5: f64 = 2.2360679774997896;
+/// √5 ≈ 2.23606797749979
+pub const SQRT5: f64 = 2.236_067_977_499_79;
 
 /// The circle constant, which is the ratio of a circle's circumference to its radius.
 /// τ = 2π ≈ 6.28318530717958647692528676655900577
