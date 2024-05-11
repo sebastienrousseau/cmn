@@ -1,5 +1,6 @@
 [package]
-authors = ["Sebastien Rousseau <sebastian.rousseau@gmail.com>"]
+# Metadata about the package.
+authors = ["The Common (CMN) library contributors <contact@cmnlib.com>"]
 build = "build.rs"
 categories = [
     "config",
@@ -16,15 +17,8 @@ exclude = [
     "/.github/*",
     "/.gitignore",
     "/.vscode/*"
-    ]
-homepage = "https://minifunctions.com/"
-keywords = ["cmn", "common", "config", "configurations", "constants"]
-license = "MIT OR Apache-2.0"
-name = "cmn"
-readme = "README.md"
-repository = "https://github.com/sebastienrousseau/cmn/"
-rust-version = "1.69.0"
-version = "0.0.3"
+]
+homepage = "https://cmnlib.com/"
 include = [
     "/CONTRIBUTING.md",
     "/LICENSE-APACHE",
@@ -36,11 +30,14 @@ include = [
     "/README.md",
     "/src/**",
     "/tests/**",
-    "/xtask/**",
 ]
-
-[workspace]
-members = ["xtask"]
+keywords = ["cmn", "common", "config", "configurations", "constants"]
+license = "MIT OR Apache-2.0"
+name = "cmn"
+readme = "README.md"
+repository = "https://github.com/sebastienrousseau/cmn/"
+rust-version = "1.60"
+version = "0.0.4"
 
 [[bench]]
 name = "benchmark"
@@ -55,11 +52,13 @@ name = "cmn"
 path = "examples/cmn.rs"
 
 [dependencies]
-serde = { version = "1.0.163", features = ["derive"] }
-serde_json = "1.0.96"
+# Dependencies for the library
+serde = { version = "1.0.201", features = ["derive"] }
+serde_json = "1.0.117"
 
 [dev-dependencies]
-assert_cmd = "2.0.11"
+# Dependencies for testing
+assert_cmd = "2.0.14"
 criterion = "0.5.1"
 
 [lib]
@@ -68,10 +67,66 @@ name = "cmn"
 path = "src/lib.rs"
 
 [features]
+# No default features
 default = []
 
 [package.metadata.docs.rs]
-all-features = true
+targets = ["x86_64-unknown-linux-gnu"]
+rustdoc-args = ["--generate-link-to-definition"]
+
+# Linting config
+[lints.rust]
+
+## Warn
+# box_pointers = "warn"
+missing_copy_implementations = "warn"
+missing_docs = "warn"
+unstable_features = "warn"
+# unused_crate_dependencies = "warn"
+unused_extern_crates = "warn"
+unused_results = "warn"
+
+## Allow
+bare_trait_objects = "allow"
+elided_lifetimes_in_paths = "allow"
+non_camel_case_types = "allow"
+non_upper_case_globals = "allow"
+trivial_bounds = "allow"
+unsafe_code = "allow"
+
+## Forbid
+missing_debug_implementations = "forbid"
+non_ascii_idents = "forbid"
+unreachable_pub = "forbid"
+
+## Deny
+dead_code = "deny"
+deprecated_in_future = "deny"
+ellipsis_inclusive_range_patterns = "deny"
+explicit_outlives_requirements = "deny"
+future_incompatible = { level = "deny", priority = -1 }
+keyword_idents = "deny"
+macro_use_extern_crate = "deny"
+meta_variable_misuse = "deny"
+missing_fragment_specifier = "deny"
+noop_method_call = "deny"
+pointer_structural_match = "deny"
+rust_2018_idioms = { level = "deny", priority = -1 }
+rust_2021_compatibility = { level = "deny", priority = -1 }
+single_use_lifetimes = "deny"
+trivial_casts = "deny"
+trivial_numeric_casts = "deny"
+unused = { level = "deny", priority = -1 }
+unused_features = "deny"
+unused_import_braces = "deny"
+unused_labels = "deny"
+unused_lifetimes = "deny"
+unused_macro_rules = "deny"
+unused_qualifications = "deny"
+variant_size_differences = "deny"
+
+[package.metadata.clippy]
+warn-lints = ["clippy::all", "clippy::pedantic", "clippy::cargo", "clippy::nursery"]
 
 [profile.dev]
 codegen-units = 256
@@ -86,16 +141,16 @@ rpath = false
 strip = false
 
 [profile.release]
-codegen-units = 1        # Compile crates one after another so the compiler can optimize better
-debug = false            # Disable debug information
-debug-assertions = false # Disable debug assertions
-incremental = false      # Disable incremental compilation
-lto = true               # Enables link to optimizations
-opt-level = "s"          # Optimize for binary size
-overflow-checks = false  # Disable overflow checks
-panic = "abort"          # Strip expensive panic clean-up logic
-rpath = false            # Disable rpath
-strip = "symbols"        # Automatically strip symbols from the binary.
+codegen-units = 1
+debug = false
+debug-assertions = false
+incremental = false
+lto = true
+opt-level = "s"
+overflow-checks = false
+panic = "abort"
+rpath = false
+strip = "symbols"
 
 [profile.test]
 codegen-units = 256

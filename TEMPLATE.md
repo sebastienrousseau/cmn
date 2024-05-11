@@ -49,7 +49,7 @@ represents the different constant values. The values can be an
 `f64 float`, a `String`, a `u32`, a `usize`, or a `&'static [char]`
 array of characters.
 
-[0]: https://minifunctions.com/ "MiniFunctions"
+[0]: https://cmnlib.com/ "MiniFunctions"
 [1]: https://cmnlib.one "Common (CMN) Library Website"
 [2]: https://opensource.org/license/apache-2-0/ "Apache License, Version 2.0"
 [4]: https://github.com/sebastienrousseau/cmn/issues "Issues"
@@ -65,7 +65,7 @@ array of characters.
 [crates-badge]: https://img.shields.io/crates/v/cmn.svg?style=for-the-badge 'Crates.io badge'
 [divider]: https://kura.pro/common/images/elements/divider.svg "divider"
 [docs-badge]: https://img.shields.io/docsrs/cmn.svg?style=for-the-badge 'Docs.rs badge'
-[libs-badge]: https://img.shields.io/badge/lib.rs-v0.0.3-orange.svg?style=for-the-badge 'Lib.rs badge'
+[libs-badge]: https://img.shields.io/badge/lib.rs-v0.0.4-orange.svg?style=for-the-badge 'Lib.rs badge'
 [license-badge]: https://img.shields.io/crates/l/cmn.svg?style=for-the-badge 'License badge'
 [made-with-rust-badge]: https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust 'Made With Rust badge'
 

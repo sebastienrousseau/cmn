@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+  release:
+    types: [created]
 
 jobs:
   all:
@@ -16,11 +18,11 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: hecrj/setup-rust-action@v1
+      - uses: hecrj/setup-rust-action@v2
         with:
           rust-version: nightly
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Update libssl
         run: |
@@ -35,7 +37,7 @@ jobs:
             echo '<html><head><meta http-equiv="refresh" content="0; url=/cmn/"></head><body></body></html>' > ./target/doc/index.html
 
       - name: Deploy
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation
           path: target/doc
@@ -43,10 +45,10 @@ jobs:
           retention-days: 1
 
       - name: Write CNAME file
-        run: echo 'doc.cmnlib.one' > ./target/doc/CNAME
+        run: echo 'doc.cmnlib.com' > ./target/doc/CNAME
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.9.3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           cname: true
           commit_message: Deploy documentation at ${{ github.sha }}
