@@ -166,12 +166,15 @@ impl Common {
         let words_data = self
             .fields
             .get("words")
-            .expect("Words data not found in JSON")
-            .as_array()
-            .expect("Words data is not an array")
-            .iter()
-            .map(|word_value| word_value.as_str().unwrap().to_string())
-            .collect::<Vec<String>>(); // Add type annotation here
+            .map(|words_array| {
+                words_array
+                    .as_array()
+                    .expect("Words data is not an array")
+                    .iter()
+                    .map(|word_value| word_value.as_str().unwrap().to_string())
+                    .collect::<Vec<String>>()
+            })
+            .unwrap_or_default(); // Add this line
 
         Words {
             words: HashSet::from_iter(words_data),

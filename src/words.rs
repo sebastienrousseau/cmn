@@ -82,11 +82,17 @@ impl Default for Words {
     /// This method is automatically called when creating a new instance of `Words`
     /// using `Words::default()`.
     fn default() -> Self {
-        let mut words = Words::new();
-        for word in WORD_LIST.iter() {
-            words.add_word(word);
+        let mut sorted_words: Vec<String> = WORD_LIST
+            .iter()
+            .map(|&word| word.to_owned())
+            .collect();
+
+        sorted_words.sort_unstable();
+        sorted_words.dedup();
+
+        Words {
+            words: sorted_words.into_iter().collect(),
         }
-        words
     }
 }
 
