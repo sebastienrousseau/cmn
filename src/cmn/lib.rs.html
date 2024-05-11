@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-f3501f0f5ae15dfb.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cmn" data-themes="" data-resource-suffix="" data-rustdoc-version="1.71.0-nightly (1a5f8bce7 2023-05-26)" data-search-js="search-4926e5fc22a5646a.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-8c76f75bfb6bd192.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../static.files/source-script-11255107d0a65077.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-f0540c1d82cde29b.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://kura.pro/cmn/images/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../cmn/index.html"><img src="https://kura.pro/cmn/images/logos/cmn.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cmn" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (6e1d94708 2024-05-10)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="icon" href="https://kura.pro/cmn/images/favicon.ico"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -197,6 +197,58 @@
 <a href="#197" id="197">197</a>
 <a href="#198" id="198">198</a>
 <a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
+<a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
+<a href="#235" id="235">235</a>
+<a href="#236" id="236">236</a>
+<a href="#237" id="237">237</a>
+<a href="#238" id="238">238</a>
+<a href="#239" id="239">239</a>
+<a href="#240" id="240">240</a>
+<a href="#241" id="241">241</a>
+<a href="#242" id="242">242</a>
+<a href="#243" id="243">243</a>
+<a href="#244" id="244">244</a>
+<a href="#245" id="245">245</a>
+<a href="#246" id="246">246</a>
+<a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
 </pre></div><pre class="rust"><code><span class="comment">// Copyright © 2023 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
@@ -206,13 +258,13 @@
 //!
 //! *Part of the [Mini Functions][0] family of libraries.*
 //!
-//! [![Common (CMN)](https://kura.pro/cmn/images/titles/title-cmn.svg)](https://minifunctions.com/cmn)
+//! [![Common (CMN)](https://kura.pro/cmn/images/titles/title-cmn.svg)](https://cmnlib.com/cmn)
 //!
 //! &lt;center&gt;
 //!
 //! [![Crates.io](https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&amp;color=success&amp;labelColor=27A006)](https://crates.io/crates/cmn)
 //! [![GitHub](https://img.shields.io/badge/github-555555?style=for-the-badge&amp;labelColor=000000&amp;logo=github)](https://github.com/sebastienrousseau/cmn)
-//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.3-success.svg?style=for-the-badge&amp;color=8A48FF&amp;labelColor=6F36E4)](https://lib.rs/crates/cmn)
+//! [![Lib.rs](https://img.shields.io/badge/lib.rs-v0.0.4-success.svg?style=for-the-badge&amp;color=8A48FF&amp;labelColor=6F36E4)](https://lib.rs/crates/cmn)
 //! [![License](https://img.shields.io/crates/l/cmn.svg?style=for-the-badge&amp;color=007EC6&amp;labelColor=03589B)](http://opensource.org/licenses/MIT)
 //! [![Rust](https://img.shields.io/badge/rust-f04041?style=for-the-badge&amp;labelColor=c0282d&amp;logo=rust)](https://www.rust-lang.org)
 //!
@@ -237,26 +289,37 @@
 //! The following table lists the most important mathematical and cryptographic constants available in the `Common (CMN)` library:
 //!
 //!| Constants | Description | Example |
-//!| --- | --- | --- |
-//!| AVOGADRO | Avogadro&#39;s constant is the number of atoms or molecules in one mole of a substance. | The number of atoms in 12 grams of carbon-12 is 6.02214076 × 10^23. This can be used to calculate the number of atoms or molecules in a given sample. |
-//!| BOLTZMANN | Boltzmann&#39;s constant is the physical constant relating the temperature of a system to the average kinetic energy of its constituent particles. | The kinetic energy of an atom at room temperature is about 2.0 × 10^-21 joules. This can be used to calculate the temperature of a system, or to calculate the average kinetic energy of its particles. |
-//!| EULER | Euler&#39;s constant is a mathematical constant approximately equal to 2.71828. | The sum of the infinite series 1 + 1/2 + 1/3 + ... is equal to Euler&#39;s constant, e. This can be used to calculate the sum of an infinite series, or to calculate the logarithm of a number. |
-//!| GAMMA | The gamma constant is a mathematical constant approximately equal to 0.57721. | The gamma function of 2 is equal to 1. This can be used to calculate the gamma function of a number, or to calculate the factorial of a number. |
-//!| HASH_ALGORITHM | The hash algorithm used to generate the hash. The default is Blake3. | The hash of the string &quot;Hello, world!&quot; is 5eb63bbbe01eeed093cb22bb8f5acdc32790160b123138d53f2173b8d3dc3eee. This can be used to verify the integrity of data, or to create a unique identifier for a file. |
-//!| HASH_COST | The cost of the hash. | The hash cost of Blake3 is 2^128. This can be used to determine how secure a hash algorithm is. |
+//!| -- | -- | -- |
+//!| APERY | Apéry's constant, is the sum of the reciprocals of the positive cubes.&lt;br&gt;`ζ(3) ≈ 1.2020569032` | Used in various mathematical calculations and series approximations. |
+//!| AVOGADRO | Avogadro's constant is the number of atoms or molecules in one mole of a substance.&lt;br&gt;`N_A ≈ 6.02214076 x 10^23 mol^-1` | The number of atoms in 12 grams of carbon-12 is 6.02214076 × 10^23. This can be used to calculate the number of atoms or molecules in a given sample. |
+//!| BOLTZMANN | Boltzmann's constant is the physical constant relating the temperature of a system to the average kinetic energy of its constituent particles.&lt;br&gt;`k_B ≈ 1.380648 x 10^-23 J K^-1` | The kinetic energy of an atom at room temperature is about 2.0 × 10^-21 joules. This can be used to calculate the temperature of a system, or to calculate the average kinetic energy of its particles. |
+//!| CATALAN | Catalan's constant, is the sum of the alternating harmonic series.&lt;br&gt;`C ≈ 0.915965594177219` | Used in various mathematical calculations and series approximations. |
+//!| COULOMB | Coulomb's constant, is the proportionality constant in Coulomb's law.&lt;br&gt;`k_e ≈ 8.9875517923` x 10^9 N m^2 C^-2 | Used in calculations related to electrostatic forces and electric fields. |
+//!| EULER | Euler's constant is a mathematical constant approximately equal to 2.71828.&lt;br&gt;`e ≈ 2.7182818284590452353602874713527` | The sum of the infinite series 1 + 1/2 + 1/3 + ... is equal to Euler's constant, e. This can be used to calculate the sum of an infinite series, or to calculate the logarithm of a number. |
+//!| FARADAY | Faraday constant, which represents the amount of electric charge carried by one mole of electrons.&lt;br&gt;`F ≈ 96485.33212 C mol^-1` | Used in calculations related to electrochemistry and electrolysis. |
+//!| GAMMA | The gamma constant is a mathematical constant approximately equal to 0.57721.&lt;br&gt;`γ ≈ 0.5772156649015329` | The gamma function of 2 is equal to 1. This can be used to calculate the gamma function of a number, or to calculate the factorial of a number. |
+//!| GAS_CONSTANT | The gas constant, which relates the energy scale to the temperature scale in the ideal gas law.&lt;br&gt;`R ≈ 8.314462618 J mol^-1 K^-1` | Used in calculations related to the behavior of gases and thermodynamics. |
+//!| GLAISHER_KINKELIN | Glaisher-Kinkelin constant, which arises in the asymptotic expansion of the Barnes G-function.&lt;br&gt;`A ≈ 1.2824271291` | Used in various mathematical calculations and series approximations. |
+//!| GRAVITATIONAL_CONSTANT | The gravitational constant, is the proportionality constant in Newton's law of universal gravitation.&lt;br&gt;`G ≈ 6.67430 x 10^-11 m^3 kg^-1 s^-2` | Used in calculations related to gravitational forces and celestial mechanics. |
+//!| HASH_ALGORITHM | The hash algorithm used to generate the hash. The default is Blake3. | The hash of the string "Hello, world!" is 5eb63bbbe01eeed093cb22bb8f5acdc32790160b123138d53f2173b8d3dc3eee. This can be used to verify the integrity of data, or to create a unique identifier for a file. |
+//!| HASH_COST | The cost of the hash. | The hash cost of Blake3 is&lt;br&gt;`2^128`. This can be used to determine how secure a hash algorithm is. |
 //!| HASH_LENGTH | The length of the hash. | The hash length of Blake3 is 32 bytes. This can be used to determine how much space is required to store the hash output. |
-//!| PHI | The golden ratio is a number approximately equal to 1.618033988749895. | The golden ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
-//!| PI | Pi is the ratio of a circle&#39;s circumference to its diameter. | The circumference of a circle with a radius of 1 is equal to pi. This can be used to calculate the circumference, area, and volume of circles, spheres, and other geometric shapes. |
-//!| PLANCK | Planck&#39;s constant is a physical constant that is approximately equal to 6.62607015 × 10^−34 joule seconds. | The energy of a photon of light with a wavelength of 500 nanometers is equal to Planck&#39;s constant multiplied by the frequency of the light. This can be used to calculate the energy of photons and other elementary particles. |
-//!| SILVER_RATIO | The silver ratio is a number approximately equal to 1.414213562373095. | The silver ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
-//!| SPECIAL_CHARS | A list of special characters. | The special characters are: !@#$%^&amp;*()_+-={}[]|\:;&quot;&#39;&lt;&gt;,.? |
-//!| SQRT2 | The square root of 2 is a number approximately equal to 1.414213562373095. | The area of a circle with a radius of 1 is equal to the square root of 2. This can be used to calculate the area and volume of circles, spheres, and other geometric shapes. |
-//!| SQRT3 | The square root of 3 is a number approximately equal to 1.732050807568877. | The area of a circle with a radius of 1 is equal to the square root of 3. This can be used to calculate the area and volume of circles
-//!| SQRT5 | The square root of 5 is a number approximately equal to 2.23606797749979. | The area of a circle with a radius of 1 is equal to the square root of 5. |
-//!| TAU | Tau is a number approximately equal to 6.283185307179586. | The circumference of a circle with a radius of 1 is equal to tau. |
+//!| KHINCHIN | Khinchin's constant, which appears in the theory of continued fractions.&lt;br&gt;`K ≈ 2.6854520010` | Used in various mathematical calculations and series approximations. |
+//!| PHI | The golden ratio is a number approximately equal to 1.618033988749895.&lt;br&gt;`φ = (1 + √5) / 2 ≈ 1.6180339887498948482045868343656` | The golden ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
+//!| Pi (π) | Pi is the ratio of a circle's circumference to its diameter.&lt;br&gt;`π ≈ 3.14159265358979323846264338327950288` | The circumference of a circle with a radius of 1 is equal to pi. This can be used to calculate the circumference, area, and volume of circles, spheres, and other geometric shapes. |
+//!| PLANCK | Planck's constant, which relates the energy of a photon to its frequency.&lt;br&gt;`h ≈ 6.62607015 x 10^-34 J s` | The energy of a photon of light with a wavelength of 500 nanometers is equal to Planck's constant multiplied by the frequency of the light. This can be used to calculate the energy of photons and other elementary particles. |
+//!| PLANCK_REDUCED | Planck's reduced constant, is Planck's constant divided by 2π.&lt;br&gt;`ħ = h / (2π) ≈ 1.054571817 x 10^-34 J s` | Used in quantum mechanics and related calculations. |
+//!| SILVER_RATIO | The silver ratio is one of the silver means.&lt;br&gt;`δ_s = 1 + √2 ≈ 2.4142135623730950488016887242097` | The silver ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
+//!| SPEED_OF_LIGHT | The speed of light in vacuum.&lt;br&gt;`c ≈ 299792458 m s^-1` | Used in calculations related to relativity and electromagnetic phenomena. |
+//!| SPECIAL_CHARS | A set of special characters. | The special characters are: !@#$%^&amp;*()_+-={}[]|\:;"'&lt;&gt;,.?` |
+//!| SQRT2 | The square root of 2.&lt;br&gt;`√2 ≈ 1.4142135623730950488016887242097` | The area of a circle with a radius of 1 is equal to the square root of 2. This can be used to calculate the area and volume of circles, spheres, and other geometric shapes. |
+//!| SQRT3 | The square root of 3.&lt;br&gt;`√3 ≈ 1.7320508075688772935274463415059` | The area of a circle with a radius of 1 is equal to the square root of 3. This can be used to calculate the area and volume of circles. |
+//!| SQRT5 | The square root of 5.&lt;br&gt;`√5 ≈ 2.23606797749979` | The area of a circle with a radius of 1 is equal to the square root of 5. |
+//!| TAU | The circle constant, is the ratio of a circle's circumference to its radius.&lt;br&gt;`τ = 2π ≈ 6.28318530717958647692528676655900577` | The circumference of a circle with a radius of 1 is equal to tau. |
+//!| VACUUM_PERMEABILITY | The vacuum permeability, which relates magnetic induction to magnetic field strength.&lt;br&gt;`μ_0 ≈ 1.25663706212 x 10^-6 N A^-2` | Used in calculations related to electromagnetism and magnetic fields. |
+//!| VACUUM_PERMITTIVITY | The vacuum permittivity, which relates electric displacement to electric field strength.&lt;br&gt;`ε_0 ≈ 8.8541878128 x 10^-12 F m^-1` | Used in calculations related to electromagnetism and electric fields. |
 //!
-//! The following table lists the dictionaries available in the Common
-//! library.
+//! The following table lists the dictionaries available in the Common library.
 //!
 //!| Words | Description |
 //!| --- | --- |
@@ -274,16 +337,19 @@
 //! extern crate cmn;
 //! use cmn::Constants;
 //! use cmn::Words;
+//! use cmn::words::WORD_LIST;
 //!
 //! // Constants
 //! let constants = Constants::new();
-//! let constant = constants.constant(&quot;EULER&quot;);
-//! assert_eq!(constant.unwrap().name, &quot;EULER&quot;);
+//! let constant = constants.constant("EULER");
+//! assert_eq!(constant.unwrap().name, "EULER");
 //!
 //! // Words
-//! let words = Words::new();
+//! let words = Words::default();
 //! let words_list = words.words_list();
-//! assert_eq!(words_list[0], &quot;aboard&quot;);
+//! // Checking the first three elements to verify correct initialization and ordering
+//! assert_eq!(words_list.len(), WORD_LIST.len(), "Default words list length should match WORD_LIST length.");
+//! assert_eq!(words_list[0], "aboard", "Check that words list is sorted and starts with the first word.");
 //!
 //! ```
 //! ## License
@@ -298,27 +364,22 @@
 //! defined in the Apache-2.0 license, shall be dual licensed as above,
 //! without any additional terms or conditions.
 //!
-//! [0]: https://minifunctions.com/ &quot;MiniFunctions&quot;
+//! [0]: https://cmnlib.com/ "MiniFunctions"
 //!
-</span><span class="attr">#![cfg_attr(feature = <span class="string">&quot;bench&quot;</span>, feature(test))]
-#![deny(dead_code)]
-#![deny(missing_debug_implementations)]
-#![deny(missing_docs)]
-#![forbid(unsafe_code)]
-#![warn(unreachable_pub)]
+</span><span class="attr">#![cfg_attr(feature = <span class="string">"bench"</span>, feature(test))]
 #![doc(
-    html_favicon_url = <span class="string">&quot;https://kura.pro/cmn/images/favicon.ico&quot;</span>,
-    html_logo_url = <span class="string">&quot;https://kura.pro/cmn/images/logos/cmn.svg&quot;</span>,
-    html_root_url = <span class="string">&quot;https://docs.rs/cmn&quot;
+    html_favicon_url = <span class="string">"https://kura.pro/cmn/images/favicon.ico"</span>,
+    html_logo_url = <span class="string">"https://kura.pro/cmn/images/logos/cmn.svg"</span>,
+    html_root_url = <span class="string">"https://docs.rs/cmn"
 </span>)]
-#![crate_name = <span class="string">&quot;cmn&quot;</span>]
-#![crate_type = <span class="string">&quot;lib&quot;</span>]
+#![crate_name = <span class="string">"cmn"</span>]
+#![crate_type = <span class="string">"lib"</span>]
 
-</span><span class="doccomment">/// The `serde` crate provides the `Serialize` and `Deserialize` traits
+</span><span class="kw">use </span>std::collections::HashSet;
+
+<span class="doccomment">/// The `serde` crate provides the `Serialize` and `Deserialize` traits
 /// that are used to serialize and deserialize the data.
-</span><span class="kw">extern crate </span>serde;
-<span class="kw">use </span>serde::{Deserialize, Serialize};
-<span class="kw">use </span>serde_json;
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="doccomment">/// The `macros` module contains functions for generating macros.
 </span><span class="kw">pub mod </span>macros;
@@ -364,15 +425,58 @@
     }
     <span class="doccomment">/// Returns a new instance of the `Words` structure.
     </span><span class="kw">pub fn </span>words(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Words {
-        Words::new()
+        <span class="kw">let </span>words_data = <span class="self">self
+            </span>.fields
+            .get(<span class="string">"words"</span>)
+            .map(|words_array| {
+                words_array
+                    .as_array()
+                    .expect(<span class="string">"Words data is not an array"</span>)
+                    .iter()
+                    .map(|word_value| {
+                        word_value.as_str().unwrap().to_string()
+                    })
+                    .collect::&lt;Vec&lt;String&gt;&gt;()
+            })
+            .unwrap_or_default(); <span class="comment">// Add this line
+
+        </span>Words {
+            words: HashSet::from_iter(words_data),
+        }
     }
-    <span class="doccomment">/// Parses a string of JSON data and returns a new instance of the
-    /// `Common` structure.
-    </span><span class="kw">pub fn </span>parse(
-        input: <span class="kw-2">&amp;</span>str,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
-        <span class="kw">let </span>common: Common = serde_json::from_str(input)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(common)
+    <span class="doccomment">/// Parses a string of JSON data and returns a new instance of the `Common` structure.
+    </span><span class="kw">pub fn </span>parse(input: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, serde_json::Error&gt; {
+        <span class="kw">match </span>serde_json::from_str::&lt;Common&gt;(input) {
+            <span class="prelude-val">Ok</span>(common) =&gt; {
+                <span class="kw">if </span>common.fields.is_null()
+                    || common.fields.is_object()
+                        &amp;&amp; common.fields.as_object().unwrap().is_empty()
+                {
+                    <span class="comment">// If the `fields` object is null or empty, return the default `Common` instance
+                    </span><span class="prelude-val">Ok</span>(Common::default())
+                } <span class="kw">else </span>{
+                    <span class="prelude-val">Ok</span>(common)
+                }
+            }
+            <span class="prelude-val">Err</span>(e) =&gt; {
+                <span class="comment">// Handle the JSON parsing error
+                </span><span class="kw">match </span>e.classify() {
+                    serde_json::error::Category::Io =&gt; {
+                        <span class="macro">eprintln!</span>(<span class="string">"I/O error occurred: {}"</span>, e);
+                    }
+                    serde_json::error::Category::Syntax =&gt; {
+                        <span class="macro">eprintln!</span>(<span class="string">"JSON syntax error: {}"</span>, e);
+                    }
+                    serde_json::error::Category::Data =&gt; {
+                        <span class="macro">eprintln!</span>(<span class="string">"Invalid JSON data: {}"</span>, e);
+                    }
+                    serde_json::error::Category::Eof =&gt; {
+                        <span class="macro">eprintln!</span>(<span class="string">"Unexpected end of JSON input"</span>);
+                    }
+                }
+                <span class="prelude-val">Err</span>(e)
+            }
+        }
     }
 }
 
@@ -386,13 +490,13 @@
 
 <span class="doccomment">/// This is the main entry point for the `Common (CMN)` library.
 </span><span class="kw">pub fn </span>run() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
-    <span class="kw">if </span>std::env::var(<span class="string">&quot;CMN_TEST_MODE&quot;</span>).unwrap_or_default() == <span class="string">&quot;1&quot; </span>{
-        <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">&quot;Simulated error&quot;</span>.into());
+    <span class="kw">if </span>std::env::var(<span class="string">"CMN_TEST_MODE"</span>).unwrap_or_default() == <span class="string">"1" </span>{
+        <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">"Simulated error"</span>.into());
     }
-    <span class="kw">let </span>name = <span class="string">&quot;cmn&quot;</span>;
-    <span class="macro">println!</span>(<span class="string">&quot;Welcome to `{}` 👋!&quot;</span>, { name }.to_uppercase());
+    <span class="kw">let </span>name = <span class="string">"cmn"</span>;
+    <span class="macro">println!</span>(<span class="string">"Welcome to `{}` 👋!"</span>, { name }.to_uppercase());
     <span class="macro">println!</span>(
-        <span class="string">&quot;A Rust library for accessing a collection of mathematical and cryptographic constants.&quot;
+        <span class="string">"A Rust library for accessing a collection of mathematical and cryptographic constants."
     </span>);
     <span class="prelude-val">Ok</span>(())
 }

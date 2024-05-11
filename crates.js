@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["cmn","xtask"];
+window.ALL_CRATES = ["cmn"];
