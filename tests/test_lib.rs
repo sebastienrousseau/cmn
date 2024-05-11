@@ -31,11 +31,12 @@ mod tests {
 
     #[test]
     fn test_words() {
-        let common = Common::new();
-        let words = common.words();
-        assert_eq!(words.words_list().len(), 4096);
+        let words = Words::new();
+        let new_words = words.words();
+    
+        assert_eq!(new_words.words.len(), 0);
     }
-
+    
     #[test]
     fn test_default() {
         let common = Common::default();

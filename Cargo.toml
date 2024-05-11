@@ -79,12 +79,12 @@ rustdoc-args = ["--generate-link-to-definition"]
 
 ## Warn
 # box_pointers = "warn"
-# missing_copy_implementations = "warn"
-# missing_docs = "warn"
-# unstable_features = "warn"
+missing_copy_implementations = "warn"
+missing_docs = "warn"
+unstable_features = "warn"
 # unused_crate_dependencies = "warn"
-# unused_extern_crates = "warn"
-# unused_results = "warn"
+unused_extern_crates = "warn"
+unused_results = "warn"
 
 ## Allow
 bare_trait_objects = "allow"

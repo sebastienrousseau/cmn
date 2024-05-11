@@ -75,6 +75,7 @@
 //! extern crate cmn;
 //! use cmn::Constants;
 //! use cmn::Words;
+//! use cmn::words::WORD_LIST;
 //!
 //! // Constants
 //! let constants = Constants::new();
@@ -82,9 +83,11 @@
 //! assert_eq!(constant.unwrap().name, "EULER");
 //!
 //! // Words
-//! let words = Words::new();
+//! let words = Words::default();
 //! let words_list = words.words_list();
-//! assert_eq!(words_list[0], "aboard");
+//! // Checking the first three elements to verify correct initialization and ordering
+//! assert_eq!(words_list.len(), WORD_LIST.len(), "Default words list length should match WORD_LIST length.");
+//! assert_eq!(words_list[0], "aboard", "Check that words list is sorted and starts with the first word.");
 //!
 //! ```
 //! ## License
@@ -109,6 +112,8 @@
 )]
 #![crate_name = "cmn"]
 #![crate_type = "lib"]
+
+use std::collections::HashSet;
 
 /// The `serde` crate provides the `Serialize` and `Deserialize` traits
 /// that are used to serialize and deserialize the data.
@@ -158,15 +163,44 @@ impl Common {
     }
     /// Returns a new instance of the `Words` structure.
     pub fn words(&self) -> Words {
-        Words::new()
+        let words_data = self
+            .fields
+            .get("words")
+            .expect("Words data not found in JSON")
+            .as_array()
+            .expect("Words data is not an array")
+            .iter()
+            .map(|word_value| word_value.as_str().unwrap().to_string())
+            .collect::<Vec<String>>(); // Add type annotation here
+
+        Words {
+            words: HashSet::from_iter(words_data),
+        }
     }
     /// Parses a string of JSON data and returns a new instance of the
     /// `Common` structure.
-    pub fn parse(
-        input: &str,
-    ) -> Result<Self, Box<dyn std::error::Error>> {
-        let common: Common = serde_json::from_str(input)?;
-        Ok(common)
+    pub fn parse(input: &str) -> Result<Self, serde_json::Error> {
+        match serde_json::from_str(input) {
+            Ok(common) => Ok(common),
+            Err(e) => {
+                // Handle the JSON parsing error
+                match e.classify() {
+                    serde_json::error::Category::Io => {
+                        eprintln!("I/O error occurred: {}", e);
+                    }
+                    serde_json::error::Category::Syntax => {
+                        eprintln!("JSON syntax error: {}", e);
+                    }
+                    serde_json::error::Category::Data => {
+                        eprintln!("Invalid JSON data: {}", e);
+                    }
+                    serde_json::error::Category::Eof => {
+                        eprintln!("Unexpected end of JSON input");
+                    }
+                }
+                Err(e)
+            }
+        }
     }
 }
 

@@ -1,9 +1,6 @@
 // Copyright © 2023 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-// Copyright © 2023 Common (CMN) library. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0 OR MIT
-
 use serde::{Deserialize, Serialize};
 
 /// Contains several commonly used mathematical and cryptographic constants.

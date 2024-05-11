@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 //! Benchmarks for the Common (CMN) library.
+
 #![allow(missing_docs)]
+
 use criterion::{
     black_box, criterion_group, criterion_main, Criterion,
 };
@@ -20,6 +22,7 @@ fn bench_cmn(c: &mut Criterion) {
         });
     });
 }
+
 fn bench_words(c: &mut Criterion) {
     c.bench_function("Words::new", |b| {
         b.iter(|| {
@@ -27,9 +30,10 @@ fn bench_words(c: &mut Criterion) {
             let _ = black_box(words.words_list());
         })
     });
+
     c.bench_function("Words::default", |b| {
         b.iter(|| {
-            let words = black_box(Words {});
+            let words = black_box(Words::default());
             let _ = black_box(words.words_list());
         })
     });

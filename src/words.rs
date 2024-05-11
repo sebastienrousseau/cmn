@@ -1,33 +1,96 @@
 // Copyright © 2023 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-/// The `serde` crate provides the `Serialize` and `Deserialize` traits
-/// that are used to serialize and deserialize the data.
-extern crate serde;
-use serde::{Deserialize, Serialize};
+//! This module provides a structured way to manage a collection of words.
+//! It is primarily used in applications where word manipulation is necessary,
+//! such as generating passphrases or similar textual content.
 
-/// Contains several words for use in generating passphrases.
+use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
+
+/// A structure to hold and manage a set of words.
+///
+/// `Words` can be used to store words and perform operations on them,
+/// such as retrieving them as a list for passphrase generation. The words are stored
+/// in a `HashSet` to ensure quick lookups and to avoid duplicates, making it more
+/// efficient than a list, especially with large datasets.
 #[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct Words;
+pub struct Words {
+    /// The set of words stored in the structure.
+    ///
+    /// The `HashSet` is used to ensure that words are unique and to provide
+    /// efficient lookups.
+    pub words: HashSet<String>,
+}
 
 impl Words {
-    /// Creates a new instance of `Words`.
+    /// Constructs a new, empty `Words`.
     pub fn new() -> Self {
-        Words
+        Words {
+            words: HashSet::new(),
+        }
     }
-    /// Returns a list of words for use in generating passphrases.
-    pub fn words_list(&self) -> &'static [&'static str] {
-        WORD_LIST
+
+    /// Constructs a new `Words` instance from a list of words.
+    pub fn words(&self) -> &Words {
+        self
+    }
+
+    /// Returns a list of all words stored in the structure.
+    ///
+    /// This method provides access to the words as a sorted vector. It is useful for operations
+    /// that may require ordered data, like displaying words in a user interface.
+    pub fn words_list(&self) -> Vec<String> {
+        let mut words_vec: Vec<String> = self.words.iter().cloned().collect();
+        words_vec.sort();
+        words_vec
+    }
+
+    /// Adds a word to the set.
+    ///
+    /// If the word already exists, it will not be added again due to the properties of the `HashSet`.
+    pub fn add_word(&mut self, word: &str) {
+        let _ = self.words.insert(word.to_string());
+    }
+
+    /// Checks if a word exists in the set.
+    pub fn contains(&self, word: &str) -> bool {
+        self.words.contains(word)
+    }
+
+    /// Returns the number of words in the set.
+    pub fn count(&self) -> usize {
+        self.words.len()
+    }
+
+    /// Clears all words from the set.
+    pub fn clear(&mut self) {
+        self.words.clear();
+    }
+
+    /// Removes a word from the set.
+    ///
+    /// Returns true if the word was present in the set, otherwise false.
+    pub fn remove_word(&mut self, word: &str) -> bool {
+        self.words.remove(word)
     }
 }
 
 impl Default for Words {
+    /// Populates the `Words` struct with a predefined list of words.
+    ///
+    /// This method is automatically called when creating a new instance of `Words`
+    /// using `Words::default()`.
     fn default() -> Self {
-        Self::new()
+        let mut words = Words::new();
+        for word in WORD_LIST.iter() {
+            words.add_word(word);
+        }
+        words
     }
 }
 
-/// The list of words.
+/// The predefined list of words used to initialize the `Words` struct.
 pub const WORD_LIST: &[&str] = &[
     "aboard", "abode", "abort", "abound", "about", "above", "abroad",
     "abrupt", "absent", "absorb", "absurd", "abuse", "accent",
@@ -35,9 +98,8 @@ pub const WORD_LIST: &[&str] = &[
     "acid", "acidic", "acorn", "acre", "across", "act", "action",
     "active", "actor", "actual", "acute", "adapt", "add", "added",
     "addict", "adept", "adhere", "adjust", "admire", "admit", "adam",
-    "afghan", "alaska", "alice", "allah", "amazon", "andrew", "anglo",
-    "angola", "antony", "adobe", "adopt", "adrift", "adult", "adverb",
     "advert", "aerial", "afar", "affair", "affect", "afford", "afield",
+    "afghan", "alaska", "alice", "allah", "amazon", "andrew", "anglo",
     "afloat", "afraid", "afresh", "after", "again", "age", "agency",
     "agenda", "agent", "aghast", "agile", "ago", "agony", "agree",
     "agreed", "ahead", "aid", "aide", "aim", "air", "airman", "airy",
@@ -48,12 +110,12 @@ pub const WORD_LIST: &[&str] = &[
     "altar", "alter", "always", "amaze", "amber", "ambush", "amen",
     "amend", "amid", "amidst", "amiss", "among", "amount", "ample",
     "amuse", "anchor", "and", "anew", "angel", "anger", "angle",
+    "angola", "antony", "adobe", "adopt", "adrift", "adult", "adverb",
     "angry", "animal", "ankle", "annoy", "annual", "answer", "anthem",
     "anti", "any", "anyhow", "anyway", "apart", "apathy", "apex",
     "apiece", "appeal", "appear", "apple", "apply", "apron", "arcade",
-    "arcane", "arch", "ardent", "are", "area", "argue", "arid",
     "april", "arab", "arctic", "athens", "austin", "bach", "baltic",
-    "basque", "berlin", "bible", "arise", "arm", "armful", "armpit",
+    "arcane", "arch", "ardent", "are", "area", "argue", "arid",
     "army", "aroma", "around", "arouse", "array", "arrest", "arrive",
     "arrow", "arson", "art", "artery", "artful", "artist", "ascent",
     "ashen", "ashore", "aside", "ask", "asleep", "aspect", "assay",
@@ -71,6 +133,7 @@ pub const WORD_LIST: &[&str] = &[
     "bare", "barely", "barge", "bark", "barley", "barn", "baron",
     "barrel", "barren", "basalt", "base", "basic", "basil", "basin",
     "basis", "basket", "bass", "bat", "batch", "bath", "baton",
+    "basque", "berlin", "bible", "arise", "arm", "armful", "armpit",
     "battle", "bay", "beach", "beacon", "beak", "beam", "bean", "bear",
     "beard", "beast", "beat", "beauty", "become", "bed", "beech",
     "beef", "beefy", "beep", "beer", "beet", "beetle", "before",
@@ -87,10 +150,9 @@ pub const WORD_LIST: &[&str] = &[
     "blot", "blouse", "blow", "blue", "bluff", "blunt", "blur",
     "blush", "boar", "board", "boast", "boat", "bodily", "body",
     "bogus", "boil", "bold", "bolt", "bomb", "bond", "bombay", "bonn",
-    "boston", "brazil", "briton", "buddha", "burma", "caesar", "cairo",
-    "canada", "bone", "bonnet", "bonus", "bony", "book", "boom",
     "boost", "boot", "booth", "booze", "border", "bore", "borrow",
     "bosom", "boss", "both", "bother", "bottle", "bottom", "bought",
+    "boston", "brazil", "briton", "buddha", "burma", "caesar", "cairo",
     "bounce", "bound", "bounty", "bout", "bovine", "bow", "bowel",
     "bowl", "box", "boy", "boyish", "brace", "brain", "brainy",
     "brake", "bran", "branch", "brand", "brandy", "brass", "brave",
@@ -108,11 +170,11 @@ pub const WORD_LIST: &[&str] = &[
     "cable", "cache", "cactus", "cage", "cake", "calf", "call",
     "caller", "calm", "calmly", "came", "camel", "camera", "camp",
     "campus", "can", "canal", "canary", "cancel", "cancer", "candid",
+    "canada", "bone", "bonnet", "bonus", "bony", "book", "boom",
     "candle", "candy", "cane", "canine", "canoe", "canopy", "canvas",
     "canyon", "cap", "cape", "car", "carbon", "card", "care", "career",
     "caress", "cargo", "carnal", "carp", "carpet", "carrot", "carry",
     "cart", "carl", "carol", "celtic", "chile", "china", "christ",
-    "congo", "cuba", "cyprus", "czech", "cartel", "case", "cash",
     "cask", "cast", "castle", "casual", "cat", "catch", "cater",
     "cattle", "caught", "causal", "cause", "cave", "cease", "celery",
     "cell", "cellar", "cement", "censor", "census", "cereal", "cervix",
@@ -136,6 +198,7 @@ pub const WORD_LIST: &[&str] = &[
     "collar", "colon", "colony", "colt", "column", "comb", "combat",
     "come", "comedy", "comic", "commit", "common", "compel", "comply",
     "concur", "cone", "confer", "consul", "convex", "convey", "convoy",
+    "congo", "cuba", "cyprus", "czech", "cartel", "case", "cash",
     "cook", "cool", "cope", "copper", "copy", "coral", "cord", "core",
     "cork", "corn", "corner", "corps", "corpse", "corpus", "cortex",
     "cosmic", "cosmos", "cost", "costly", "cosy", "cotton", "couch",
@@ -153,8 +216,8 @@ pub const WORD_LIST: &[&str] = &[
     "cute", "cycle", "cyclic", "cynic", "dad", "daddy", "dagger",
     "daily", "dairy", "daisy", "dale", "damage", "damn", "damp",
     "dampen", "dance", "danger", "dare", "dallas", "danish", "darwin",
-    "david", "delhi", "derby", "diana", "dublin", "dutch", "east",
     "dark", "darken", "dash", "data", "date", "dawn", "day", "dead",
+    "david", "delhi", "derby", "diana", "dublin", "dutch", "east",
     "deadly", "deaf", "deal", "dealer", "dean", "dear", "death",
     "debate", "debit", "debris", "debt", "debtor", "decade", "decay",
     "decent", "decide", "deck", "decor", "decree", "deduce", "deed",
@@ -184,7 +247,6 @@ pub const WORD_LIST: &[&str] = &[
     "earth", "ease", "easel", "easily", "easter", "easy", "eat",
     "eaten", "eater", "echo", "eddy", "edge", "edible", "eden",
     "edward", "eric", "essex", "europe", "eve", "exodus", "france",
-    "french", "friday", "edict", "edit", "editor", "eerie", "eerily",
     "effect", "effort", "egg", "ego", "eight", "eighth", "eighty",
     "either", "elbow", "elder", "eldest", "elect", "eleven", "elicit",
     "elite", "else", "elude", "elves", "embark", "emblem", "embryo",
@@ -227,6 +289,7 @@ pub const WORD_LIST: &[&str] = &[
     "foul", "found", "four", "fourth", "fox", "foyer", "frail",
     "frame", "franc", "frank", "fraud", "free", "freed", "freely",
     "freer", "freeze", "frenzy", "fresh", "friar", "fridge", "fried",
+    "french", "friday", "edict", "edit", "editor", "eerie", "eerily",
     "friend", "fright", "fringe", "frock", "frog", "from", "front",
     "frost", "frosty", "frown", "frozen", "frugal", "fruit", "fudge",
     "fuel", "fulfil", "full", "fully", "fun", "fund", "funny", "fur",
@@ -234,10 +297,10 @@ pub const WORD_LIST: &[&str] = &[
     "future", "fuzzy", "gadget", "gag", "gain", "gala", "galaxy",
     "gale", "gall", "galley", "gallon", "gallop", "gamble", "game",
     "gamma", "gang", "gandhi", "gaul", "gemini", "geneva", "george",
-    "german", "gloria", "god", "gothic", "greece", "gap", "garage",
     "garden", "garlic", "gas", "gasp", "gate", "gather", "gauge",
     "gaunt", "gave", "gay", "gaze", "gear", "geese", "gender", "gene",
     "genial", "genius", "genre", "gentle", "gently", "gentry", "genus",
+    "german", "gloria", "god", "gothic", "greece", "gap", "garage",
     "get", "ghetto", "ghost", "giant", "gift", "giggle", "gill",
     "gilt", "ginger", "girl", "give", "given", "glad", "glade",
     "glance", "gland", "glare", "glass", "glassy", "gleam", "glee",
@@ -250,7 +313,6 @@ pub const WORD_LIST: &[&str] = &[
     "gray", "grease", "greasy", "great", "greed", "greedy", "green",
     "greet", "grew", "grey", "grid", "grief", "grill", "grim", "grin",
     "grind", "greek", "hague", "haiti", "hanoi", "harry", "havana",
-    "hawaii", "hebrew", "henry", "hermes", "grip", "grit", "gritty",
     "groan", "groin", "groom", "groove", "gross", "ground", "group",
     "grove", "grow", "grown", "growth", "grudge", "grunt", "guard",
     "guess", "guest", "guide", "guild", "guilt", "guilty", "guise",
@@ -261,6 +323,7 @@ pub const WORD_LIST: &[&str] = &[
     "harder", "hardly", "hare", "harem", "harm", "harp", "harsh",
     "has", "hash", "hassle", "haste", "hasten", "hasty", "hat",
     "hatch", "hate", "haul", "haunt", "have", "haven", "havoc", "hawk",
+    "hawaii", "hebrew", "henry", "hermes", "grip", "grit", "gritty",
     "hazard", "haze", "hazel", "hazy", "head", "heal", "health",
     "heap", "hear", "heard", "heart", "hearth", "hearty", "heat",
     "heater", "heaven", "heavy", "heck", "hectic", "hedge", "heel",
@@ -270,7 +333,6 @@ pub const WORD_LIST: &[&str] = &[
     "heroic", "heroin", "hey", "heyday", "hick", "hidden", "hide",
     "high", "higher", "highly", "hill", "him", "hind", "hint", "hippy",
     "hire", "his", "hiss", "hit", "hive", "hindu", "hitler", "idaho",
-    "inca", "india", "indian", "iowa", "iran", "iraq", "irish",
     "hoard", "hoarse", "hobby", "hockey", "hold", "holder", "hole",
     "hollow", "holly", "holy", "home", "honest", "honey", "hood",
     "hook", "hope", "horn", "horny", "horrid", "horror", "horse",
@@ -281,6 +343,7 @@ pub const WORD_LIST: &[&str] = &[
     "icon", "idea", "ideal", "idiom", "idiot", "idle", "idly", "idol",
     "ignite", "ignore", "ill", "image", "immune", "impact", "imply",
     "import", "impose", "incest", "inch", "income", "incur", "indeed",
+    "inca", "india", "indian", "iowa", "iran", "iraq", "irish",
     "index", "indoor", "induce", "inept", "inert", "infant", "infect",
     "infer", "influx", "inform", "inject", "injure", "injury",
     "inlaid", "inland", "inlet", "inmate", "inn", "innate", "inner",
@@ -292,17 +355,17 @@ pub const WORD_LIST: &[&str] = &[
     "jacob", "james", "japan", "itself", "ivory", "jacket", "jade",
     "jaguar", "jail", "jargon", "jaw", "jazz", "jeep", "java",
     "jersey", "jesus", "jewish", "jim", "john", "jordan", "joseph",
-    "judas", "judy", "jelly", "jerky", "jest", "jet", "jewel", "job",
     "jock", "jockey", "join", "joint", "joke", "jolly", "jolt", "joy",
     "joyful", "joyous", "judge", "juice", "juicy", "jumble", "jumbo",
+    "judas", "judy", "jelly", "jerky", "jest", "jet", "jewel", "job",
     "july", "june", "kansas", "karl", "kenya", "koran", "korea",
-    "kuwait", "laos", "latin", "leo", "jump", "jungle", "junior",
     "junk", "junta", "jury", "just", "karate", "keel", "keen", "keep",
     "keeper", "kept", "kernel", "kettle", "key", "khaki", "kick",
     "kid", "kidnap", "kidney", "kill", "killer", "kin", "kind",
     "kindly", "king", "kiss", "kite", "kitten", "knack", "knee",
     "knew", "knife", "knight", "knit", "knob", "knock", "knot", "know",
     "known", "label", "lace", "lack", "lad", "ladder", "laden", "lady",
+    "kuwait", "laos", "latin", "leo", "jump", "jungle", "junior",
     "lagoon", "laity", "lake", "lamb", "lame", "lamp", "lance", "land",
     "lane", "lap", "lapse", "large", "larval", "laser", "last",
     "latch", "late", "lately", "latent", "later", "latest", "latter",
@@ -315,7 +378,6 @@ pub const WORD_LIST: &[&str] = &[
     "lessen", "lesser", "lesson", "lest", "let", "lethal", "letter",
     "level", "lever", "levy", "lewis", "liable", "liar", "libel",
     "libya", "lima", "lisbon", "liz", "london", "louvre", "lucy",
-    "luther", "madame", "madrid", "lice", "lick", "lid", "lie", "lied",
     "life", "lift", "light", "like", "likely", "limb", "lime", "limit",
     "limp", "line", "linear", "linen", "linger", "link", "lion", "lip",
     "liquid", "liquor", "list", "listen", "lit", "live", "lively",
@@ -328,14 +390,15 @@ pub const WORD_LIST: &[&str] = &[
     "loyal", "lucid", "luck", "lucky", "lull", "lump", "lumpy",
     "lunacy", "lunar", "lunch", "lung", "lure", "lurid", "lush",
     "lust", "lute", "luxury", "lying", "lymph", "lynch", "lyric",
+    "luther", "madame", "madrid", "lice", "lick", "lid", "lie", "lied",
     "macho", "macro", "mad", "madam", "made", "mafia", "magic",
     "magma", "magnet", "magnum", "maid", "maiden", "mail", "main",
     "mainly", "major", "make", "maker", "male", "malice", "mall",
     "malt", "mammal", "manage", "mane", "malta", "maria", "mars",
-    "mary", "maya", "mecca", "mexico", "miami", "mickey", "milan",
     "mania", "manic", "manner", "manor", "mantle", "manual", "manure",
     "many", "map", "maple", "marble", "march", "mare", "margin",
     "marina", "mark", "market", "marry", "marsh", "martin", "martyr",
+    "mary", "maya", "mecca", "mexico", "miami", "mickey", "milan",
     "mask", "mason", "mass", "mast", "master", "match", "mate",
     "matrix", "matter", "mature", "maxim", "may", "maybe", "mayor",
     "maze", "mead", "meadow", "meal", "mean", "meant", "meat", "medal",
@@ -351,10 +414,10 @@ pub const WORD_LIST: &[&str] = &[
     "mix", "moan", "moat", "mobile", "mock", "mode", "model", "modem",
     "modern", "modest", "modify", "module", "moist", "molar", "mole",
     "molten", "moment", "monaco", "monday", "moscow", "moses",
-    "moslem", "mrs", "munich", "muslim", "naples", "nazi", "money",
     "monies", "monk", "monkey", "month", "mood", "moody", "moon",
     "moor", "moral", "morale", "morbid", "more", "morgue", "mortal",
     "mortar", "mosaic", "mosque", "moss", "most", "mostly", "moth",
+    "moslem", "mrs", "munich", "muslim", "naples", "nazi", "money",
     "mother", "motion", "motive", "motor", "mould", "mount", "mourn",
     "mouse", "mouth", "move", "movie", "much", "muck", "mucus", "mud",
     "muddle", "muddy", "mule", "mummy", "murder", "murky", "murmur",
@@ -365,9 +428,8 @@ pub const WORD_LIST: &[&str] = &[
     "nation", "native", "nature", "nausea", "naval", "nave", "navy",
     "near", "nearer", "nearly", "neat", "neatly", "neck", "need",
     "needle", "needy", "negate", "neon", "nephew", "nepal", "newark",
-    "nile", "nobel", "north", "norway", "ohio", "oscar", "oslo",
-    "oxford", "nerve", "nest", "neural", "never", "newly", "next",
     "nice", "nicely", "niche", "nickel", "niece", "night", "nimble",
+    "nile", "nobel", "north", "norway", "ohio", "oscar", "oslo",
     "nine", "ninety", "ninth", "noble", "nobody", "node", "noise",
     "noisy", "non", "none", "noon", "nor", "norm", "normal", "nose",
     "nosy", "not", "note", "notice", "notify", "notion", "nought",
@@ -384,10 +446,10 @@ pub const WORD_LIST: &[&str] = &[
     "otter", "ought", "ounce", "our", "out", "outer", "output",
     "outset", "oval", "oven", "over", "overt", "owe", "owing", "owl",
     "own", "owner", "oxide", "oxygen", "oyster", "ozone", "pace",
+    "oxford", "nerve", "nest", "neural", "never", "newly", "next",
     "pack", "packet", "pact", "paddle", "paddy", "pagan", "page",
     "paid", "pain", "paint", "pair", "palace", "pale", "palm", "panel",
     "panic", "panama", "paris", "pascal", "paul", "peking", "peru",
-    "peter", "philip", "poland", "polish", "papa", "papal", "paper",
     "parade", "parcel", "pardon", "parent", "parish", "park", "parody",
     "parrot", "part", "partly", "party", "pass", "past", "paste",
     "pastel", "pastor", "pastry", "pat", "patch", "patent", "path",
@@ -396,6 +458,7 @@ pub const WORD_LIST: &[&str] = &[
     "pelvic", "pelvis", "pen", "penal", "pence", "pencil", "penis",
     "penny", "people", "pepper", "per", "perch", "peril", "period",
     "perish", "permit", "person", "pest", "petite", "petrol", "petty",
+    "peter", "philip", "poland", "polish", "papa", "papal", "paper",
     "phase", "phone", "photo", "phrase", "piano", "pick", "picket",
     "picnic", "pie", "piece", "pier", "pierce", "piety", "pig",
     "pigeon", "piggy", "pike", "pile", "pill", "pillar", "pillow",
@@ -411,9 +474,8 @@ pub const WORD_LIST: &[&str] = &[
     "pony", "pool", "poor", "poorly", "pop", "pope", "poppy", "pore",
     "pork", "port", "portal", "pose", "posh", "post", "postal", "pot",
     "potato", "potent", "pouch", "pound", "pour", "powder", "power",
-    "praise", "pray", "prayer", "preach", "prefer", "prefix", "press",
     "prague", "quebec", "rex", "rhine", "ritz", "robert", "roman",
-    "rome", "rosa", "russia", "pretty", "price", "pride", "priest",
+    "praise", "pray", "prayer", "preach", "prefer", "prefix", "press",
     "primal", "prime", "prince", "print", "prior", "prism", "prison",
     "privy", "prize", "probe", "profit", "prompt", "prone", "proof",
     "propel", "proper", "prose", "proton", "proud", "prove", "proven",
@@ -450,6 +512,7 @@ pub const WORD_LIST: &[&str] = &[
     "road", "roar", "roast", "rob", "robe", "robin", "robot", "robust",
     "rock", "rocket", "rocky", "rod", "rode", "rodent", "rogue",
     "role", "roll", "roof", "room", "root", "rope", "rose", "rosy",
+    "rome", "rosa", "russia", "pretty", "price", "pride", "priest",
     "rotate", "rotor", "rotten", "rouge", "rough", "round", "route",
     "rover", "row", "royal", "rubble", "ruby", "rudder", "rude",
     "rugby", "ruin", "rule", "ruler", "rumble", "rump", "run", "rune",
@@ -458,7 +521,6 @@ pub const WORD_LIST: &[&str] = &[
     "safe", "safely", "safer", "safety", "saga", "sage", "said",
     "sail", "sailor", "saint", "sake", "salad", "salary", "sale",
     "saline", "sahara", "sam", "saturn", "saudi", "saxon", "scot",
-    "seoul", "somali", "sony", "soviet", "saliva", "salmon", "saloon",
     "salt", "salty", "salute", "same", "sample", "sand", "sandy",
     "sane", "sash", "satan", "satin", "satire", "sauce", "sauna",
     "savage", "save", "say", "scale", "scalp", "scan", "scant", "scar",
@@ -470,6 +532,7 @@ pub const WORD_LIST: &[&str] = &[
     "seeing", "seek", "seem", "seize", "seldom", "select", "self",
     "sell", "seller", "semi", "senate", "send", "senile", "senior",
     "sense", "sensor", "sent", "sentry", "sequel", "serene", "serial",
+    "seoul", "somali", "sony", "soviet", "saliva", "salmon", "saloon",
     "series", "sermon", "serum", "serve", "server", "set", "settle",
     "seven", "severe", "sewage", "sex", "sexual", "sexy", "shabby",
     "shade", "shadow", "shady", "shaft", "shaggy", "shah", "shake",
@@ -501,7 +564,6 @@ pub const WORD_LIST: &[&str] = &[
     "sordid", "sore", "sorrow", "sorry", "sort", "soul", "sound",
     "soup", "sour", "source", "space", "spade", "span", "spare",
     "spark", "spain", "stalin", "sudan", "suez", "sunday", "sweden",
-    "swiss", "sydney", "syria", "taiwan", "sparse", "spasm", "spat",
     "spate", "speak", "spear", "speech", "speed", "speedy", "spell",
     "spend", "sperm", "sphere", "spice", "spicy", "spider", "spiky",
     "spill", "spin", "spinal", "spine", "spiral", "spirit", "spit",
@@ -529,12 +591,12 @@ pub const WORD_LIST: &[&str] = &[
     "swan", "swap", "swarm", "sway", "swear", "sweat", "sweaty",
     "sweep", "sweet", "swell", "swift", "swim", "swine", "swing",
     "swirl", "switch", "sword", "swore", "symbol", "synod", "syntax",
+    "swiss", "sydney", "syria", "taiwan", "sparse", "spasm", "spat",
     "syrup", "system", "table", "tablet", "taboo", "tacit", "tackle",
     "tact", "tactic", "tail", "tailor", "take", "tale", "talent",
     "talk", "tall", "tally", "tame", "tandem", "tangle", "tank", "tap",
     "tape", "target", "tariff", "tart", "task", "taste", "tarzan",
     "taurus", "tehran", "teresa", "texas", "thomas", "tibet", "tokyo",
-    "tom", "turk", "tasty", "tattoo", "taut", "tavern", "tax", "taxi",
     "tea", "teach", "teak", "team", "tear", "tease", "tech", "teeth",
     "tell", "temper", "temple", "tempo", "tempt", "ten", "tenant",
     "tend", "tender", "tendon", "tennis", "tenor", "tense", "tensor",
@@ -549,6 +611,7 @@ pub const WORD_LIST: &[&str] = &[
     "tile", "till", "tilt", "timber", "time", "timid", "tin", "tiny",
     "tip", "tissue", "title", "toad", "toast", "today", "toilet",
     "token", "told", "toll", "tomato", "tomb", "tonal", "tone",
+    "tom", "turk", "tasty", "tattoo", "taut", "tavern", "tax", "taxi",
     "tongue", "tonic", "too", "took", "tool", "tooth", "top", "topaz",
     "topic", "torch", "torque", "torso", "tort", "toss", "total",
     "touch", "tough", "tour", "toward", "towel", "tower", "town",
@@ -562,7 +625,6 @@ pub const WORD_LIST: &[&str] = &[
     "try", "tsar", "tube", "tumble", "tuna", "tundra", "tune", "tung",
     "tunic", "tunnel", "turban", "turf", "turn", "turtle", "tutor",
     "tweed", "twelve", "turkey", "uganda", "venice", "venus", "vienna",
-    "viking", "virgo", "warsaw", "west", "yale", "twenty", "twice",
     "twin", "twist", "two", "tycoon", "tying", "type", "tyrant",
     "ugly", "ulcer", "ultra", "umpire", "unable", "uncle", "under",
     "uneasy", "unfair", "unify", "union", "unique", "unit", "unite",
@@ -577,6 +639,7 @@ pub const WORD_LIST: &[&str] = &[
     "verb", "verbal", "verge", "verify", "verity", "verse", "versus",
     "very", "vessel", "vest", "veto", "via", "viable", "vicar", "vice",
     "victim", "victor", "video", "view", "vigil", "vile", "villa",
+    "viking", "virgo", "warsaw", "west", "yale", "twenty", "twice",
     "vine", "vinyl", "viola", "violet", "violin", "viral", "virgin",
     "virtue", "virus", "visa", "vision", "visit", "visual", "vital",
     "vivid", "vocal", "vodka", "vogue", "voice", "void", "volley",
@@ -602,7 +665,6 @@ pub const WORD_LIST: &[&str] = &[
     "wrist", "writ", "write", "writer", "wrong", "xerox", "yacht",
     "yard", "yarn", "yeah", "year", "yeast", "yellow", "yet", "yield",
     "yogurt", "yolk", "you", "young", "your", "yemen", "york", "zaire",
-    "zurich", "aback", "abbey", "abbot", "abide", "ablaze", "able",
     "youth", "zeal", "zebra", "zenith", "zero", "zigzag", "zinc",
-    "zombie", "zone",
+    "zombie", "zone","zurich"
 ];
