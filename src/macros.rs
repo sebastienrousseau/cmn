@@ -81,6 +81,18 @@ macro_rules! cmn_join {
     }};
 }
 
+/// This macro creates a new map of the given key-value pairs.
+#[macro_export]
+macro_rules! cmn_map {
+    ($($key:expr => $value:expr),*) => {{
+        let mut map = ::std::collections::HashMap::new();
+        $(
+            map.insert($key, $value);
+        )*
+        map
+    }};
+}
+
 /// This macro finds the maximum value of the given values.
 #[macro_export]
 macro_rules! cmn_max {
@@ -133,6 +145,14 @@ macro_rules! cmn_split {
         }
         v
     }};
+}
+
+/// This macro converts the given string to a number.
+#[macro_export]
+macro_rules! cmn_to_num {
+    ($s:expr) => {
+        $s.parse::<f64>().unwrap_or(0.0)
+    };
 }
 
 /// This macro creates a new vector with the given elements.

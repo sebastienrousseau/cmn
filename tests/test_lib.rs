@@ -33,10 +33,10 @@ mod tests {
     fn test_words() {
         let words = Words::new();
         let new_words = words.words();
-    
+
         assert_eq!(new_words.words.len(), 0);
     }
-    
+
     #[test]
     fn test_default() {
         let common = Common::default();
