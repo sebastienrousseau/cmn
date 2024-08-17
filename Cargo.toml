@@ -54,7 +54,7 @@ path = "examples/cmn.rs"
 [dependencies]
 # Dependencies for the library
 serde = { version = "1.0.208", features = ["derive"] }
-serde_json = "1.0.124"
+serde_json = "1.0.125"
 
 [dev-dependencies]
 # Dependencies for testing
