@@ -560,4 +560,125 @@ mod tests {
             assert_eq!(dt.day(), *expected_day, "Failed for {input}");
         }
     }
+
+    // ===============================================================
+    // DateTime::now
+    // ===============================================================
+
+    #[test]
+    fn now_returns_reasonable_year() {
+        let dt = DateTime::now();
+        assert!(dt.year() >= 2024);
+        assert!(dt.year() <= 2100);
+    }
+
+    #[test]
+    fn now_is_utc() {
+        assert_eq!(DateTime::now().offset_minutes(), 0);
+    }
+
+    // ===============================================================
+    // DateTime::from_unix_timestamp / roundtrip
+    // ===============================================================
+
+    #[test]
+    fn from_unix_epoch_zero() {
+        let dt = DateTime::from_unix_timestamp(0);
+        assert_eq!(dt.year(), 1970);
+        assert_eq!(dt.month(), 1);
+        assert_eq!(dt.day(), 1);
+        assert_eq!(dt.hour(), 0);
+    }
+
+    #[test]
+    fn from_unix_known_date() {
+        // 2026-04-05T12:00:00Z
+        let dt = DateTime::parse("2026-04-05T12:00:00Z").unwrap();
+        let ts = dt.to_unix_timestamp();
+        let rt = DateTime::from_unix_timestamp(ts);
+        assert_eq!(rt.year(), 2026);
+        assert_eq!(rt.month(), 4);
+        assert_eq!(rt.day(), 5);
+        assert_eq!(rt.hour(), 12);
+    }
+
+    #[test]
+    fn from_unix_negative_timestamp() {
+        // 1969-12-31T23:59:00Z = -60
+        let dt = DateTime::from_unix_timestamp(-60);
+        assert_eq!(dt.year(), 1969);
+        assert_eq!(dt.month(), 12);
+        assert_eq!(dt.day(), 31);
+        assert_eq!(dt.hour(), 23);
+        assert_eq!(dt.minute(), 59);
+    }
+
+    #[test]
+    fn from_unix_roundtrip() {
+        let dt = DateTime::parse("2026-06-15T08:30:45Z").unwrap();
+        let rt = DateTime::from_unix_timestamp(dt.to_unix_timestamp());
+        assert_eq!(dt.to_iso8601(), rt.to_iso8601());
+    }
+
+    // ===============================================================
+    // DateTime::add_seconds / add_hours / add_days
+    // ===============================================================
+
+    #[test]
+    fn add_seconds_positive() {
+        let dt = DateTime::parse("2026-04-05T12:00:00Z").unwrap();
+        let dt2 = dt.add_seconds(3600);
+        assert_eq!(dt2.hour(), 13);
+    }
+
+    #[test]
+    fn add_seconds_negative() {
+        let dt = DateTime::parse("2026-04-05T12:00:00Z").unwrap();
+        let dt2 = dt.add_seconds(-3600);
+        assert_eq!(dt2.hour(), 11);
+    }
+
+    #[test]
+    fn add_hours_crosses_day() {
+        let dt = DateTime::parse("2026-04-05T23:00:00Z").unwrap();
+        let dt2 = dt.add_hours(2);
+        assert_eq!(dt2.day(), 6);
+        assert_eq!(dt2.hour(), 1);
+    }
+
+    #[test]
+    fn add_days_crosses_month() {
+        let dt = DateTime::parse("2026-01-30T12:00:00Z").unwrap();
+        let dt2 = dt.add_days(3);
+        assert_eq!(dt2.month(), 2);
+        assert_eq!(dt2.day(), 2);
+    }
+
+    // ===============================================================
+    // TryFrom<&str>
+    // ===============================================================
+
+    #[test]
+    fn try_from_str_valid() {
+        let dt: Result<DateTime, _> = "2026-04-05T14:30:00Z".try_into();
+        assert!(dt.is_ok());
+        assert_eq!(dt.unwrap().year(), 2026);
+    }
+
+    #[test]
+    fn try_from_str_invalid() {
+        let dt: Result<DateTime, _> = "bad".try_into();
+        assert!(dt.is_err());
+    }
+
+    // ===============================================================
+    // From<SystemTime>
+    // ===============================================================
+
+    #[test]
+    fn from_system_time() {
+        let st = std::time::SystemTime::now();
+        let dt: DateTime = st.into();
+        assert!(dt.year() >= 2024);
+    }
 }

@@ -12,12 +12,6 @@ categories = [
 description = "55 mathematical, physical, and cryptographic constants for Rust — no_std, WASM-ready, compile-time const, typed runtime lookup, 14 utility macros"
 documentation = "https://docs.rs/cmn"
 edition = "2021"
-exclude = [
-    "/.git/*",
-    "/.github/*",
-    "/.gitignore",
-    "/.vscode/*"
-]
 homepage = "https://cmnlib.com/"
 include = [
     "/CHANGELOG.md",
@@ -76,8 +70,9 @@ default = ["std"]
 std = ["serde", "serde_json"]
 
 [package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
 targets = ["x86_64-unknown-linux-gnu"]
-rustdoc-args = ["--generate-link-to-definition"]
 
 # Linting config
 [lints.rust]
@@ -97,7 +92,7 @@ elided_lifetimes_in_paths = "allow"
 non_camel_case_types = "allow"
 non_upper_case_globals = "allow"
 trivial_bounds = "allow"
-unsafe_code = "allow"
+unsafe_code = "forbid"
 
 ## Forbid
 missing_debug_implementations = "forbid"

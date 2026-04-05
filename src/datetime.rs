@@ -306,6 +306,52 @@ impl DateTime {
         secs - i64::from(self.offset_minutes) * 60
     }
 
+    /// Returns the current UTC datetime from the system clock.
+    pub fn now() -> Self {
+        let dur = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap_or_default();
+        Self::from_unix_timestamp(dur.as_secs() as i64)
+    }
+
+    /// Creates a `DateTime` from a Unix timestamp (UTC).
+    pub fn from_unix_timestamp(ts: i64) -> Self {
+        let (days, rem) = if ts >= 0 {
+            (ts / 86400, ts % 86400)
+        } else {
+            let d = (ts + 1) / 86400 - 1;
+            (d, ts - d * 86400)
+        };
+        let (y, m, d) = civil_from_days(days);
+        let hour = (rem / 3600) as u8;
+        let minute = ((rem % 3600) / 60) as u8;
+        let second = (rem % 60) as u8;
+        Self {
+            year: y,
+            month: m,
+            day: d,
+            hour,
+            minute,
+            second,
+            offset_minutes: 0,
+        }
+    }
+
+    /// Returns a new `DateTime` offset by the given seconds.
+    pub fn add_seconds(&self, secs: i64) -> Self {
+        Self::from_unix_timestamp(self.to_unix_timestamp() + secs)
+    }
+
+    /// Returns a new `DateTime` offset by the given hours.
+    pub fn add_hours(&self, hours: i64) -> Self {
+        self.add_seconds(hours * 3600)
+    }
+
+    /// Returns a new `DateTime` offset by the given days.
+    pub fn add_days(&self, days: i64) -> Self {
+        self.add_seconds(days * 86400)
+    }
+
     /// Returns the signed [`Duration`] from `other` to `self`.
     pub fn duration_since(&self, other: &Self) -> Duration {
         Duration {
@@ -374,6 +420,22 @@ impl DateTime {
 impl fmt::Display for DateTime {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.to_iso8601())
+    }
+}
+
+impl TryFrom<&str> for DateTime {
+    type Error = ParseError;
+    fn try_from(s: &str) -> Result<Self, Self::Error> {
+        Self::parse(s)
+    }
+}
+
+impl From<std::time::SystemTime> for DateTime {
+    fn from(st: std::time::SystemTime) -> Self {
+        let dur = st
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap_or_default();
+        Self::from_unix_timestamp(dur.as_secs() as i64)
     }
 }
 
@@ -453,6 +515,22 @@ fn days_in_month(y: i32, m: u8) -> u8 {
         // in DateTime::new, preventing construction.
         _ => 0,
     }
+}
+
+/// Converts a day count (since Unix epoch) to (year, month, day).
+/// Inverse of `days_from_civil` (Howard Hinnant algorithm).
+fn civil_from_days(z: i64) -> (i32, u8, u8) {
+    let z = z + 719468;
+    let era = if z >= 0 { z } else { z - 146096 } / 146097;
+    let doe = (z - era * 146097) as u64; // 0..=146096
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365; // 0..=399
+    let y = (yoe as i64) + era * 400;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153; // 0..=11
+    let d = (doy - (153 * mp + 2) / 5 + 1) as u8;
+    let m = if mp < 10 { mp + 3 } else { mp - 9 } as u8;
+    let y = if m <= 2 { y + 1 } else { y } as i32;
+    (y, m, d)
 }
 
 /// Days from 0000-01-01 to the given civil date

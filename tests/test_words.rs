@@ -208,4 +208,24 @@ mod tests {
             );
         }
     }
+
+    // ---------------------------------------------------------------
+    // FromIterator
+    // ---------------------------------------------------------------
+
+    #[test]
+    fn from_iterator_creates_words() {
+        let items = vec!["alpha".to_string(), "beta".to_string()];
+        let words: Words = items.into_iter().collect();
+        assert_eq!(words.count(), 2);
+        assert!(words.contains("alpha"));
+        assert!(words.contains("beta"));
+    }
+
+    #[test]
+    fn from_iterator_deduplicates() {
+        let items = vec!["dup".to_string(), "dup".to_string()];
+        let words: Words = items.into_iter().collect();
+        assert_eq!(words.count(), 1);
+    }
 }

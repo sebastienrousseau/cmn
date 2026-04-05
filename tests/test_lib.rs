@@ -84,6 +84,21 @@ mod tests {
         assert!(words.words_list().is_empty());
     }
 
+    #[test]
+    fn words_non_array_returns_empty() {
+        let json = r#"{"words": "not_array"}"#;
+        let common = Common::parse(json).unwrap();
+        assert!(common.words().words_list().is_empty());
+    }
+
+    #[test]
+    fn words_mixed_types_skips_non_strings() {
+        let json = r#"{"words": ["good", 42, null, "ok"]}"#;
+        let common = Common::parse(json).unwrap();
+        let list = common.words().words_list();
+        assert_eq!(list, vec!["good", "ok"]);
+    }
+
     // ---------------------------------------------------------------
     // Common::parse — happy paths
     // ---------------------------------------------------------------

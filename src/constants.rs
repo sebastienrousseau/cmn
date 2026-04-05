@@ -409,7 +409,40 @@ pub enum ConstantValue {
     CharArray(&'static [char]),
 }
 
-/// A static lookup table of all named float constants.
+#[cfg(feature = "std")]
+impl core::fmt::Display for ConstantValue {
+    fn fmt(
+        &self,
+        f: &mut core::fmt::Formatter<'_>,
+    ) -> core::fmt::Result {
+        match self {
+            Self::Float(v) => write!(f, "{v}"),
+            Self::String(v) => write!(f, "{v}"),
+            Self::U32(v) => write!(f, "{v}"),
+            Self::Usize(v) => write!(f, "{v}"),
+            Self::CharArray(v) => {
+                for ch in *v {
+                    write!(f, "{ch}")?;
+                }
+                Ok(())
+            }
+        }
+    }
+}
+
+/// Constant category for [`CONSTANTS_TABLE`].
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Category {
+    /// Pure mathematical constant.
+    Mathematical,
+    /// Physical / SI constant (CODATA 2018).
+    Physical,
+    /// Cryptographic or utility constant.
+    Cryptographic,
+}
+
+/// A static lookup table of all named float constants with
+/// category metadata.
 ///
 /// Available in `no_std`. Zero allocation. Use this for
 /// compile-time constant lookup by name without the `std`
@@ -418,65 +451,73 @@ pub enum ConstantValue {
 /// # Example
 ///
 /// ```
-/// use cmn::constants::CONSTANTS_TABLE;
+/// use cmn::constants::{CONSTANTS_TABLE, Category};
 ///
 /// let pi = CONSTANTS_TABLE.iter()
-///     .find(|(name, _)| *name == "PI")
-///     .map(|(_, val)| *val);
+///     .find(|(name, _, _)| *name == "PI")
+///     .map(|(_, val, _)| *val);
 /// assert_eq!(pi, Some(core::f64::consts::PI));
+///
+/// // Filter by category
+/// let physical: Vec<_> = CONSTANTS_TABLE.iter()
+///     .filter(|(_, _, cat)| *cat == Category::Physical)
+///     .collect();
+/// assert!(physical.len() > 10);
 /// ```
-pub const CONSTANTS_TABLE: &[(&str, f64)] = &[
-    ("APERY", APERY),
-    ("AVOGADRO", AVOGADRO),
-    ("BOLTZMANN", BOLTZMANN),
-    ("CATALAN", CATALAN),
-    ("COULOMB", COULOMB),
-    ("EULER", EULER),
-    ("FARADAY", FARADAY),
-    ("GAMMA", GAMMA),
-    ("GAS_CONSTANT", GAS_CONSTANT),
-    ("GLAISHER_KINKELIN", GLAISHER_KINKELIN),
-    ("GRAVITATIONAL_CONSTANT", GRAVITATIONAL_CONSTANT),
-    ("KHINCHIN", KHINCHIN),
-    ("PHI", PHI),
-    ("PI", PI),
-    ("PLANCK", PLANCK),
-    ("PLANCK_REDUCED", PLANCK_REDUCED),
-    ("SILVER_RATIO", SILVER_RATIO),
-    ("SPEED_OF_LIGHT", SPEED_OF_LIGHT),
-    ("SQRT2", SQRT2),
-    ("SQRT3", SQRT3),
-    ("SQRT5", SQRT5),
-    ("TAU", TAU),
-    ("VACUUM_PERMEABILITY", VACUUM_PERMEABILITY),
-    ("VACUUM_PERMITTIVITY", VACUUM_PERMITTIVITY),
-    ("LN_2", LN_2),
-    ("LN_10", LN_10),
-    ("LOG2_E", LOG2_E),
-    ("LOG10_E", LOG10_E),
-    ("FRAC_1_SQRT_2", FRAC_1_SQRT_2),
-    ("FRAC_1_PI", FRAC_1_PI),
-    ("FRAC_2_PI", FRAC_2_PI),
-    ("FRAC_2_SQRT_PI", FRAC_2_SQRT_PI),
-    ("FRAC_PI_2", FRAC_PI_2),
-    ("FRAC_PI_3", FRAC_PI_3),
-    ("FRAC_PI_4", FRAC_PI_4),
-    ("FRAC_PI_6", FRAC_PI_6),
-    ("FRAC_PI_8", FRAC_PI_8),
-    ("ELEMENTARY_CHARGE", ELEMENTARY_CHARGE),
-    ("ELECTRON_MASS", ELECTRON_MASS),
-    ("PROTON_MASS", PROTON_MASS),
-    ("NEUTRON_MASS", NEUTRON_MASS),
-    ("STEFAN_BOLTZMANN", STEFAN_BOLTZMANN),
-    ("WIEN_DISPLACEMENT", WIEN_DISPLACEMENT),
-    ("STANDARD_GRAVITY", STANDARD_GRAVITY),
-    ("STANDARD_ATMOSPHERE", STANDARD_ATMOSPHERE),
-    ("ATOMIC_MASS_UNIT", ATOMIC_MASS_UNIT),
-    ("BOHR_RADIUS", BOHR_RADIUS),
-    ("FINE_STRUCTURE", FINE_STRUCTURE),
-    ("RYDBERG", RYDBERG),
-    ("MAGNETIC_FLUX_QUANTUM", MAGNETIC_FLUX_QUANTUM),
-    ("CONDUCTANCE_QUANTUM", CONDUCTANCE_QUANTUM),
+use Category::{Mathematical as M, Physical as P};
+/// A static lookup table of all named float constants.
+pub const CONSTANTS_TABLE: &[(&str, f64, Category)] = &[
+    ("APERY", APERY, M),
+    ("AVOGADRO", AVOGADRO, P),
+    ("BOLTZMANN", BOLTZMANN, P),
+    ("CATALAN", CATALAN, M),
+    ("COULOMB", COULOMB, P),
+    ("EULER", EULER, M),
+    ("FARADAY", FARADAY, P),
+    ("GAMMA", GAMMA, M),
+    ("GAS_CONSTANT", GAS_CONSTANT, P),
+    ("GLAISHER_KINKELIN", GLAISHER_KINKELIN, M),
+    ("GRAVITATIONAL_CONSTANT", GRAVITATIONAL_CONSTANT, P),
+    ("KHINCHIN", KHINCHIN, M),
+    ("PHI", PHI, M),
+    ("PI", PI, M),
+    ("PLANCK", PLANCK, P),
+    ("PLANCK_REDUCED", PLANCK_REDUCED, P),
+    ("SILVER_RATIO", SILVER_RATIO, M),
+    ("SPEED_OF_LIGHT", SPEED_OF_LIGHT, P),
+    ("SQRT2", SQRT2, M),
+    ("SQRT3", SQRT3, M),
+    ("SQRT5", SQRT5, M),
+    ("TAU", TAU, M),
+    ("VACUUM_PERMEABILITY", VACUUM_PERMEABILITY, P),
+    ("VACUUM_PERMITTIVITY", VACUUM_PERMITTIVITY, P),
+    ("LN_2", LN_2, M),
+    ("LN_10", LN_10, M),
+    ("LOG2_E", LOG2_E, M),
+    ("LOG10_E", LOG10_E, M),
+    ("FRAC_1_SQRT_2", FRAC_1_SQRT_2, M),
+    ("FRAC_1_PI", FRAC_1_PI, M),
+    ("FRAC_2_PI", FRAC_2_PI, M),
+    ("FRAC_2_SQRT_PI", FRAC_2_SQRT_PI, M),
+    ("FRAC_PI_2", FRAC_PI_2, M),
+    ("FRAC_PI_3", FRAC_PI_3, M),
+    ("FRAC_PI_4", FRAC_PI_4, M),
+    ("FRAC_PI_6", FRAC_PI_6, M),
+    ("FRAC_PI_8", FRAC_PI_8, M),
+    ("ELEMENTARY_CHARGE", ELEMENTARY_CHARGE, P),
+    ("ELECTRON_MASS", ELECTRON_MASS, P),
+    ("PROTON_MASS", PROTON_MASS, P),
+    ("NEUTRON_MASS", NEUTRON_MASS, P),
+    ("STEFAN_BOLTZMANN", STEFAN_BOLTZMANN, P),
+    ("WIEN_DISPLACEMENT", WIEN_DISPLACEMENT, P),
+    ("STANDARD_GRAVITY", STANDARD_GRAVITY, P),
+    ("STANDARD_ATMOSPHERE", STANDARD_ATMOSPHERE, P),
+    ("ATOMIC_MASS_UNIT", ATOMIC_MASS_UNIT, P),
+    ("BOHR_RADIUS", BOHR_RADIUS, P),
+    ("FINE_STRUCTURE", FINE_STRUCTURE, P),
+    ("RYDBERG", RYDBERG, P),
+    ("MAGNETIC_FLUX_QUANTUM", MAGNETIC_FLUX_QUANTUM, P),
+    ("CONDUCTANCE_QUANTUM", CONDUCTANCE_QUANTUM, P),
 ];
 
 /// Apéry's constant, which is the sum of the reciprocals of the positive cubes.

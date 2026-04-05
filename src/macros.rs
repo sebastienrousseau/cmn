@@ -3,41 +3,35 @@
 
 //! Utility macros that eliminate common Rust boilerplate.
 //!
-//! Use these for quick min/max, range-checks, vector/map
-//! construction, string splitting, and numeric parsing without
-//! pulling in additional crate dependencies.
+//! Macros marked **no_std** work without the `std` feature.
+//! Macros marked **std** require the `std` feature.
 //!
 //! ## Available macros
 //!
-//! | Macro | Description |
-//! |--------|------------|
-//! | `cmn` | The main macro for the cmn crate. It takes any number of arguments and parses them into a Rust value. |
-//! | `cmn_assert` | Checks if the given expression is true. |
-//! | `cmn_contains` | Checks if the given string contains the given substring. |
-//! | `cmn_in_range` | Checks if the given value is in the given range. |
-//! | `cmn_join` | Joins a vector of strings into a single string. |
-//! | `cmn_map` | Creates a new map of the given key-value pairs. |
-//! | `cmn_max` | Returns the maximum of the given values. |
-//! | `cmn_min` | Returns the minimum of the given values. |
-//! | `cmn_parse` | Parses the given input into a Rust value. |
-//! | `cmn_print_vec` | Prints a vector of elements to the console. |
-//! | `cmn_print` | Prints the arguments to the console. |
-//! | `cmn_split` | Splits a string into a vector of words. |
-//! | `cmn_to_num` | Converts the given string to a number. |
-//! | `cmn_vec` | Creates a new vector of the given elements. |
-//!
+//! | Macro | Requires | Description |
+//! |--------|----------|------------|
+//! | `cmn_assert` | no_std | Checks if the given expression is true. |
+//! | `cmn_contains` | no_std | Checks if the given string contains the given substring. |
+//! | `cmn_in_range` | no_std | Checks if the given value is in the given range. |
+//! | `cmn_max` | no_std | Returns the maximum of the given values. |
+//! | `cmn_min` | no_std | Returns the minimum of the given values. |
+//! | `cmn_to_num` | no_std | Converts the given string to a number. |
+//! | `cmn_constants` | no_std | Defines a set of `f64` constants. |
+//! | `cmn` | std | Parses arguments via `Common::parse`. |
+//! | `cmn_parse` | std | Parses the given input into a Rust value. |
+//! | `cmn_join` | std | Joins strings together. |
+//! | `cmn_split` | std | Splits a string into a vector of words. |
+//! | `cmn_vec` | std | Creates a new vector with the given elements. |
+//! | `cmn_map` | std | Creates a new map of the given key-value pairs. |
+//! | `cmn_print` | std | Prints the arguments to the console. |
+//! | `cmn_print_vec` | std | Prints a vector of elements to the console. |
 
-/// This macro takes any number of arguments and parses them into a
-/// Rust value.
-#[macro_export]
-macro_rules! cmn {
-    ($($tt:tt)*) => {
-        cmn::Common::parse($($tt)*)
-    };
-}
+// ---------------------------------------------------------------
+// no_std-compatible macros (6)
+// ---------------------------------------------------------------
 
-/// This macro asserts that the given condition is true. If the
-/// condition is false, the macro panics with the given message.
+/// Asserts that the given condition is true.
+/// Panics with "Assertion failed!" if false.
 #[macro_export]
 macro_rules! cmn_assert {
     ($($arg:tt)*) => {
@@ -47,7 +41,7 @@ macro_rules! cmn_assert {
     };
 }
 
-/// This macro checks if the given string contains the given substring.
+/// Checks if a string contains a substring.
 #[macro_export]
 macro_rules! cmn_contains {
     ($s:expr, $sub:expr) => {
@@ -55,7 +49,7 @@ macro_rules! cmn_contains {
     };
 }
 
-/// This macro checks if the given value is within the given range.
+/// Checks if a value is within an inclusive range.
 #[macro_export]
 macro_rules! cmn_in_range {
     ($value:expr, $min:expr, $max:expr) => {
@@ -63,31 +57,7 @@ macro_rules! cmn_in_range {
     };
 }
 
-/// This macro joins the given strings together with the given separator.
-#[macro_export]
-macro_rules! cmn_join {
-    ($($s:expr),*) => {{
-        let mut s = String::new();
-        $(
-            s += &$s;
-        )*
-        s
-    }};
-}
-
-/// This macro creates a new map of the given key-value pairs.
-#[macro_export]
-macro_rules! cmn_map {
-    ($($key:expr => $value:expr),*) => {{
-        let mut map = ::std::collections::HashMap::new();
-        $(
-            map.insert($key, $value);
-        )*
-        map
-    }};
-}
-
-/// This macro finds the maximum value of the given values.
+/// Returns the maximum of the given values.
 #[macro_export]
 macro_rules! cmn_max {
     ($x:expr $(, $y:expr)*) => {{
@@ -99,7 +69,7 @@ macro_rules! cmn_max {
     }};
 }
 
-/// This macro finds the minimum value of the given values.
+/// Returns the minimum of the given values.
 #[macro_export]
 macro_rules! cmn_min {
     ($x:expr $(, $y:expr)*) => {{
@@ -111,25 +81,65 @@ macro_rules! cmn_min {
     }};
 }
 
-/// This macro prints the given arguments to the console.
+/// Converts a string to `f64`, returning `0.0` on failure.
 #[macro_export]
-macro_rules! cmn_print {
-    ($($arg:tt)*) => {
-        println!("{}", format_args!("{}", $($arg)*));
+macro_rules! cmn_to_num {
+    ($s:expr) => {
+        $s.parse::<f64>().unwrap_or(0.0)
     };
 }
 
-/// This macro prints the given vector of values to the console.
+/// Defines a set of `f64` constants.
 #[macro_export]
-macro_rules! cmn_print_vec {
-    ($($v:expr),*) => {{
-        for v in $($v),* {
-            println!("{}", v);
-        }
+macro_rules! cmn_constants {
+    ($($name:ident = $value:expr),*) => {
+        $(
+            /// The value of the constant.
+            pub const $name: f64 = $value;
+        )*
+    };
+}
+
+// ---------------------------------------------------------------
+// std-only macros (8) — require String, Vec, HashMap, println
+// ---------------------------------------------------------------
+
+/// Parses arguments via `Common::parse`. Requires `std`.
+#[cfg(feature = "std")]
+#[macro_export]
+macro_rules! cmn {
+    ($($tt:tt)*) => {
+        cmn::Common::parse($($tt)*)
+    };
+}
+
+/// Parses the given input into a `Common` value.
+/// Requires `std`.
+#[cfg(feature = "std")]
+#[macro_export]
+macro_rules! cmn_parse {
+    ($input:expr) => {
+        Common::parse($input)
+    };
+}
+
+/// Joins strings together into a single `String`.
+/// Requires `std`.
+#[cfg(feature = "std")]
+#[macro_export]
+macro_rules! cmn_join {
+    ($($s:expr),*) => {{
+        let mut s = String::new();
+        $(
+            s += &$s;
+        )*
+        s
     }};
 }
 
-/// This macro splits the given string into a vector of strings.
+/// Splits a string into a `Vec<String>` by whitespace.
+/// Requires `std`.
+#[cfg(feature = "std")]
 #[macro_export]
 macro_rules! cmn_split {
     ($s:expr) => {{
@@ -141,15 +151,9 @@ macro_rules! cmn_split {
     }};
 }
 
-/// This macro converts the given string to a number.
-#[macro_export]
-macro_rules! cmn_to_num {
-    ($s:expr) => {
-        $s.parse::<f64>().unwrap_or(0.0)
-    };
-}
-
-/// This macro creates a new vector with the given elements.
+/// Creates a new `Vec` with the given elements.
+/// Requires `std`.
+#[cfg(feature = "std")]
 #[macro_export]
 macro_rules! cmn_vec {
     ($($elem:expr),*) => {{
@@ -159,42 +163,38 @@ macro_rules! cmn_vec {
     }};
 }
 
-/// This macro parses the given input into a Rust value.
+/// Creates a `HashMap` from key-value pairs.
+/// Requires `std`.
+#[cfg(feature = "std")]
 #[macro_export]
-macro_rules! cmn_parse {
-    ($input:expr) => {
-        Common::parse($input)
-    };
-}
-
-/// This macro defines a set of constants with their corresponding
-/// values. The macros can be used to define constants in a concise
-/// and easy-to-read way.
-#[macro_export]
-macro_rules! cmn_constants {
-    ($($name:ident = $value:expr),*) => {
+macro_rules! cmn_map {
+    ($($key:expr => $value:expr),*) => {{
+        let mut map =
+            ::std::collections::HashMap::new();
         $(
-            /// The value of the constant.
-            pub const $name: f64 = $value;
+            map.insert($key, $value);
         )*
+        map
+    }};
+}
+
+/// Prints the arguments to stdout. Requires `std`.
+#[cfg(feature = "std")]
+#[macro_export]
+macro_rules! cmn_print {
+    ($($arg:tt)*) => {
+        println!("{}", format_args!("{}", $($arg)*));
     };
 }
 
-// cmn_constants! {
-//     AVOGADRO = super::constants::AVOGADRO,
-//     BOLTZMANN = super::constants::BOLTZMANN,
-//     EULER = super::constants::EULER,
-//     GAMMA = super::constants::GAMMA,
-//     HASH_ALGORITHM = super::constants::HASH_ALGORITHM,
-//     HASH_COST = super::constants::HASH_COST,
-//     HASH_LENGTH = super::constants::HASH_LENGTH,
-//     PHI = super::constants::PHI,
-//     PI = super::constants::PI,
-//     PLANCK = super::constants::PLANCK,
-//     SILVER_RATIO = super::constants::SILVER_RATIO,
-//     SPECIAL_CHARS = super::constants::SPECIAL_CHARS,
-//     SQRT2 = super::constants::SQRT2,
-//     SQRT3 = super::constants::SQRT3,
-//     SQRT5 = super::constants::SQRT5,
-//     TAU = super::constants::TAU
-// }
+/// Prints each element of a slice to stdout.
+/// Requires `std`.
+#[cfg(feature = "std")]
+#[macro_export]
+macro_rules! cmn_print_vec {
+    ($($v:expr),*) => {{
+        for v in $($v),* {
+            println!("{}", v);
+        }
+    }};
+}

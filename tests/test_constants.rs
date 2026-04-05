@@ -602,4 +602,63 @@ mod tests {
     fn neutron_heavier_than_proton() {
         assert!(NEUTRON_MASS > PROTON_MASS);
     }
+
+    // ---------------------------------------------------------------
+    // ConstantValue Display
+    // ---------------------------------------------------------------
+
+    #[test]
+    fn constant_value_display_float() {
+        let v = ConstantValue::Float(2.5);
+        assert_eq!(format!("{v}"), "2.5");
+    }
+
+    #[test]
+    fn constant_value_display_string() {
+        let v = ConstantValue::String("Blake3".to_string());
+        assert_eq!(format!("{v}"), "Blake3");
+    }
+
+    #[test]
+    fn constant_value_display_u32() {
+        let v = ConstantValue::U32(8);
+        assert_eq!(format!("{v}"), "8");
+    }
+
+    #[test]
+    fn constant_value_display_usize() {
+        let v = ConstantValue::Usize(32);
+        assert_eq!(format!("{v}"), "32");
+    }
+
+    #[test]
+    fn constant_value_display_char_array() {
+        let v = ConstantValue::CharArray(&['a', 'b']);
+        assert_eq!(format!("{v}"), "ab");
+    }
+
+    // ---------------------------------------------------------------
+    // CONSTANTS_TABLE with Category
+    // ---------------------------------------------------------------
+
+    #[test]
+    fn constants_table_has_51_float_entries() {
+        use cmn::constants::CONSTANTS_TABLE;
+        assert_eq!(CONSTANTS_TABLE.len(), 51);
+    }
+
+    #[test]
+    fn constants_table_category_filter() {
+        use cmn::constants::{Category, CONSTANTS_TABLE};
+        let math: Vec<_> = CONSTANTS_TABLE
+            .iter()
+            .filter(|(_, _, c)| *c == Category::Mathematical)
+            .collect();
+        let phys: Vec<_> = CONSTANTS_TABLE
+            .iter()
+            .filter(|(_, _, c)| *c == Category::Physical)
+            .collect();
+        assert!(math.len() > 20);
+        assert!(phys.len() > 20);
+    }
 }

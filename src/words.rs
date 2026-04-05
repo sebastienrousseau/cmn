@@ -72,6 +72,14 @@ impl Words {
     }
 }
 
+impl FromIterator<String> for Words {
+    fn from_iter<I: IntoIterator<Item = String>>(iter: I) -> Self {
+        Words {
+            words: iter.into_iter().collect(),
+        }
+    }
+}
+
 impl Default for Words {
     /// Populates the `Words` struct with a predefined list of words.
     ///

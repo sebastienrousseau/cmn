@@ -1,4 +1,5 @@
 #![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 #![forbid(unsafe_code)]
 // Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
@@ -136,19 +137,19 @@ impl Common {
         }
     }
     /// Returns a new instance of the `Words` structure.
+    ///
+    /// Gracefully handles malformed JSON — returns an empty
+    /// `Words` if the `words` field is missing, not an array,
+    /// or contains non-string elements.
     pub fn words(&self) -> Words {
-        let words_data = self
+        let words_data: Vec<String> = self
             .fields
             .get("words")
-            .map(|words_array| {
-                words_array
-                    .as_array()
-                    .expect("Words data is not an array")
-                    .iter()
-                    .map(|word_value| {
-                        word_value.as_str().unwrap().to_string()
-                    })
-                    .collect::<Vec<String>>()
+            .and_then(|v| v.as_array())
+            .map(|arr| {
+                arr.iter()
+                    .filter_map(|v| v.as_str().map(|s| s.to_string()))
+                    .collect()
             })
             .unwrap_or_default();
 
@@ -156,24 +157,20 @@ impl Common {
             words: words_data.into_iter().collect(),
         }
     }
+
     /// Parses a string of JSON data and returns a new
     /// instance of the `Common` structure.
     pub fn parse(input: &str) -> Result<Self, serde_json::Error> {
-        match serde_json::from_str::<Common>(input) {
-            Ok(common) => {
-                if common.fields.is_null()
-                    || common.fields.is_object()
-                        && common.fields.as_object().unwrap().is_empty()
-                {
-                    Ok(Common::default())
-                } else {
-                    Ok(common)
-                }
-            }
-            Err(e) => {
-                eprintln!("JSON parse error: {e}");
-                Err(e)
-            }
+        let common = serde_json::from_str::<Common>(input)?;
+        let is_empty = common.fields.is_null()
+            || common
+                .fields
+                .as_object()
+                .is_some_and(|obj| obj.is_empty());
+        if is_empty {
+            Ok(Common::default())
+        } else {
+            Ok(common)
         }
     }
 }
