@@ -1,3 +1,4 @@
+#![allow(missing_docs)]
 // Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
