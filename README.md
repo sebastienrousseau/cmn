@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://kura.pro/cmn/images/logos/cmn.svg" alt="Common (CMN) logo" width="128" />
+  <img src="https://cloudcdn.pro/cloudcdn/v1/logos/kura.svg" alt="Common (CMN) logo" width="128" />
 </p>
 
 <h1 align="center">Common (CMN)</h1>

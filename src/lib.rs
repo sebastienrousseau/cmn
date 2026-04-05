@@ -71,8 +71,8 @@
 //! [MIT](https://opensource.org/licenses/MIT), at your option.
 //!
 #![doc(
-    html_favicon_url = "https://kura.pro/cmn/images/favicon.ico",
-    html_logo_url = "https://kura.pro/cmn/images/logos/cmn.svg",
+    html_favicon_url = "https://cloudcdn.pro/cloudcdn/v1/logos/kura.svg",
+    html_logo_url = "https://cloudcdn.pro/cloudcdn/v1/logos/kura.svg",
     html_root_url = "https://docs.rs/cmn"
 )]
 #![crate_name = "cmn"]
