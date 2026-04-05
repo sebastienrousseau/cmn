@@ -1,25 +1,23 @@
-// Copyright © 2023 Common (CMN) library. All rights reserved.
+// Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-//! This module provides a structured way to manage a collection of words.
-//! It is primarily used in applications where word manipulation is necessary,
-//! such as generating passphrases or similar textual content.
+//! Word-list management for passphrase generation and text processing.
+//!
+//! Use [`Words::default()`] to load the curated built-in dictionary,
+//! or [`Words::new()`] to start with an empty set and populate it
+//! with [`Words::add_word()`]. All lookups are O(1) via `HashSet`.
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 
-/// A structure to hold and manage a set of words.
+/// A deduplicated set of words with O(1) lookup.
 ///
-/// `Words` can be used to store words and perform operations on them,
-/// such as retrieving them as a list for passphrase generation. The words are stored
-/// in a `HashSet` to ensure quick lookups and to avoid duplicates, making it more
-/// efficient than a list, especially with large datasets.
+/// Use for passphrase generation, word games, or text processing.
+/// Backed by `HashSet<String>` for uniqueness and fast containment
+/// checks.
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Words {
-    /// The set of words stored in the structure.
-    ///
-    /// The `HashSet` is used to ensure that words are unique and to provide
-    /// efficient lookups.
+    /// The underlying word set. Guarantees uniqueness.
     pub words: HashSet<String>,
 }
 
@@ -31,15 +29,12 @@ impl Words {
         }
     }
 
-    /// Constructs a new `Words` instance from a list of words.
+    /// Returns a reference to this `Words` instance.
     pub fn words(&self) -> &Words {
         self
     }
 
-    /// Returns a list of all words stored in the structure.
-    ///
-    /// This method provides access to the words as a sorted vector. It is useful for operations
-    /// that may require ordered data, like displaying words in a user interface.
+    /// Returns all words as a sorted `Vec<String>`.
     pub fn words_list(&self) -> Vec<String> {
         let mut words_vec: Vec<String> =
             self.words.iter().cloned().collect();

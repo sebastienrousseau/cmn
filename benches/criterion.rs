@@ -1,13 +1,12 @@
-// Copyright © 2023 Common (CMN) library. All rights reserved.
+// Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 //! Benchmarks for the Common (CMN) library.
 
 #![allow(missing_docs)]
 
-use criterion::{
-    black_box, criterion_group, criterion_main, Criterion,
-};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 pub use cmn::Common;
 pub use cmn::Constants;

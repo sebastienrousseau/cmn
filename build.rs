@@ -1,4 +1,4 @@
-// Copyright © 2023 Common (CMN) library. All rights reserved.
+// Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 //! The main function of the build script.

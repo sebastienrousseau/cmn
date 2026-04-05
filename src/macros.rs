@@ -1,15 +1,13 @@
-// Copyright © 2023 Common (CMN) library. All rights reserved.
+// Copyright © 2023-2026 Common (CMN) library. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-//! Macros for the cmn crate.
+//! Utility macros that eliminate common Rust boilerplate.
 //!
-//! This module bundles all macros used across the cmn crate.
-//! These include macros for validating input, and macros for
-//! generating the Common struct.
+//! Use these for quick min/max, range-checks, vector/map
+//! construction, string splitting, and numeric parsing without
+//! pulling in additional crate dependencies.
 //!
-//! ## Generic macros for the cmn crate.
-//!
-//! This crate provides the following macros:
+//! ## Available macros
 //!
 //! | Macro | Description |
 //! |--------|------------|
@@ -61,11 +59,7 @@ macro_rules! cmn_contains {
 #[macro_export]
 macro_rules! cmn_in_range {
     ($value:expr, $min:expr, $max:expr) => {
-        if $value >= $min && $value <= $max {
-            true
-        } else {
-            false
-        }
+        ($value >= $min && $value <= $max)
     };
 }
 
