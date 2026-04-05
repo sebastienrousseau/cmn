@@ -12,18 +12,23 @@
 //! ## Why CMN?
 //!
 //! `std::f64::consts` provides 11 mathematical constants. CMN
-//! extends that with 44 physical, cryptographic, and series
-//! constants — plus a runtime lookup API, 14 utility macros,
-//! and a built-in word-list module. Every constant resolves at
-//! compile time. Works in `no_std` environments.
+//! extends that with 110 additional physical, cryptographic,
+//! and series constants — plus a runtime lookup API, 15
+//! utility macros (7 `no_std` + 8 `std`), a datetime module,
+//! and a built-in word-list. Every constant resolves at
+//! compile time. Works in `no_std` and WASM environments.
 //!
 //! ## Modules
 //!
 //! - **[`constants`]** — 121 `const` values (PI, Avogadro,
-//!   Planck, etc.). With `std`: runtime `Constants` lookup API
-//!   + `ConstantValue` typed enum.
-//! - **[`macros`]** — 14 utility macros for min/max,
-//!   range-checks, collections, and parsing.
+//!   Planck, W/Z/Higgs boson, etc.) with `Category` filtering.
+//!   With `std`: runtime `Constants` lookup API +
+//!   `ConstantValue` typed enum.
+//! - **[`macros`]** — 15 utility macros: 7 `no_std`
+//!   (`cmn_max!`, `cmn_min!`, `cmn_in_range!`, `cmn_assert!`,
+//!   `cmn_contains!`, `cmn_to_num!`, `cmn_constants!`) + 8
+//!   `std` (`cmn_vec!`, `cmn_map!`, `cmn_join!`, `cmn_split!`,
+//!   `cmn_print!`, `cmn_print_vec!`, `cmn!`, `cmn_parse!`).
 //! - With `std` feature: **[`words`]** module, **[`datetime`]**
 //!   utilities, and **`Common`** JSON bridge.
 //!
@@ -56,7 +61,7 @@
 //!
 //! | Feature | Default | Enables |
 //! |---------|---------|---------|
-//! | `std`   | Yes     | `Constants` struct, `Words`, `Common`, serde support |
+//! | `std`   | Yes     | `Constants` struct, `ConstantValue`, `Words`, `Common`, `datetime`, 8 std macros, serde |
 //!
 //! For `no_std`, disable default features:
 //! ```toml
@@ -81,8 +86,8 @@
 #[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 
-/// 14 utility macros for assertions, collections, range-checks,
-/// and string operations. Available in `no_std`.
+/// 15 utility macros: 7 `no_std`-compatible + 8 `std`-only.
+/// See the [`macros`] module for the full list.
 pub mod macros;
 
 /// 121 mathematical, physical, and cryptographic constants as
