@@ -61,7 +61,7 @@
 //! For `no_std`, disable default features:
 //! ```toml
 //! [dependencies]
-//! cmn = { version = "0.0.5", default-features = false }
+//! cmn = { version = "0.0.6", default-features = false }
 //! ```
 //!
 //! ## License

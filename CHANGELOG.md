@@ -5,6 +5,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.6] - 2026-04-05
+
+### Added
+
+- 66 new constants (121 total): particle masses (muon, tau, deuteron,
+  triton, helion, alpha), mass ratios, magnetic moments and g-factors,
+  eV equivalents, Compton wavelengths, radiation constants, Josephson
+  and von Klitzing constants, Hartree energy, Planck units (mass,
+  length, time, temperature, charge), molar/thermodynamic constants,
+  electromagnetic constants, atomic unit conversions, W/Z/Higgs boson
+  masses (PDG 2022), particle masses in MeV/c², reduced Compton
+  wavelengths, gas constant in L·atm/(mol·K)
+- `Category` enum on `CONSTANTS_TABLE` for filtering
+  (Mathematical/Physical/Cryptographic)
+- `DateTime::now()`, `from_unix_timestamp()`, `add_seconds()`,
+  `add_hours()`, `add_days()`
+- `impl TryFrom<&str>` and `impl From<SystemTime>` for `DateTime`
+- `impl Display` for `ConstantValue` (all 5 variants)
+- `impl FromIterator<String>` for `Words`
+- 6 example files: constants_math, constants_physical,
+  constants_lookup, datetime_demo, words_demo, macros_demo
+- `#[cfg_attr(docsrs, doc(cfg(feature = "std")))]` on all
+  std-gated items for docs.rs feature badges
+
+### Changed
+
+- `CONSTANTS_TABLE` now includes `Category` metadata (was flat tuples)
+- 8 std-dependent macros gated behind `cfg(feature = "std")`; 7 remain
+  `no_std`-compatible
+- `Common::words()` gracefully handles malformed JSON instead of
+  panicking
+- `Common::parse()` uses `is_some_and()` instead of `.unwrap()`
+- Removed `eprintln` from library code
+- `unsafe_code` lint changed from `"allow"` to `"forbid"` in Cargo.toml
+- Removed conflicting `exclude`/`include` in Cargo.toml
+- Removed unused `commons` git dependency
+- Updated `deny.toml` for cargo-deny 0.19 schema
+- Rewrote SECURITY.md with contact, versions table, security posture
+
+### Fixed
+
+- CI: removed invalid `coverage-threshold` input (startup_failure)
+- CI: applied `cargo fmt` for max_width = 72
+- CI: added `#![allow(missing_docs)]` to test crates
+- CI: bumped `actions/checkout` from v4 to v6
+- CI: fixed `severity-threshold` from `medium` to `moderate`
+- CI: added `main` to GitHub Pages deployment branch policy
+
 ## [0.0.5] - 2026-04-05
 
 ### Added
@@ -84,5 +132,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Constants` struct with `constant()` and `constants()` methods
 - Basic macro set (`cmn!`, `cmn_parse!`)
 
+[0.0.6]: https://github.com/sebastienrousseau/cmn/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/sebastienrousseau/cmn/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/sebastienrousseau/cmn/releases/tag/v0.0.4

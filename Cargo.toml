@@ -9,7 +9,7 @@ categories = [
     "cryptography",
     "development-tools",
 ]
-description = "55 mathematical, physical, and cryptographic constants for Rust — no_std, WASM-ready, compile-time const, typed runtime lookup, 14 utility macros"
+description = "121 mathematical, physical, and cryptographic constants for Rust — no_std, WASM-ready, compile-time const, typed runtime lookup, 14 utility macros"
 documentation = "https://docs.rs/cmn"
 edition = "2021"
 homepage = "https://cmnlib.com/"
@@ -32,7 +32,7 @@ name = "cmn"
 readme = "README.md"
 repository = "https://github.com/sebastienrousseau/cmn/"
 rust-version = "1.72"
-version = "0.0.5"
+version = "0.0.6"
 
 [[bench]]
 name = "benchmark"

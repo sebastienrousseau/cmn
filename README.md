@@ -5,7 +5,7 @@
 <h1 align="center">Common (CMN)</h1>
 
 <p align="center">
-  <strong>55 mathematical and cryptographic constants for Rust. Zero runtime cost. One dependency.</strong>
+  <strong>121 mathematical and cryptographic constants for Rust. Zero runtime cost. One dependency.</strong>
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   <a href="https://crates.io/crates/cmn"><img src="https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=fc8d62&logo=rust" alt="Crates.io" /></a>
   <a href="https://docs.rs/cmn"><img src="https://img.shields.io/badge/docs.rs-cmn-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" alt="Docs.rs" /></a>
   <a href="https://codecov.io/gh/sebastienrousseau/cmn"><img src="https://img.shields.io/codecov/c/github/sebastienrousseau/cmn?style=for-the-badge&logo=codecov" alt="Coverage" /></a>
-  <a href="https://lib.rs/crates/cmn"><img src="https://img.shields.io/badge/lib.rs-v0.0.5-orange.svg?style=for-the-badge" alt="lib.rs" /></a>
+  <a href="https://lib.rs/crates/cmn"><img src="https://img.shields.io/badge/lib.rs-v0.0.6-orange.svg?style=for-the-badge" alt="lib.rs" /></a>
 </p>
 
 ---
@@ -22,7 +22,7 @@
 
 CMN gives you accurate, well-documented mathematical and physical constants as compile-time `const` values in Rust. Every constant resolves at compile time with zero runtime allocation.
 
-**One line to install. Zero configuration. 198 tests. 100% code coverage.**
+**One line to install. Zero configuration. 295 tests. 100% code coverage.**
 
 ```bash
 cargo add cmn
@@ -44,12 +44,12 @@ cargo add cmn
 
 | | `cmn` | `physical_constants` | `natural_constants` | `std::f64::consts` |
 |:---|:---:|:---:|:---:|:---:|
-| **Constants** | 55 | 354 | 370+ | 11 |
+| **Constants** | 121 | 354 | 370+ | 11 |
 | **Runtime typed lookup** | `ConstantValue` enum | -- | -- | -- |
 | **Utility macros** | 14 | -- | -- | -- |
 | **Word list** | Built-in | -- | -- | -- |
 | **License** | MIT / Apache-2.0 | GPL-3.0 | MIT | stdlib |
-| **Test coverage** | 100% (198 tests) | Unknown | Unknown | N/A |
+| **Test coverage** | 100% (295 tests) | Unknown | Unknown | N/A |
 | **Documentation** | 100% | 100% | 29% | stdlib |
 | **MSRV** | 1.72 | Unspecified | Unspecified | N/A |
 
@@ -63,7 +63,7 @@ Add to `Cargo.toml`:
 
 ```toml
 [dependencies]
-cmn = "0.0.5"
+cmn = "0.0.6"
 ```
 
 Requires [Rust](https://rustup.rs/) 1.72+. Works on macOS, Linux, and Windows.
@@ -232,7 +232,7 @@ Full API reference: [docs.rs/cmn](https://docs.rs/cmn)
 ```mermaid
 graph LR
     subgraph "cmn crate"
-        B["constants.rs<br/>55 const values<br/>Constants lookup API"]
+        B["constants.rs<br/>121 const values<br/>Constants lookup API"]
         C["words.rs<br/>Words HashSet<br/>WORD_LIST dictionary"]
         D["macros.rs<br/>14 utility macros"]
         A["lib.rs<br/>Common struct<br/>JSON serde bridge"]
@@ -250,7 +250,7 @@ graph LR
 
 | Module | What it does | When to use it |
 |:---|:---|:---|
-| [`constants`](https://docs.rs/cmn/latest/cmn/constants/) | 55 compile-time `const` values + `Constants` runtime API + `ConstantValue` enum | You need a mathematical or physical constant |
+| [`constants`](https://docs.rs/cmn/latest/cmn/constants/) | 121 compile-time `const` values + `Constants` runtime API + `ConstantValue` enum | You need a mathematical or physical constant |
 | [`words`](https://docs.rs/cmn/latest/cmn/words/) | `Words` struct backed by `HashSet<String>` with add/remove/contains + `WORD_LIST` | Passphrase generation, word games, text processing |
 | [`macros`](https://docs.rs/cmn/latest/cmn/macros/) | 14 macros: `cmn_max!`, `cmn_min!`, `cmn_vec!`, `cmn_map!`, `cmn_in_range!`, etc. | Quick utilities without writing boilerplate |
 | [`datetime`](https://docs.rs/cmn/latest/cmn/datetime/) | ISO 8601 parsing, relative formatting, duration math, timezone offsets | Timestamps, "3 hours ago", duration calculations — no external crate |
@@ -261,12 +261,12 @@ graph LR
 ## FAQ
 
 **How accurate are the constants?**
-Mathematical constants use `std::f64::consts` where available (PI, E, TAU, SQRT2). Physical constants are sourced from CODATA 2018 recommended values. All values are validated by 198 tests including mathematical identity checks (e.g., `SQRT2^2 == 2`, `R == k_B * N_A`).
+Mathematical constants use `std::f64::consts` where available (PI, E, TAU, SQRT2). Physical constants are sourced from CODATA 2018 recommended values. All values are validated by 295 tests including mathematical identity checks (e.g., `SQRT2^2 == 2`, `R == k_B * N_A`).
 
 **Does CMN support `no_std`?**
-Yes. Disable default features to get all 55 `const` values and 14 macros with zero dependencies:
+Yes. Disable default features to get all 121 `const` values and 14 macros with zero dependencies:
 ```toml
-cmn = { version = "0.0.5", default-features = false }
+cmn = { version = "0.0.6", default-features = false }
 ```
 The `Constants` runtime API, `Words`, and `Common` structs require the `std` feature (enabled by default).
 
@@ -297,7 +297,7 @@ Rust **1.72**. Tested on stable. No nightly features required.
 git clone https://github.com/sebastienrousseau/cmn.git
 cd cmn
 cargo build        # Compile
-cargo test         # 198 tests, 100% coverage
+cargo test         # 295 tests, 100% coverage
 cargo clippy       # Zero warnings
 cargo fmt --check  # Verify formatting
 cargo doc --open   # Browse API docs locally
