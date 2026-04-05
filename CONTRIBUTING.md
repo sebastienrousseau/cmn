@@ -21,7 +21,7 @@ cargo build
 cargo test
 ```
 
-All 198+ tests should pass. If they don't, open an issue before proceeding.
+All 295+ tests should pass. If they don't, open an issue before proceeding.
 
 ## Signed Commits (Required)
 
@@ -67,7 +67,7 @@ git log --show-signature -1
 | Feature | `feat/<description>` | `feat/add-ln2-constant` |
 | Fix | `fix/<description>` | `fix/phi-precision` |
 | Docs | `docs/<description>` | `docs/update-readme` |
-| Release | `feat/vX.Y.Z` | `feat/v0.0.5` |
+| Release | `feat/vX.Y.Z` | `feat/v0.0.6` |
 
 ## Commit Messages
 
@@ -87,7 +87,7 @@ Before opening a PR, verify:
 
 - [ ] `cargo fmt --check` passes
 - [ ] `cargo clippy --all-targets` has zero warnings
-- [ ] `cargo test` passes (all 198+ tests)
+- [ ] `cargo test` passes (all 295+ tests)
 - [ ] `cargo doc` builds without warnings
 - [ ] New public API items have `///` doc comments
 - [ ] All commits are signed (`git log --show-signature`)

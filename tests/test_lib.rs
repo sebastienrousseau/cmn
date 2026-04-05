@@ -15,7 +15,7 @@ mod tests {
         let common = Common::new();
         // constants() delegates to Constants::default, so it should work
         let constants = common.constants();
-        assert_eq!(constants.constants().len(), 110);
+        assert_eq!(constants.constants().len(), 121);
     }
 
     #[test]
@@ -37,7 +37,7 @@ mod tests {
     fn constants_returns_default_constants_instance() {
         let common = Common::default();
         let constants = common.constants();
-        assert_eq!(constants.constants().len(), 110);
+        assert_eq!(constants.constants().len(), 121);
         assert_eq!(
             constants.constants(),
             Constants::default().constants()

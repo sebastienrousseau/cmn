@@ -27,7 +27,7 @@ pub struct Constant {
     pub value: String,
 }
 
-/// Collection of 110 mathematical, physical, and cryptographic constants.
+/// Collection of 121 mathematical, physical, and cryptographic constants.
 /// Requires the `std` feature.
 #[cfg(feature = "std")]
 #[derive(Clone, Serialize, Debug)]
@@ -119,7 +119,7 @@ impl Constants {
             .cloned()
     }
 
-    /// Returns a slice of all 110 constants.
+    /// Returns a slice of all 121 constants.
     ///
     /// # Example
     ///
@@ -127,7 +127,7 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 110);
+    /// assert_eq!(constants.constants().len(), 121);
     /// ```
     pub fn constants(&self) -> &[Constant] {
         &self.constants
@@ -141,12 +141,12 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 110);
+    /// assert_eq!(constants.constants().len(), 121);
     ///
     /// ```
     ///
     pub fn new() -> Self {
-        let mut constants = Vec::with_capacity(110);
+        let mut constants = Vec::with_capacity(121);
         constants.extend([
             Constant {
                 name: "APERY",
@@ -599,6 +599,53 @@ impl Constants {
                 name: "ATOMIC_UNIT_OF_POLARIZABILITY",
                 value: ATOMIC_UNIT_OF_POLARIZABILITY.to_string(),
             },
+            // --- Boson masses & MeV forms ---
+            Constant {
+                name: "W_BOSON_MASS_GEV",
+                value: W_BOSON_MASS_GEV.to_string(),
+            },
+            Constant {
+                name: "Z_BOSON_MASS_GEV",
+                value: Z_BOSON_MASS_GEV.to_string(),
+            },
+            Constant {
+                name: "HIGGS_BOSON_MASS_GEV",
+                value: HIGGS_BOSON_MASS_GEV.to_string(),
+            },
+            Constant {
+                name: "ELECTRON_MASS_MEV",
+                value: ELECTRON_MASS_MEV.to_string(),
+            },
+            Constant {
+                name: "PROTON_MASS_MEV",
+                value: PROTON_MASS_MEV.to_string(),
+            },
+            Constant {
+                name: "NEUTRON_MASS_MEV",
+                value: NEUTRON_MASS_MEV.to_string(),
+            },
+            Constant {
+                name: "MUON_MASS_MEV",
+                value: MUON_MASS_MEV.to_string(),
+            },
+            // --- Reduced Compton wavelengths ---
+            Constant {
+                name: "ELECTRON_REDUCED_COMPTON",
+                value: ELECTRON_REDUCED_COMPTON.to_string(),
+            },
+            Constant {
+                name: "PROTON_REDUCED_COMPTON",
+                value: PROTON_REDUCED_COMPTON.to_string(),
+            },
+            Constant {
+                name: "NEUTRON_REDUCED_COMPTON",
+                value: NEUTRON_REDUCED_COMPTON.to_string(),
+            },
+            // --- Gas constant variant ---
+            Constant {
+                name: "GAS_CONSTANT_L_ATM",
+                value: GAS_CONSTANT_L_ATM.to_string(),
+            },
         ]);
 
         Self { constants }
@@ -814,6 +861,17 @@ pub const CONSTANTS_TABLE: &[(&str, f64, Category)] = &[
         ATOMIC_UNIT_OF_POLARIZABILITY,
         P,
     ),
+    ("W_BOSON_MASS_GEV", W_BOSON_MASS_GEV, P),
+    ("Z_BOSON_MASS_GEV", Z_BOSON_MASS_GEV, P),
+    ("HIGGS_BOSON_MASS_GEV", HIGGS_BOSON_MASS_GEV, P),
+    ("ELECTRON_MASS_MEV", ELECTRON_MASS_MEV, P),
+    ("PROTON_MASS_MEV", PROTON_MASS_MEV, P),
+    ("NEUTRON_MASS_MEV", NEUTRON_MASS_MEV, P),
+    ("MUON_MASS_MEV", MUON_MASS_MEV, P),
+    ("ELECTRON_REDUCED_COMPTON", ELECTRON_REDUCED_COMPTON, P),
+    ("PROTON_REDUCED_COMPTON", PROTON_REDUCED_COMPTON, P),
+    ("NEUTRON_REDUCED_COMPTON", NEUTRON_REDUCED_COMPTON, P),
+    ("GAS_CONSTANT_L_ATM", GAS_CONSTANT_L_ATM, P),
 ];
 
 /// Apéry's constant, which is the sum of the reciprocals of the positive cubes.
@@ -1109,7 +1167,7 @@ pub const ELECTRON_PROTON_MASS_RATIO: f64 = 5.446_170_214_87e-4;
 
 /// Proton-to-electron mass ratio (CODATA 2018).
 /// m_p / m_e ≈ 1836.15267343
-pub const PROTON_ELECTRON_MASS_RATIO: f64 = 1836.152_673_43;
+pub const PROTON_ELECTRON_MASS_RATIO: f64 = 1_836.152_673_43;
 
 /// Muon-to-electron mass ratio (CODATA 2018).
 /// m_μ / m_e ≈ 206.7682830
@@ -1326,3 +1384,59 @@ pub const ATOMIC_UNIT_OF_ELECTRIC_FIELD: f64 = 5.142_206_747_63e11;
 /// Atomic unit of electric polarizability.
 /// e²a₀²/E_h ≈ 1.64877727436e-41 C²m²/J
 pub const ATOMIC_UNIT_OF_POLARIZABILITY: f64 = 1.648_777_274_36e-41;
+
+// ---------------------------------------------------------------
+// Particle masses in MeV/c² and boson masses
+// ---------------------------------------------------------------
+
+/// W boson mass (PDG 2022).
+/// m_W ≈ 80.377 GeV/c²
+pub const W_BOSON_MASS_GEV: f64 = 80.377;
+
+/// Z boson mass (PDG 2022).
+/// m_Z ≈ 91.1876 GeV/c²
+pub const Z_BOSON_MASS_GEV: f64 = 91.1876;
+
+/// Higgs boson mass (PDG 2022).
+/// m_H ≈ 125.25 GeV/c²
+pub const HIGGS_BOSON_MASS_GEV: f64 = 125.25;
+
+/// Electron mass in MeV/c² (CODATA 2018).
+/// m_e c² ≈ 0.51099895000 MeV
+pub const ELECTRON_MASS_MEV: f64 = 0.510_998_950_00;
+
+/// Proton mass in MeV/c² (CODATA 2018).
+/// m_p c² ≈ 938.27208816 MeV
+pub const PROTON_MASS_MEV: f64 = 938.272_088_16;
+
+/// Neutron mass in MeV/c² (CODATA 2018).
+/// m_n c² ≈ 939.56542052 MeV
+pub const NEUTRON_MASS_MEV: f64 = 939.565_420_52;
+
+/// Muon mass in MeV/c² (CODATA 2018).
+/// m_μ c² ≈ 105.6583755 MeV
+pub const MUON_MASS_MEV: f64 = 105.658_375_5;
+
+// ---------------------------------------------------------------
+// Reduced Compton wavelengths (λ̄ = ℏ/(mc))
+// ---------------------------------------------------------------
+
+/// Reduced Compton wavelength of the electron.
+/// λ̄_e = ℏ/(m_e c) ≈ 3.8615926796e-13 m
+pub const ELECTRON_REDUCED_COMPTON: f64 = 3.861_592_679_6e-13;
+
+/// Reduced Compton wavelength of the proton.
+/// λ̄_p = ℏ/(m_p c) ≈ 2.10308910336e-16 m
+pub const PROTON_REDUCED_COMPTON: f64 = 2.103_089_103_36e-16;
+
+/// Reduced Compton wavelength of the neutron.
+/// λ̄_n = ℏ/(m_n c) ≈ 2.10019415600e-16 m
+pub const NEUTRON_REDUCED_COMPTON: f64 = 2.100_194_156_00e-16;
+
+// ---------------------------------------------------------------
+// Molar gas constant in other units
+// ---------------------------------------------------------------
+
+/// Molar gas constant in L·atm/(mol·K).
+/// R ≈ 0.08205736608 L·atm/(mol·K)
+pub const GAS_CONSTANT_L_ATM: f64 = 0.082_057_366_08;

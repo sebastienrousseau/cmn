@@ -25,8 +25,8 @@ fix or mitigation within **7 days**.
 
 | Version | Supported |
 |:--------|:----------|
-| 0.0.5   | Yes       |
-| < 0.0.5 | No        |
+| 0.0.6   | Yes       |
+| < 0.0.6 | No        |
 
 ## Security Posture
 
