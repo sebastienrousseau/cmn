@@ -32,7 +32,7 @@ mod tests {
     #[test]
     fn new_creates_55_constants() {
         let c = Constants::new();
-        assert_eq!(c.constants().len(), 110);
+        assert_eq!(c.constants().len(), 121);
     }
 
     #[test]
@@ -642,9 +642,9 @@ mod tests {
     // ---------------------------------------------------------------
 
     #[test]
-    fn constants_table_has_106_float_entries() {
+    fn constants_table_has_117_float_entries() {
         use cmn::constants::CONSTANTS_TABLE;
-        assert_eq!(CONSTANTS_TABLE.len(), 106);
+        assert_eq!(CONSTANTS_TABLE.len(), 117);
     }
 
     #[test]
