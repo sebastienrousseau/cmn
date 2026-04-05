@@ -1,64 +1,62 @@
+// Copyright © 2023-2026 Common (CMN) library. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 #[cfg(test)]
 mod tests {
     use assert_cmd::prelude::*;
     use std::process::Command;
 
+    // ---------------------------------------------------------------
+    // Binary execution — CMN_TEST_MODE=1 triggers error path
+    // ---------------------------------------------------------------
+
     #[test]
-    fn test_run_with_cmn_test_mode() {
+    fn binary_test_mode_exits_with_error() {
         let output = Command::cargo_bin("cmn")
             .unwrap()
             .env("CMN_TEST_MODE", "1")
             .output()
             .expect("Failed to execute command");
 
-        // Assert that the command execution was not successful
         assert!(!output.status.success());
-
-        // Assert that the error message was printed to stderr
         let stderr = String::from_utf8(output.stderr).unwrap();
-        assert!(stderr.contains("Error running cmn: Simulated error"));
+        assert!(
+            stderr.contains("Error running cmn: Simulated error"),
+            "Expected simulated error in stderr, got: {stderr}"
+        );
     }
 
+    // ---------------------------------------------------------------
+    // Binary execution — normal mode prints welcome
+    // ---------------------------------------------------------------
+
     #[test]
-    fn test_run_without_cmn_test_mode() {
+    fn binary_normal_mode_prints_welcome() {
         let output = Command::cargo_bin("cmn")
             .unwrap()
             .output()
             .expect("Failed to execute command");
 
-        // Assert that the command execution was successful
         assert!(output.status.success());
-
-        // Assert that the welcome messages were printed to stdout
         let stdout = String::from_utf8(output.stdout).unwrap();
-        assert!(stdout.contains("Welcome to `CMN` 👋!"));
-        assert!(stdout.contains("A Rust library for accessing a collection of mathematical and cryptographic constants."));
+        assert!(stdout.contains("Welcome to `CMN`"));
+        assert!(stdout.contains(
+            "A Rust library for accessing a collection of mathematical and cryptographic constants."
+        ));
     }
 
-    fn run_test_scenario() -> Result<(), Box<dyn std::error::Error>> {
-        // Simulate an error scenario
-        // Return an error explicitly
-        Err("Test error".into())
-    }
+    // ---------------------------------------------------------------
+    // Binary execution — CMN_TEST_MODE=0 is not error mode
+    // ---------------------------------------------------------------
 
     #[test]
-    fn test_main() {
-        // Test calling the `run()` function directly
-        let result = run_test_scenario();
-        assert!(result.is_err());
-
-        // Test calling the `main()` function
+    fn binary_test_mode_zero_succeeds() {
         let output = Command::cargo_bin("cmn")
             .unwrap()
-            .env("CMN_TEST_MODE", "1")
+            .env("CMN_TEST_MODE", "0")
             .output()
             .expect("Failed to execute command");
 
-        // Assert that the command execution was not successful
-        assert!(!output.status.success());
-
-        // Assert that the error message was printed to stderr
-        let stderr = String::from_utf8(output.stderr).unwrap();
-        assert!(stderr.contains("Error running cmn: Simulated error"));
+        assert!(output.status.success());
     }
 }

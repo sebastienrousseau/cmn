@@ -1,0 +1,60 @@
+# Unified CI Pipeline
+# Uses reusable workflows from sebastienrousseau/pipelines
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+    branches:
+      - main
+      - "feat/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Rust CI
+    uses: sebastienrousseau/pipelines/.github/workflows/rust-ci.yml@main
+    with:
+      rust-version: 'stable'
+      run-clippy: true
+      run-fmt: true
+      run-audit: true
+      run-coverage: true
+      coverage-threshold: 80
+    secrets: inherit
+
+  security:
+    uses: sebastienrousseau/pipelines/.github/workflows/security.yml@main
+    with:
+      language: rust
+
+  docs:
+    if: github.ref == 'refs/heads/main'
+    uses: sebastienrousseau/pipelines/.github/workflows/docs.yml@main
+    with:
+      type: rust
+      redirect-crate: cmn
+
+  # Nightly toolchain tests (optional, continue on error)
+  test-nightly:
+    name: Test (nightly)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Run tests
+        run: cargo test --all-features

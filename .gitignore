@@ -1,10 +1,33 @@
-*.DS_Store
+# Build artifacts
+/target/
+/build/
+
+# Cargo lock (library crate — consumers use their own)
+# Cargo.lock is committed for reproducible CI; uncomment to ignore:
+# Cargo.lock
+
+# Coverage & profiling
 *.profraw
+*.profdata
+tarpaulin-report.html
+lcov.info
+cobertura.xml
+
+# OS files
+.DS_Store
+*/.DS_Store
+Thumbs.db
+
+# Editor / IDE
 /.vscode/
+/.idea/
+*.swp
+*.swo
+*~
+
+# Generated docs (use `cargo doc` to rebuild)
 /output/
 /public/
-/target/
-build
+
+# macOS resource forks
 Icon?
-src/.DS_Store
-tarpaulin-report.html

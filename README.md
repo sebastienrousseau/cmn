@@ -1,181 +1,340 @@
-<!-- markdownlint-disable MD033 MD041 -->
+<p align="center">
+  <img src="https://kura.pro/cmn/images/logos/cmn.svg" alt="Common (CMN) logo" width="128" />
+</p>
 
-<img src="https://kura.pro/cmn/images/logos/cmn.svg"
-alt="Common (CMN) logo" height="261" width="261" align="right" />
+<h1 align="center">Common (CMN)</h1>
 
-<!-- markdownlint-enable MD033 MD041 -->
+<p align="center">
+  <strong>55 mathematical and cryptographic constants for Rust. Zero runtime cost. One dependency.</strong>
+</p>
 
-# Common (CMN)
+<p align="center">
+  <a href="https://github.com/sebastienrousseau/cmn/actions"><img src="https://img.shields.io/github/actions/workflow/status/sebastienrousseau/cmn/ci.yml?style=for-the-badge&logo=github" alt="Build" /></a>
+  <a href="https://crates.io/crates/cmn"><img src="https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=fc8d62&logo=rust" alt="Crates.io" /></a>
+  <a href="https://docs.rs/cmn"><img src="https://img.shields.io/badge/docs.rs-cmn-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" alt="Docs.rs" /></a>
+  <a href="https://codecov.io/gh/sebastienrousseau/cmn"><img src="https://img.shields.io/codecov/c/github/sebastienrousseau/cmn?style=for-the-badge&logo=codecov" alt="Coverage" /></a>
+  <a href="https://lib.rs/crates/cmn"><img src="https://img.shields.io/badge/lib.rs-v0.0.5-orange.svg?style=for-the-badge" alt="lib.rs" /></a>
+</p>
 
-A Rust library for accessing a collection of mathematical and cryptographic constants
+---
 
-*Part of the [Mini Functions][00] family of libraries.*
+## What is CMN?
 
-<!-- markdownlint-disable MD033 MD041 -->
-<center>
-<!-- markdownlint-enable MD033 MD041 -->
+CMN gives you accurate, well-documented mathematical and physical constants as compile-time `const` values in Rust. Every constant resolves at compile time with zero runtime allocation.
 
-![Common (CMN) Banner][banner]
+**One line to install. Zero configuration. 198 tests. 100% code coverage.**
 
-[![Made With Rust][made-with-rust-badge]][13] [![Crates.io][crates-badge]][08] [![Lib.rs][libs-badge]][10] [![Docs.rs][docs-badge]][09] [![License][license-badge]][02] [![Codecov][codecov-badge]][14]
-
-• [Website][01] • [Documentation][09] • [Report Bug][04] • [Request Feature][04] • [Contributing Guidelines][05]
-
-<!-- markdownlint-disable MD033 MD041 -->
-</center>
-<!-- markdownlint-enable MD033 MD041 -->
-
-![divider][divider]
-
-## Overview 📖
-
-`Common (CMN)` is a modern, fast, and user-friendly library that makes it easy to access a wide range of mathematical and cryptographic constants.
-
-## Features ✨
-
-The `Common (CMN)` uses the `serde` crate to serialize and deserialize the data.
-
-The library has three modules:
-
-- **Macros**: This module contains functions for generating macros that can be used to access the constants and words.
-- **Constants**: This module contains the `Constants` structure, which provides a collection of constant values that are used throughout the library.
-- **Words**: This module contains the `Words` structure, which provides a collection of words that are used throughout the library.
-
-### Mathematical and Cryptographic Constants
-
-The following table lists the most important mathematical and cryptographic constants available in the `Common (CMN)` library:
-
-| Constants | Description | Example |
-| --- | --- | --- |
-| APERY | Apéry's constant, which is the sum of the reciprocals of the positive cubes. `ζ(3) ≈ 1.2020569032` | Used in various mathematical calculations and series approximations. |
-| AVOGADRO | Avogadro's constant is the number of atoms or molecules in one mole of a substance. `N_A ≈ 6.02214076 x 10^23 mol^-1` | The number of atoms in 12 grams of carbon-12 is 6.02214076 × 10^23. This can be used to calculate the number of atoms or molecules in a given sample. |
-| BOLTZMANN | Boltzmann's constant is the physical constant relating the temperature of a system to the average kinetic energy of its constituent particles. `k_B ≈ 1.380648 x 10^-23 J K^-1` | The kinetic energy of an atom at room temperature is about 2.0 × 10^-21 joules. This can be used to calculate the temperature of a system, or to calculate the average kinetic energy of its particles. |
-| CATALAN | Catalan's constant, which is the sum of the alternating harmonic series. `C ≈ 0.915965594177219` | Used in various mathematical calculations and series approximations. |
-| COULOMB | Coulomb's constant, which is the proportionality constant in Coulomb's law. `k_e ≈ 8.9875517923` x 10^9 N m^2 C^-2 | Used in calculations related to electrostatic forces and electric fields. |
-| EULER | Euler's constant is a mathematical constant approximately equal to 2.71828. `e ≈ 2.7182818284590452353602874713527` | The sum of the infinite series 1 + 1/2 + 1/3 + ... is equal to Euler's constant, e. This can be used to calculate the sum of an infinite series, or to calculate the logarithm of a number. |
-| FARADAY | Faraday constant, which represents the amount of electric charge carried by one mole of electrons. `F ≈ 96485.33212 C mol^-1` | Used in calculations related to electrochemistry and electrolysis. |
-| GAMMA | The gamma constant is a mathematical constant approximately equal to 0.57721. `γ ≈ 0.5772156649015329` | The gamma function of 2 is equal to 1. This can be used to calculate the gamma function of a number, or to calculate the factorial of a number. |
-| GAS_CONSTANT | The gas constant, which relates the energy scale to the temperature scale in the ideal gas law. `R ≈ 8.314462618 J mol^-1 K^-1` | Used in calculations related to the behavior of gases and thermodynamics. |
-| GLAISHER_KINKELIN | Glaisher-Kinkelin constant, which arises in the asymptotic expansion of the Barnes G-function. `A ≈ 1.2824271291` | Used in various mathematical calculations and series approximations. |
-| GRAVITATIONAL_CONSTANT | The gravitational constant, which is the proportionality constant in Newton's law of universal gravitation. `G ≈ 6.67430 x 10^-11 m^3 kg^-1 s^-2` | Used in calculations related to gravitational forces and celestial mechanics. |
-| HASH_ALGORITHM | The hash algorithm used to generate the hash. The default is Blake3. | The hash of the string "Hello, world!" is 5eb63bbbe01eeed093cb22bb8f5acdc32790160b123138d53f2173b8d3dc3eee. This can be used to verify the integrity of data, or to create a unique identifier for a file. |
-| HASH_COST | The cost of the hash. | The hash cost of Blake3 is `2^128`. This can be used to determine how secure a hash algorithm is. |
-| HASH_LENGTH | The length of the hash. | The hash length of Blake3 is 32 bytes. This can be used to determine how much space is required to store the hash output. |
-| KHINCHIN | Khinchin's constant, which appears in the theory of continued fractions. `K ≈ 2.6854520010` | Used in various mathematical calculations and series approximations. |
-| PHI | The golden ratio is a number approximately equal to 1.618033988749895. `φ = (1 + √5) / 2 ≈ 1.6180339887498948482045868343656` | The golden ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
-| Pi (π) | Pi is the ratio of a circle's circumference to its diameter. `π ≈ 3.14159265358979323846264338327950288` | The circumference of a circle with a radius of 1 is equal to pi. This can be used to calculate the circumference, area, and volume of circles, spheres, and other geometric shapes. |
-| PLANCK | Planck's constant, which relates the energy of a photon to its frequency. `h ≈ 6.62607015 x 10^-34 J s` | The energy of a photon of light with a wavelength of 500 nanometers is equal to Planck's constant multiplied by the frequency of the light. This can be used to calculate the energy of photons and other elementary particles. |
-| PLANCK_REDUCED | Planck's reduced constant, which is Planck's constant divided by 2π. `ħ = h / (2π) ≈ 1.054571817 x 10^-34 J s` | Used in quantum mechanics and related calculations. |
-| SILVER_RATIO | The silver ratio is one of the silver means. `δ_s = 1 + √2 ≈ 2.4142135623730950488016887242097` | The silver ratio can be used to create a symmetrical design, or a design that is pleasing to the eye. |
-| SPEED_OF_LIGHT | The speed of light in vacuum. `c ≈ 299792458 m s^-1` | Used in calculations related to relativity and electromagnetic phenomena. |
-| SPECIAL_CHARS | A set of special characters. | The special characters are: !@#$%^&*()_+-={}[]|\:;"'<>,.?` |
-| SQRT2 | The square root of 2. `√2 ≈ 1.4142135623730950488016887242097` | The area of a circle with a radius of 1 is equal to the square root of 2. This can be used to calculate the area and volume of circles, spheres, and other geometric shapes. |
-| SQRT3 | The square root of 3. `√3 ≈ 1.7320508075688772935274463415059` | The area of a circle with a radius of 1 is equal to the square root of 3. This can be used to calculate the area and volume of circles. |
-| SQRT5 | The square root of 5. `√5 ≈ 2.23606797749979` | The area of a circle with a radius of 1 is equal to the square root of 5. |
-| TAU | The circle constant, which is the ratio of a circle's circumference to its radius. `τ = 2π ≈ 6.28318530717958647692528676655900577` | The circumference of a circle with a radius of 1 is equal to tau. |
-| VACUUM_PERMEABILITY | The vacuum permeability, which relates magnetic induction to magnetic field strength. `μ_0 ≈ 1.25663706212 x 10^-6 N A^-2` | Used in calculations related to electromagnetism and magnetic fields. |
-| VACUUM_PERMITTIVITY | The vacuum permittivity, which relates electric displacement to electric field strength. `ε_0 ≈ 8.8541878128 x 10^-12 F m^-1` | Used in calculations related to electromagnetism and electric fields. |
-
-## Getting Started 🚀
-
-It takes just a few minutes to get up and running with `Common (CMN)`.
-
-### Installation
-
-To install `Common (CMN)`, you need to have the Rust toolchain installed on your machine. You can install the Rust toolchain by following the instructions on the [Rust website][13].
-
-Once you have the Rust toolchain installed, you can install `Common (CMN)` using the following command:
-
-```shell
-cargo install cmn
+```bash
+cargo add cmn
 ```
 
-### Requirements
+---
 
-The minimum supported Rust toolchain version is currently Rust **1.60** or later (stable). It is recommended that you install the latest stable version of Rust.
+## Why CMN?
 
-### Platform support
+| Need | Without CMN | With CMN |
+|:---|:---|:---|
+| PI, E, TAU | Hand-copy from `std::f64::consts` or Wikipedia | `use cmn::constants::PI;` |
+| Physical constants (Avogadro, Planck, Boltzmann) | No stdlib equivalent; copy-paste from NIST | Pre-validated, sourced from CODATA |
+| Typed constant lookup at runtime | Build your own HashMap | `constants.get_value("PI")` returns `ConstantValue::Float` |
+| Utility macros (min, max, range-check) | Write boilerplate or pull in a macro crate | `cmn_max!(3, 7, 2)` — done |
+| Word list for passphrase generation | Find a dictionary crate or embed your own | `Words::default()` — curated, deduplicated, sorted |
 
-`cmn` supports a variety of CPU architectures. It is supported and tested on MacOS, Linux, and Windows.
+### How CMN compares to other constants crates
 
+| | `cmn` | `physical_constants` | `natural_constants` | `std::f64::consts` |
+|:---|:---:|:---:|:---:|:---:|
+| **Constants** | 55 | 354 | 370+ | 11 |
+| **Runtime typed lookup** | `ConstantValue` enum | -- | -- | -- |
+| **Utility macros** | 14 | -- | -- | -- |
+| **Word list** | Built-in | -- | -- | -- |
+| **License** | MIT / Apache-2.0 | GPL-3.0 | MIT | stdlib |
+| **Test coverage** | 100% (198 tests) | Unknown | Unknown | N/A |
+| **Documentation** | 100% | 100% | 29% | stdlib |
+| **MSRV** | 1.72 | Unspecified | Unspecified | N/A |
 
-### Documentation
+`physical_constants` has the most values but is **GPL-3.0** — incompatible with MIT/Apache projects. `natural_constants` spans the most disciplines but is 29% documented and stale since 2022. CMN is the only crate that combines constants, typed runtime lookup, utility macros, and a word list under a permissive license with 100% test coverage.
 
-> ℹ️ **Info:** Please check out our [website][01] for more information.
-You can find our documentation on [docs.rs][09], [lib.rs][10] and [crates.io][08].
+---
 
-## Usage 📖
+## Install
 
-To use the `Common (CMN)` library in your project, add the following to your `Cargo.toml` file:
+Add to `Cargo.toml`:
 
 ```toml
 [dependencies]
-cmn = "0.0.4"
+cmn = "0.0.5"
 ```
 
-Add the following to your `main.rs` file:
+Requires [Rust](https://rustup.rs/) 1.72+. Works on macOS, Linux, and Windows.
+
+---
+
+## Quick Start
+
+### Constants (compile-time)
 
 ```rust
-extern crate cmn;
-use cmn::*;
+use cmn::constants::{PI, TAU, EULER, SQRT2};
+
+fn main() {
+    println!("PI    = {PI}");
+    println!("TAU   = {TAU}");
+    println!("e     = {EULER}");
+    println!("sqrt2 = {SQRT2}");
+}
 ```
 
-then you can use the functions in your application code.
+### Constants (runtime lookup)
 
-### Examples
+```rust
+use cmn::constants::{Constants, ConstantValue};
 
-`Common (CMN)` comes with a set of examples that you can use to get started. The examples are located in the `examples` directory of the project. To run the examples, clone the repository and run the following command in your terminal from the project root directory.
+let constants = Constants::new();
+if let Some(ConstantValue::Float(pi)) = constants.get_value("PI") {
+    println!("PI = {pi}");
+}
+```
 
-```shell
+### Macros
+
+```rust
+use cmn::{cmn_max, cmn_min, cmn_in_range, cmn_vec};
+
+let max = cmn_max!(3, 7, 2);       // 7
+let min = cmn_min!(3, 7, 2);       // 2
+let ok  = cmn_in_range!(5, 0, 10); // true
+let v   = cmn_vec!(1, 2, 3);       // Vec<i32>
+```
+
+### Word List
+
+```rust
+use cmn::Words;
+
+let words = Words::default();
+println!("{} words loaded", words.count());
+println!("First: {}", words.words_list()[0]); // "aboard"
+```
+
+### Datetime
+
+```rust
+use cmn::datetime::DateTime;
+
+let dt = DateTime::parse("2026-04-05T14:30:00Z").unwrap();
+assert_eq!(dt.year(), 2026);
+assert_eq!(dt.to_iso8601(), "2026-04-05T14:30:00Z");
+
+// Duration between two datetimes
+let dt2 = DateTime::parse("2026-04-05T16:30:00Z").unwrap();
+let dur = dt2.duration_since(&dt);
+assert_eq!(dur.whole_hours(), 2);
+
+// Relative time formatting
+let rel = dt.relative_to(&dt2);
+assert_eq!(rel, "2 hours ago");
+```
+
+---
+
+## Available Constants
+
+### Mathematical — Core
+
+| Constant | Symbol | Value |
+|:---|:---|:---|
+| `PI` | `pi` | 3.14159265358979... |
+| `TAU` | `tau = 2pi` | 6.28318530717958... |
+| `EULER` | `e` | 2.71828182845904... |
+| `PHI` | `phi = (1+sqrt5)/2` | 1.61803398874989... |
+| `GAMMA` | `gamma` (Euler-Mascheroni) | 0.57721566490153... |
+| `SQRT2`, `SQRT3`, `SQRT5` | Square roots | Exact `f64` values |
+| `APERY` | `zeta(3)` | 1.20205690315959... |
+| `CATALAN` | `C` | 0.91596559417721... |
+| `KHINCHIN` | `K` | 2.68545200106530... |
+| `GLAISHER_KINKELIN` | `A` | 1.28242712910062... |
+| `SILVER_RATIO` | `delta_s = 1+sqrt2` | 2.41421356237309... |
+
+### Mathematical — Logarithmic & Pi Fractions
+
+| Constant | Symbol | Value |
+|:---|:---|:---|
+| `LN_2` | `ln(2)` | 0.69314718055994... |
+| `LN_10` | `ln(10)` | 2.30258509299404... |
+| `LOG2_E` | `log2(e)` | 1.44269504088896... |
+| `LOG10_E` | `log10(e)` | 0.43429448190325... |
+| `FRAC_1_SQRT_2` | `1/sqrt(2)` | 0.70710678118654... |
+| `FRAC_1_PI` | `1/pi` | 0.31830988618379... |
+| `FRAC_2_PI` | `2/pi` | 0.63661977236758... |
+| `FRAC_2_SQRT_PI` | `2/sqrt(pi)` | 1.12837916709551... |
+| `FRAC_PI_2` | `pi/2` | 1.57079632679489... |
+| `FRAC_PI_3` | `pi/3` | 1.04719755119659... |
+| `FRAC_PI_4` | `pi/4` | 0.78539816339744... |
+| `FRAC_PI_6` | `pi/6` | 0.52359877559829... |
+| `FRAC_PI_8` | `pi/8` | 0.39269908169872... |
+
+### Physical — Fundamental
+
+| Constant | Symbol | Value | Unit |
+|:---|:---|:---|:---|
+| `SPEED_OF_LIGHT` | `c` | 299,792,458 | m/s |
+| `PLANCK` | `h` | 6.62607015e-34 | J s |
+| `PLANCK_REDUCED` | `h-bar` | h / 2pi | J s |
+| `ELEMENTARY_CHARGE` | `e` | 1.602176634e-19 | C |
+| `BOLTZMANN` | `k_B` | 1.380649e-23 | J/K |
+| `AVOGADRO` | `N_A` | 6.02214076e23 | 1/mol |
+| `GAS_CONSTANT` | `R = k_B * N_A` | 8.314462618 | J/(mol K) |
+| `FARADAY` | `F = N_A * e` | 96,485.33212 | C/mol |
+| `GRAVITATIONAL_CONSTANT` | `G` | 6.67430e-11 | m^3/(kg s^2) |
+| `FINE_STRUCTURE` | `alpha` | 7.2973525693e-3 | dimensionless |
+
+### Physical — Electromagnetic & Vacuum
+
+| Constant | Symbol | Value | Unit |
+|:---|:---|:---|:---|
+| `COULOMB` | `k_e` | 8.9875517923e9 | N m^2/C^2 |
+| `VACUUM_PERMEABILITY` | `mu_0` | 1.25663706212e-6 | N/A^2 |
+| `VACUUM_PERMITTIVITY` | `eps_0` | 8.8541878128e-12 | F/m |
+| `MAGNETIC_FLUX_QUANTUM` | `Phi_0 = h/(2e)` | 2.067833848e-15 | Wb |
+| `CONDUCTANCE_QUANTUM` | `G_0 = 2e^2/h` | 7.748091729e-5 | S |
+
+### Physical — Particles & Thermodynamics
+
+| Constant | Symbol | Value | Unit |
+|:---|:---|:---|:---|
+| `ELECTRON_MASS` | `m_e` | 9.1093837015e-31 | kg |
+| `PROTON_MASS` | `m_p` | 1.67262192369e-27 | kg |
+| `NEUTRON_MASS` | `m_n` | 1.67492749804e-27 | kg |
+| `ATOMIC_MASS_UNIT` | `u` | 1.66053906660e-27 | kg |
+| `BOHR_RADIUS` | `a_0` | 5.29177210903e-11 | m |
+| `RYDBERG` | `R_inf` | 10,973,731.568160 | 1/m |
+| `STEFAN_BOLTZMANN` | `sigma` | 5.670374419e-8 | W/(m^2 K^4) |
+| `WIEN_DISPLACEMENT` | `b` | 2.897771955e-3 | m K |
+| `STANDARD_GRAVITY` | `g` | 9.80665 | m/s^2 |
+| `STANDARD_ATMOSPHERE` | `atm` | 101,325 | Pa |
+
+### Cryptographic & Utility
+
+| Constant | Type | Value |
+|:---|:---|:---|
+| `HASH_ALGORITHM` | `&str` | `"Blake3"` |
+| `HASH_COST` | `u32` | `8` |
+| `HASH_LENGTH` | `usize` | `32` |
+| `SPECIAL_CHARS` | `&[char]` | 29 symbols (`!@#$%^&*`...) |
+
+Full API reference: [docs.rs/cmn](https://docs.rs/cmn)
+
+---
+
+## Architecture
+
+```mermaid
+graph LR
+    subgraph "cmn crate"
+        B["constants.rs<br/>55 const values<br/>Constants lookup API"]
+        C["words.rs<br/>Words HashSet<br/>WORD_LIST dictionary"]
+        D["macros.rs<br/>14 utility macros"]
+        A["lib.rs<br/>Common struct<br/>JSON serde bridge"]
+    end
+
+    A --> B
+    A --> C
+    A --> D
+
+    U["Your Code"] --> B
+    U --> C
+    U --> D
+    U --> A
+```
+
+| Module | What it does | When to use it |
+|:---|:---|:---|
+| [`constants`](https://docs.rs/cmn/latest/cmn/constants/) | 55 compile-time `const` values + `Constants` runtime API + `ConstantValue` enum | You need a mathematical or physical constant |
+| [`words`](https://docs.rs/cmn/latest/cmn/words/) | `Words` struct backed by `HashSet<String>` with add/remove/contains + `WORD_LIST` | Passphrase generation, word games, text processing |
+| [`macros`](https://docs.rs/cmn/latest/cmn/macros/) | 14 macros: `cmn_max!`, `cmn_min!`, `cmn_vec!`, `cmn_map!`, `cmn_in_range!`, etc. | Quick utilities without writing boilerplate |
+| [`datetime`](https://docs.rs/cmn/latest/cmn/datetime/) | ISO 8601 parsing, relative formatting, duration math, timezone offsets | Timestamps, "3 hours ago", duration calculations — no external crate |
+| [`Common`](https://docs.rs/cmn/latest/cmn/struct.Common.html) | JSON-backed bridge connecting constants + words via `serde` | Deserializing configuration that includes constants or words |
+
+---
+
+## FAQ
+
+**How accurate are the constants?**
+Mathematical constants use `std::f64::consts` where available (PI, E, TAU, SQRT2). Physical constants are sourced from CODATA 2018 recommended values. All values are validated by 198 tests including mathematical identity checks (e.g., `SQRT2^2 == 2`, `R == k_B * N_A`).
+
+**Does CMN support `no_std`?**
+Yes. Disable default features to get all 55 `const` values and 14 macros with zero dependencies:
+```toml
+cmn = { version = "0.0.5", default-features = false }
+```
+The `Constants` runtime API, `Words`, and `Common` structs require the `std` feature (enabled by default).
+
+**Does CMN compile to WASM?**
+Yes. `cargo build --target wasm32-unknown-unknown --no-default-features` compiles cleanly.
+
+**What is the MSRV?**
+Rust **1.72**. Tested on stable. No nightly features required.
+
+**How does CMN compare to other Rust constants crates?**
+`physical_constants` has 354 values but is **GPL-3.0** — incompatible with MIT/Apache projects. `natural_constants` covers more disciplines but is only 29% documented and unmaintained since 2022. `std::f64::consts` provides 11 math constants with no physical or cryptographic values. CMN is the only crate combining constants, typed runtime lookup, utility macros, and a word list under a permissive license with 100% test coverage. See the [comparison table](#how-cmn-compares-to-other-constants-crates) above.
+
+---
+
+## Development
+
+### Prerequisites
+
+| Platform | Install Rust |
+|:---|:---|
+| **macOS** | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
+| **Linux / WSL** | Same as above, plus `sudo apt-get install -y build-essential` |
+| **Windows** | Download [rustup-init.exe](https://rustup.rs/) and install the MSVC toolchain |
+
+### Build, Test, Verify
+
+```bash
+git clone https://github.com/sebastienrousseau/cmn.git
+cd cmn
+cargo build        # Compile
+cargo test         # 198 tests, 100% coverage
+cargo clippy       # Zero warnings
+cargo fmt --check  # Verify formatting
+cargo doc --open   # Browse API docs locally
+```
+
+### Run Example
+
+```bash
 cargo run --example cmn
 ```
 
-## Semantic Versioning Policy 🚥
+### Run Benchmarks
 
-For transparency into our release cycle and in striving to maintain backward compatibility, `Common (CMN)` follows [semantic versioning][07].
+```bash
+cargo bench
+```
 
-## License 📝
+### Troubleshooting
 
-`Common (CMN)`is distributed under the terms of both the MIT license and the
-Apache License (Version 2.0).
+| Symptom | Fix |
+|:---|:---|
+| `rustup: command not found` | Install Rust via [rustup.rs](https://rustup.rs/) |
+| `error[E0658]: unstable library feature` | `rustup update stable` (MSRV is 1.72) |
+| `linker 'cc' not found` (Linux/WSL) | `sudo apt-get install -y build-essential` |
+| `cargo test` fails on fresh clone | Open an [issue](https://github.com/sebastienrousseau/cmn/issues) with `rustc --version` |
 
-See [LICENSE-APACHE][02] and [LICENSE-MIT][03] for details.
+---
 
-## Contribution 🤝
+## Contributing
 
-We welcome all people who want to contribute. Please see the [contributing instructions][05] for more information.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for signed-commit setup and PR guidelines.
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-Contributions in any form (issues, pull requests, etc.) to this project must adhere to the [Rust's Code of Conduct][11].
+---
 
-Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
+## License
 
-## Acknowledgements 💙
+Dual-licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) or [MIT](https://opensource.org/licenses/MIT), at your option.
 
-A big thank you to all the awesome contributors of the [Common (CMN) Library][06] for their help and support.
-
-A special thank you goes to the [Rust Reddit][12] community for providing a lot of useful suggestions on how to improve this project.
-
-[00]: https://cmnlib.com/ "MiniFunctions"
-[01]: https://cmnlib.one "Common (CMN) Library Website"
-[02]: https://opensource.org/license/apache-2-0/ "Apache License, Version 2.0"
-[03]: https://opensource.org/licenses/MIT "MIT license"
-[04]: https://github.com/sebastienrousseau/cmn/issues "Issues"
-[05]: https://github.com/sebastienrousseau/cmn/blob/main/CONTRIBUTING.md "Contributing Instructions"
-[06]: https://github.com/sebastienrousseau/cmn/graphs/contributors "Contributors"
-[07]: http://semver.org/ "Semantic Versioning"
-[08]: https://crates.io/crates/cmn "Crates.io"
-[09]: https://docs.rs/cmn "Docs.rs"
-[10]: https://lib.rs/crates/cmn "Lib.rs"
-[11]: https://www.rust-lang.org/policies/code-of-conduct "Rust's Code of Conduct"
-[12]: https://reddit.com/r/rust "Rust Reddit"
-[13]: https://www.rust-lang.org "The Rust Programming Language"
-[14]: https://codecov.io/gh/sebastienrousseau/cmn "Codecov"
-
-[banner]: https://kura.pro/cmn/images/titles/title-cmn.svg 'Common (CMN) banner'
-[codecov-badge]: https://img.shields.io/codecov/c/github/sebastienrousseau/cmn?style=for-the-badge&token=0FZQGHLMOP 'Codecov'
-[crates-badge]: https://img.shields.io/crates/v/cmn.svg?style=for-the-badge 'Crates.io badge'
-[divider]: https://kura.pro/common/images/elements/divider.svg "divider"
-[docs-badge]: https://img.shields.io/docsrs/cmn.svg?style=for-the-badge 'Docs.rs badge'
-[libs-badge]: https://img.shields.io/badge/lib.rs-v0.0.4-orange.svg?style=for-the-badge 'Lib.rs badge'
-[license-badge]: https://img.shields.io/crates/l/cmn.svg?style=for-the-badge 'License badge'
-[made-with-rust-badge]: https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust 'Made With Rust badge'
+Built by [Sebastien Rousseau](https://sebastienrousseau.com).
