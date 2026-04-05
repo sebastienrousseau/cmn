@@ -252,7 +252,7 @@ mod regression {
             v["constants"].is_array(),
             "'constants' must serialise as an array"
         );
-        assert_eq!(v["constants"].as_array().unwrap().len(), 55);
+        assert_eq!(v["constants"].as_array().unwrap().len(), 110);
     }
 
     /// Common serialise → deserialise must be idempotent.
@@ -328,7 +328,7 @@ mod regression {
             .map(|_| {
                 let c = Arc::clone(&c);
                 std::thread::spawn(move || {
-                    assert_eq!(c.constants().len(), 55);
+                    assert_eq!(c.constants().len(), 110);
                     let _ = c.constant("PI");
                     let _ = c.get_value("EULER");
                 })
@@ -390,7 +390,7 @@ mod regression {
             })
             .collect();
         for h in handles {
-            assert_eq!(h.join().unwrap(), 55);
+            assert_eq!(h.join().unwrap(), 110);
         }
     }
 
@@ -609,13 +609,13 @@ mod regression {
     //    change across releases.
     // ===============================================================
 
-    /// The library must expose exactly 55 constants.
+    /// The library must expose exactly 110 constants.
     #[test]
-    fn reg_45_exactly_55_constants() {
+    fn reg_45_exactly_110_constants() {
         assert_eq!(
             Constants::new().constants().len(),
-            55,
-            "Public API contract: 55 constants"
+            110,
+            "Public API contract: 110 constants"
         );
     }
 

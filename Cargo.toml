@@ -46,6 +46,30 @@ debug = true
 name = "cmn"
 path = "examples/cmn.rs"
 
+[[example]]
+name = "constants_math"
+path = "examples/constants_math.rs"
+
+[[example]]
+name = "constants_physical"
+path = "examples/constants_physical.rs"
+
+[[example]]
+name = "constants_lookup"
+path = "examples/constants_lookup.rs"
+
+[[example]]
+name = "datetime_demo"
+path = "examples/datetime_demo.rs"
+
+[[example]]
+name = "words_demo"
+path = "examples/words_demo.rs"
+
+[[example]]
+name = "macros_demo"
+path = "examples/macros_demo.rs"
+
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"], optional = true }
 serde_json = { version = "1.0.149", optional = true }

@@ -27,7 +27,7 @@ pub struct Constant {
     pub value: String,
 }
 
-/// Collection of 55 mathematical, physical, and cryptographic constants.
+/// Collection of 110 mathematical, physical, and cryptographic constants.
 /// Requires the `std` feature.
 #[cfg(feature = "std")]
 #[derive(Clone, Serialize, Debug)]
@@ -119,7 +119,7 @@ impl Constants {
             .cloned()
     }
 
-    /// Returns a slice of all 55 constants.
+    /// Returns a slice of all 110 constants.
     ///
     /// # Example
     ///
@@ -127,7 +127,7 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 55);
+    /// assert_eq!(constants.constants().len(), 110);
     /// ```
     pub fn constants(&self) -> &[Constant] {
         &self.constants
@@ -141,12 +141,12 @@ impl Constants {
     /// use cmn::constants::Constants;
     ///
     /// let constants = Constants::new();
-    /// assert_eq!(constants.constants().len(), 55);
+    /// assert_eq!(constants.constants().len(), 110);
     ///
     /// ```
     ///
     pub fn new() -> Self {
-        let mut constants = Vec::with_capacity(55);
+        let mut constants = Vec::with_capacity(110);
         constants.extend([
             Constant {
                 name: "APERY",
@@ -370,6 +370,235 @@ impl Constants {
                 name: "CONDUCTANCE_QUANTUM",
                 value: CONDUCTANCE_QUANTUM.to_string(),
             },
+            // --- Particle masses ---
+            Constant {
+                name: "MUON_MASS",
+                value: MUON_MASS.to_string(),
+            },
+            Constant {
+                name: "TAU_PARTICLE_MASS",
+                value: TAU_PARTICLE_MASS.to_string(),
+            },
+            Constant {
+                name: "DEUTERON_MASS",
+                value: DEUTERON_MASS.to_string(),
+            },
+            Constant {
+                name: "TRITON_MASS",
+                value: TRITON_MASS.to_string(),
+            },
+            Constant {
+                name: "HELION_MASS",
+                value: HELION_MASS.to_string(),
+            },
+            Constant {
+                name: "ALPHA_PARTICLE_MASS",
+                value: ALPHA_PARTICLE_MASS.to_string(),
+            },
+            // --- Mass ratios ---
+            Constant {
+                name: "ELECTRON_PROTON_MASS_RATIO",
+                value: ELECTRON_PROTON_MASS_RATIO.to_string(),
+            },
+            Constant {
+                name: "PROTON_ELECTRON_MASS_RATIO",
+                value: PROTON_ELECTRON_MASS_RATIO.to_string(),
+            },
+            Constant {
+                name: "MUON_ELECTRON_MASS_RATIO",
+                value: MUON_ELECTRON_MASS_RATIO.to_string(),
+            },
+            Constant {
+                name: "NEUTRON_PROTON_MASS_RATIO",
+                value: NEUTRON_PROTON_MASS_RATIO.to_string(),
+            },
+            Constant {
+                name: "DEUTERON_PROTON_MASS_RATIO",
+                value: DEUTERON_PROTON_MASS_RATIO.to_string(),
+            },
+            // --- Magnetic moments ---
+            Constant {
+                name: "BOHR_MAGNETON",
+                value: BOHR_MAGNETON.to_string(),
+            },
+            Constant {
+                name: "NUCLEAR_MAGNETON",
+                value: NUCLEAR_MAGNETON.to_string(),
+            },
+            Constant {
+                name: "ELECTRON_MAGNETIC_MOMENT",
+                value: ELECTRON_MAGNETIC_MOMENT.to_string(),
+            },
+            Constant {
+                name: "PROTON_MAGNETIC_MOMENT",
+                value: PROTON_MAGNETIC_MOMENT.to_string(),
+            },
+            Constant {
+                name: "NEUTRON_MAGNETIC_MOMENT",
+                value: NEUTRON_MAGNETIC_MOMENT.to_string(),
+            },
+            Constant {
+                name: "ELECTRON_G_FACTOR",
+                value: ELECTRON_G_FACTOR.to_string(),
+            },
+            Constant {
+                name: "PROTON_G_FACTOR",
+                value: PROTON_G_FACTOR.to_string(),
+            },
+            // --- eV equivalents ---
+            Constant {
+                name: "ELECTRON_VOLT",
+                value: ELECTRON_VOLT.to_string(),
+            },
+            Constant {
+                name: "EV_TO_KG",
+                value: EV_TO_KG.to_string(),
+            },
+            Constant {
+                name: "EV_TO_AMU",
+                value: EV_TO_AMU.to_string(),
+            },
+            Constant {
+                name: "EV_TO_HZ",
+                value: EV_TO_HZ.to_string(),
+            },
+            Constant {
+                name: "EV_TO_KELVIN",
+                value: EV_TO_KELVIN.to_string(),
+            },
+            Constant {
+                name: "EV_TO_INVERSE_METER",
+                value: EV_TO_INVERSE_METER.to_string(),
+            },
+            // --- Atomic & nuclear ---
+            Constant {
+                name: "CLASSICAL_ELECTRON_RADIUS",
+                value: CLASSICAL_ELECTRON_RADIUS.to_string(),
+            },
+            Constant {
+                name: "ELECTRON_COMPTON_WAVELENGTH",
+                value: ELECTRON_COMPTON_WAVELENGTH.to_string(),
+            },
+            Constant {
+                name: "PROTON_COMPTON_WAVELENGTH",
+                value: PROTON_COMPTON_WAVELENGTH.to_string(),
+            },
+            Constant {
+                name: "NEUTRON_COMPTON_WAVELENGTH",
+                value: NEUTRON_COMPTON_WAVELENGTH.to_string(),
+            },
+            Constant {
+                name: "THOMSON_CROSS_SECTION",
+                value: THOMSON_CROSS_SECTION.to_string(),
+            },
+            Constant {
+                name: "FIRST_RADIATION_CONSTANT",
+                value: FIRST_RADIATION_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "SECOND_RADIATION_CONSTANT",
+                value: SECOND_RADIATION_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "JOSEPHSON_CONSTANT",
+                value: JOSEPHSON_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "VON_KLITZING_CONSTANT",
+                value: VON_KLITZING_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "HARTREE_ENERGY",
+                value: HARTREE_ENERGY.to_string(),
+            },
+            Constant {
+                name: "HARTREE_ENERGY_EV",
+                value: HARTREE_ENERGY_EV.to_string(),
+            },
+            // --- Planck units ---
+            Constant {
+                name: "PLANCK_MASS",
+                value: PLANCK_MASS.to_string(),
+            },
+            Constant {
+                name: "PLANCK_LENGTH",
+                value: PLANCK_LENGTH.to_string(),
+            },
+            Constant {
+                name: "PLANCK_TIME",
+                value: PLANCK_TIME.to_string(),
+            },
+            Constant {
+                name: "PLANCK_TEMPERATURE",
+                value: PLANCK_TEMPERATURE.to_string(),
+            },
+            Constant {
+                name: "PLANCK_CHARGE",
+                value: PLANCK_CHARGE.to_string(),
+            },
+            // --- Molar & thermodynamic ---
+            Constant {
+                name: "MOLAR_MASS_CONSTANT",
+                value: MOLAR_MASS_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "MOLAR_PLANCK_CONSTANT",
+                value: MOLAR_PLANCK_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "LOSCHMIDT_CONSTANT",
+                value: LOSCHMIDT_CONSTANT.to_string(),
+            },
+            Constant {
+                name: "MOLAR_VOLUME_IDEAL_GAS",
+                value: MOLAR_VOLUME_IDEAL_GAS.to_string(),
+            },
+            Constant {
+                name: "SACKUR_TETRODE_CONSTANT",
+                value: SACKUR_TETRODE_CONSTANT.to_string(),
+            },
+            // --- Electromagnetic additional ---
+            Constant {
+                name: "IMPEDANCE_OF_FREE_SPACE",
+                value: IMPEDANCE_OF_FREE_SPACE.to_string(),
+            },
+            Constant {
+                name: "INVERSE_FINE_STRUCTURE",
+                value: INVERSE_FINE_STRUCTURE.to_string(),
+            },
+            Constant {
+                name: "ELECTRON_CHARGE_TO_MASS",
+                value: ELECTRON_CHARGE_TO_MASS.to_string(),
+            },
+            Constant {
+                name: "PROTON_CHARGE_TO_MASS",
+                value: PROTON_CHARGE_TO_MASS.to_string(),
+            },
+            // --- Atomic units ---
+            Constant {
+                name: "ATOMIC_UNIT_OF_LENGTH",
+                value: ATOMIC_UNIT_OF_LENGTH.to_string(),
+            },
+            Constant {
+                name: "ATOMIC_UNIT_OF_TIME",
+                value: ATOMIC_UNIT_OF_TIME.to_string(),
+            },
+            Constant {
+                name: "ATOMIC_UNIT_OF_VELOCITY",
+                value: ATOMIC_UNIT_OF_VELOCITY.to_string(),
+            },
+            Constant {
+                name: "ATOMIC_UNIT_OF_FORCE",
+                value: ATOMIC_UNIT_OF_FORCE.to_string(),
+            },
+            Constant {
+                name: "ATOMIC_UNIT_OF_ELECTRIC_FIELD",
+                value: ATOMIC_UNIT_OF_ELECTRIC_FIELD.to_string(),
+            },
+            Constant {
+                name: "ATOMIC_UNIT_OF_POLARIZABILITY",
+                value: ATOMIC_UNIT_OF_POLARIZABILITY.to_string(),
+            },
         ]);
 
         Self { constants }
@@ -518,6 +747,73 @@ pub const CONSTANTS_TABLE: &[(&str, f64, Category)] = &[
     ("RYDBERG", RYDBERG, P),
     ("MAGNETIC_FLUX_QUANTUM", MAGNETIC_FLUX_QUANTUM, P),
     ("CONDUCTANCE_QUANTUM", CONDUCTANCE_QUANTUM, P),
+    ("MUON_MASS", MUON_MASS, P),
+    ("TAU_PARTICLE_MASS", TAU_PARTICLE_MASS, P),
+    ("DEUTERON_MASS", DEUTERON_MASS, P),
+    ("TRITON_MASS", TRITON_MASS, P),
+    ("HELION_MASS", HELION_MASS, P),
+    ("ALPHA_PARTICLE_MASS", ALPHA_PARTICLE_MASS, P),
+    ("ELECTRON_PROTON_MASS_RATIO", ELECTRON_PROTON_MASS_RATIO, P),
+    ("PROTON_ELECTRON_MASS_RATIO", PROTON_ELECTRON_MASS_RATIO, P),
+    ("MUON_ELECTRON_MASS_RATIO", MUON_ELECTRON_MASS_RATIO, P),
+    ("NEUTRON_PROTON_MASS_RATIO", NEUTRON_PROTON_MASS_RATIO, P),
+    ("DEUTERON_PROTON_MASS_RATIO", DEUTERON_PROTON_MASS_RATIO, P),
+    ("BOHR_MAGNETON", BOHR_MAGNETON, P),
+    ("NUCLEAR_MAGNETON", NUCLEAR_MAGNETON, P),
+    ("ELECTRON_MAGNETIC_MOMENT", ELECTRON_MAGNETIC_MOMENT, P),
+    ("PROTON_MAGNETIC_MOMENT", PROTON_MAGNETIC_MOMENT, P),
+    ("NEUTRON_MAGNETIC_MOMENT", NEUTRON_MAGNETIC_MOMENT, P),
+    ("ELECTRON_G_FACTOR", ELECTRON_G_FACTOR, P),
+    ("PROTON_G_FACTOR", PROTON_G_FACTOR, P),
+    ("ELECTRON_VOLT", ELECTRON_VOLT, P),
+    ("EV_TO_KG", EV_TO_KG, P),
+    ("EV_TO_AMU", EV_TO_AMU, P),
+    ("EV_TO_HZ", EV_TO_HZ, P),
+    ("EV_TO_KELVIN", EV_TO_KELVIN, P),
+    ("EV_TO_INVERSE_METER", EV_TO_INVERSE_METER, P),
+    ("CLASSICAL_ELECTRON_RADIUS", CLASSICAL_ELECTRON_RADIUS, P),
+    (
+        "ELECTRON_COMPTON_WAVELENGTH",
+        ELECTRON_COMPTON_WAVELENGTH,
+        P,
+    ),
+    ("PROTON_COMPTON_WAVELENGTH", PROTON_COMPTON_WAVELENGTH, P),
+    ("NEUTRON_COMPTON_WAVELENGTH", NEUTRON_COMPTON_WAVELENGTH, P),
+    ("THOMSON_CROSS_SECTION", THOMSON_CROSS_SECTION, P),
+    ("FIRST_RADIATION_CONSTANT", FIRST_RADIATION_CONSTANT, P),
+    ("SECOND_RADIATION_CONSTANT", SECOND_RADIATION_CONSTANT, P),
+    ("JOSEPHSON_CONSTANT", JOSEPHSON_CONSTANT, P),
+    ("VON_KLITZING_CONSTANT", VON_KLITZING_CONSTANT, P),
+    ("HARTREE_ENERGY", HARTREE_ENERGY, P),
+    ("HARTREE_ENERGY_EV", HARTREE_ENERGY_EV, P),
+    ("PLANCK_MASS", PLANCK_MASS, P),
+    ("PLANCK_LENGTH", PLANCK_LENGTH, P),
+    ("PLANCK_TIME", PLANCK_TIME, P),
+    ("PLANCK_TEMPERATURE", PLANCK_TEMPERATURE, P),
+    ("PLANCK_CHARGE", PLANCK_CHARGE, P),
+    ("MOLAR_MASS_CONSTANT", MOLAR_MASS_CONSTANT, P),
+    ("MOLAR_PLANCK_CONSTANT", MOLAR_PLANCK_CONSTANT, P),
+    ("LOSCHMIDT_CONSTANT", LOSCHMIDT_CONSTANT, P),
+    ("MOLAR_VOLUME_IDEAL_GAS", MOLAR_VOLUME_IDEAL_GAS, P),
+    ("SACKUR_TETRODE_CONSTANT", SACKUR_TETRODE_CONSTANT, P),
+    ("IMPEDANCE_OF_FREE_SPACE", IMPEDANCE_OF_FREE_SPACE, P),
+    ("INVERSE_FINE_STRUCTURE", INVERSE_FINE_STRUCTURE, P),
+    ("ELECTRON_CHARGE_TO_MASS", ELECTRON_CHARGE_TO_MASS, P),
+    ("PROTON_CHARGE_TO_MASS", PROTON_CHARGE_TO_MASS, P),
+    ("ATOMIC_UNIT_OF_LENGTH", ATOMIC_UNIT_OF_LENGTH, P),
+    ("ATOMIC_UNIT_OF_TIME", ATOMIC_UNIT_OF_TIME, P),
+    ("ATOMIC_UNIT_OF_VELOCITY", ATOMIC_UNIT_OF_VELOCITY, P),
+    ("ATOMIC_UNIT_OF_FORCE", ATOMIC_UNIT_OF_FORCE, P),
+    (
+        "ATOMIC_UNIT_OF_ELECTRIC_FIELD",
+        ATOMIC_UNIT_OF_ELECTRIC_FIELD,
+        P,
+    ),
+    (
+        "ATOMIC_UNIT_OF_POLARIZABILITY",
+        ATOMIC_UNIT_OF_POLARIZABILITY,
+        P,
+    ),
 ];
 
 /// Apéry's constant, which is the sum of the reciprocals of the positive cubes.
@@ -774,3 +1070,259 @@ pub const MAGNETIC_FLUX_QUANTUM: f64 = 2.067_833_848e-15;
 /// The conductance quantum (CODATA 2018, exact since 2019 SI).
 /// G_0 = 2e²/h = 7.748091729 x 10^-5 S
 pub const CONDUCTANCE_QUANTUM: f64 = 7.748_091_729e-5;
+
+// ---------------------------------------------------------------
+// Particle masses — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Muon mass (CODATA 2018).
+/// m_μ ≈ 1.883531627e-28 kg
+pub const MUON_MASS: f64 = 1.883_531_627e-28;
+
+/// Tau lepton mass (CODATA 2018).
+/// m_τ ≈ 3.16754e-27 kg
+pub const TAU_PARTICLE_MASS: f64 = 3.167_54e-27;
+
+/// Deuteron mass (CODATA 2018).
+/// m_d ≈ 3.3435837724e-27 kg
+pub const DEUTERON_MASS: f64 = 3.343_583_772_4e-27;
+
+/// Triton mass (CODATA 2018).
+/// m_t ≈ 5.0073567446e-27 kg
+pub const TRITON_MASS: f64 = 5.007_356_744_6e-27;
+
+/// Helion (He-3 nucleus) mass (CODATA 2018).
+/// m_h ≈ 5.0064127796e-27 kg
+pub const HELION_MASS: f64 = 5.006_412_779_6e-27;
+
+/// Alpha particle mass (CODATA 2018).
+/// m_α ≈ 6.6446573357e-27 kg
+pub const ALPHA_PARTICLE_MASS: f64 = 6.644_657_335_7e-27;
+
+// ---------------------------------------------------------------
+// Mass ratios — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Electron-to-proton mass ratio (CODATA 2018).
+/// m_e / m_p ≈ 5.44617021487e-4
+pub const ELECTRON_PROTON_MASS_RATIO: f64 = 5.446_170_214_87e-4;
+
+/// Proton-to-electron mass ratio (CODATA 2018).
+/// m_p / m_e ≈ 1836.15267343
+pub const PROTON_ELECTRON_MASS_RATIO: f64 = 1836.152_673_43;
+
+/// Muon-to-electron mass ratio (CODATA 2018).
+/// m_μ / m_e ≈ 206.7682830
+pub const MUON_ELECTRON_MASS_RATIO: f64 = 206.768_283_0;
+
+/// Neutron-to-proton mass ratio (CODATA 2018).
+/// m_n / m_p ≈ 1.00137841931
+pub const NEUTRON_PROTON_MASS_RATIO: f64 = 1.001_378_419_31;
+
+/// Deuteron-to-proton mass ratio (CODATA 2018).
+/// m_d / m_p ≈ 1.99900750139
+pub const DEUTERON_PROTON_MASS_RATIO: f64 = 1.999_007_501_39;
+
+// ---------------------------------------------------------------
+// Magnetic moments — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Bohr magneton (CODATA 2018).
+/// μ_B = eℏ/(2m_e) ≈ 9.2740100783e-24 J/T
+pub const BOHR_MAGNETON: f64 = 9.274_010_078_3e-24;
+
+/// Nuclear magneton (CODATA 2018).
+/// μ_N = eℏ/(2m_p) ≈ 5.0507837461e-27 J/T
+pub const NUCLEAR_MAGNETON: f64 = 5.050_783_746_1e-27;
+
+/// Electron magnetic moment (CODATA 2018).
+/// μ_e ≈ -9.2847647043e-24 J/T
+pub const ELECTRON_MAGNETIC_MOMENT: f64 = -9.284_764_704_3e-24;
+
+/// Proton magnetic moment (CODATA 2018).
+/// μ_p ≈ 1.41060679736e-26 J/T
+pub const PROTON_MAGNETIC_MOMENT: f64 = 1.410_606_797_36e-26;
+
+/// Neutron magnetic moment (CODATA 2018).
+/// μ_n ≈ -9.6623651e-27 J/T
+pub const NEUTRON_MAGNETIC_MOMENT: f64 = -9.662_365_1e-27;
+
+/// Electron g-factor (CODATA 2018).
+/// g_e ≈ -2.00231930436256
+pub const ELECTRON_G_FACTOR: f64 = -2.002_319_304_362_56;
+
+/// Proton g-factor (CODATA 2018).
+/// g_p ≈ 5.5856946893
+pub const PROTON_G_FACTOR: f64 = 5.585_694_689_3;
+
+// ---------------------------------------------------------------
+// Electron volt equivalents — CODATA 2018 (exact since 2019)
+// ---------------------------------------------------------------
+
+/// Electron volt in joules (CODATA 2018, exact).
+/// 1 eV = 1.602176634e-19 J
+pub const ELECTRON_VOLT: f64 = 1.602_176_634e-19;
+
+/// Electron volt–kilogram relationship (exact).
+/// 1 eV/c² ≈ 1.782661921e-36 kg
+pub const EV_TO_KG: f64 = 1.782_661_921e-36;
+
+/// Electron volt–atomic mass unit relationship.
+/// 1 eV/c² ≈ 1.07354410233e-9 u
+pub const EV_TO_AMU: f64 = 1.073_544_102_33e-9;
+
+/// Electron volt–hertz relationship (exact).
+/// 1 eV/h ≈ 2.417989242e14 Hz
+pub const EV_TO_HZ: f64 = 2.417_989_242e14;
+
+/// Electron volt–kelvin relationship (exact).
+/// 1 eV/k_B ≈ 1.160451812e4 K
+pub const EV_TO_KELVIN: f64 = 1.160_451_812e4;
+
+/// Electron volt–inverse meter relationship (exact).
+/// 1 eV/(hc) ≈ 8.065543937e5 /m
+pub const EV_TO_INVERSE_METER: f64 = 8.065_543_937e5;
+
+// ---------------------------------------------------------------
+// Atomic & nuclear constants — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Classical electron radius (CODATA 2018).
+/// r_e = α²a_0 ≈ 2.8179403262e-15 m
+pub const CLASSICAL_ELECTRON_RADIUS: f64 = 2.817_940_326_2e-15;
+
+/// Compton wavelength of the electron (CODATA 2018).
+/// λ_C = h/(m_e c) ≈ 2.42631023867e-12 m
+pub const ELECTRON_COMPTON_WAVELENGTH: f64 = 2.426_310_238_67e-12;
+
+/// Compton wavelength of the proton (CODATA 2018).
+/// λ_C,p = h/(m_p c) ≈ 1.32140985539e-15 m
+pub const PROTON_COMPTON_WAVELENGTH: f64 = 1.321_409_855_39e-15;
+
+/// Compton wavelength of the neutron (CODATA 2018).
+/// λ_C,n = h/(m_n c) ≈ 1.31959090581e-15 m
+pub const NEUTRON_COMPTON_WAVELENGTH: f64 = 1.319_590_905_81e-15;
+
+/// Thomson cross section (CODATA 2018).
+/// σ_T = (8π/3)r_e² ≈ 6.6524587321e-29 m²
+pub const THOMSON_CROSS_SECTION: f64 = 6.652_458_732_1e-29;
+
+/// First radiation constant (CODATA 2018).
+/// c_1 = 2πhc² ≈ 3.741771852e-16 W m²
+pub const FIRST_RADIATION_CONSTANT: f64 = 3.741_771_852e-16;
+
+/// Second radiation constant (CODATA 2018).
+/// c_2 = hc/k_B ≈ 1.438776877e-2 m K
+pub const SECOND_RADIATION_CONSTANT: f64 = 1.438_776_877e-2;
+
+/// Josephson constant (CODATA 2018, exact since 2019 SI).
+/// K_J = 2e/h ≈ 4.835978484e14 Hz/V
+pub const JOSEPHSON_CONSTANT: f64 = 4.835_978_484e14;
+
+/// Von Klitzing constant (CODATA 2018, exact since 2019 SI).
+/// R_K = h/e² ≈ 25812.80745 Ω
+pub const VON_KLITZING_CONSTANT: f64 = 25_812.807_45;
+
+/// Hartree energy (CODATA 2018).
+/// E_h = m_e c² α² ≈ 4.3597447222071e-18 J
+pub const HARTREE_ENERGY: f64 = 4.359_744_722_207_1e-18;
+
+/// Hartree energy in eV (CODATA 2018).
+/// E_h ≈ 27.211386245988 eV
+pub const HARTREE_ENERGY_EV: f64 = 27.211_386_245_988;
+
+// ---------------------------------------------------------------
+// Planck units — derived from fundamental constants
+// ---------------------------------------------------------------
+
+/// Planck mass.
+/// m_P = √(ℏc/G) ≈ 2.176434e-8 kg
+pub const PLANCK_MASS: f64 = 2.176_434e-8;
+
+/// Planck length.
+/// l_P = √(ℏG/c³) ≈ 1.616255e-35 m
+pub const PLANCK_LENGTH: f64 = 1.616_255e-35;
+
+/// Planck time.
+/// t_P = √(ℏG/c⁵) ≈ 5.391247e-44 s
+pub const PLANCK_TIME: f64 = 5.391_247e-44;
+
+/// Planck temperature.
+/// T_P = m_P c²/k_B ≈ 1.416784e32 K
+pub const PLANCK_TEMPERATURE: f64 = 1.416_784e32;
+
+/// Planck charge.
+/// q_P = √(4πε₀ℏc) ≈ 1.875546e-18 C
+pub const PLANCK_CHARGE: f64 = 1.875_546e-18;
+
+// ---------------------------------------------------------------
+// Molar & thermodynamic — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Molar mass constant (CODATA 2018).
+/// M_u ≈ 0.99999999965e-3 kg/mol
+pub const MOLAR_MASS_CONSTANT: f64 = 0.999_999_999_65e-3;
+
+/// Molar Planck constant (exact).
+/// N_A h ≈ 3.990312712e-10 J s/mol
+pub const MOLAR_PLANCK_CONSTANT: f64 = 3.990_312_712e-10;
+
+/// Loschmidt constant at 273.15 K, 101.325 kPa.
+/// n_0 ≈ 2.6867774e25 /m³
+pub const LOSCHMIDT_CONSTANT: f64 = 2.686_777_4e25;
+
+/// Molar volume of ideal gas at STP (273.15 K, 100 kPa).
+/// V_m ≈ 22.71095e-3 m³/mol
+pub const MOLAR_VOLUME_IDEAL_GAS: f64 = 22.710_95e-3;
+
+/// Sackur-Tetrode constant at 1 K, 101.325 kPa.
+/// S_0/R ≈ -1.15170753706
+pub const SACKUR_TETRODE_CONSTANT: f64 = -1.151_707_537_06;
+
+// ---------------------------------------------------------------
+// Electromagnetic — additional CODATA 2018
+// ---------------------------------------------------------------
+
+/// Impedance of free space (CODATA 2018).
+/// Z_0 = μ₀c ≈ 376.730313668 Ω
+pub const IMPEDANCE_OF_FREE_SPACE: f64 = 376.730_313_668;
+
+/// Inverse fine-structure constant (CODATA 2018).
+/// 1/α ≈ 137.035999084
+pub const INVERSE_FINE_STRUCTURE: f64 = 137.035_999_084;
+
+/// Electron charge-to-mass quotient (CODATA 2018).
+/// e/m_e ≈ -1.75882001076e11 C/kg
+pub const ELECTRON_CHARGE_TO_MASS: f64 = -1.758_820_010_76e11;
+
+/// Proton charge-to-mass quotient (CODATA 2018).
+/// e/m_p ≈ 9.5788332e7 C/kg
+pub const PROTON_CHARGE_TO_MASS: f64 = 9.578_833_2e7;
+
+// ---------------------------------------------------------------
+// Atomic unit conversions — CODATA 2018
+// ---------------------------------------------------------------
+
+/// Atomic unit of length (= Bohr radius).
+/// a_0 ≈ 5.29177210903e-11 m
+pub const ATOMIC_UNIT_OF_LENGTH: f64 = BOHR_RADIUS;
+
+/// Atomic unit of time.
+/// ℏ/E_h ≈ 2.4188843265857e-17 s
+pub const ATOMIC_UNIT_OF_TIME: f64 = 2.418_884_326_585_7e-17;
+
+/// Atomic unit of velocity.
+/// a_0 E_h/ℏ ≈ 2.18769126364e6 m/s
+pub const ATOMIC_UNIT_OF_VELOCITY: f64 = 2.187_691_263_64e6;
+
+/// Atomic unit of force.
+/// E_h/a_0 ≈ 8.2387234983e-8 N
+pub const ATOMIC_UNIT_OF_FORCE: f64 = 8.238_723_498_3e-8;
+
+/// Atomic unit of electric field.
+/// E_h/(ea_0) ≈ 5.14220674763e11 V/m
+pub const ATOMIC_UNIT_OF_ELECTRIC_FIELD: f64 = 5.142_206_747_63e11;
+
+/// Atomic unit of electric polarizability.
+/// e²a₀²/E_h ≈ 1.64877727436e-41 C²m²/J
+pub const ATOMIC_UNIT_OF_POLARIZABILITY: f64 = 1.648_777_274_36e-41;

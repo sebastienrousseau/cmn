@@ -6,7 +6,7 @@
 
 //! # Common (CMN)
 //!
-//! 55 mathematical and cryptographic constants for Rust.
+//! 110 mathematical and cryptographic constants for Rust.
 //! Zero runtime cost. `no_std` compatible.
 //!
 //! ## Why CMN?
@@ -19,7 +19,7 @@
 //!
 //! ## Modules
 //!
-//! - **[`constants`]** — 55 `const` values (PI, Avogadro,
+//! - **[`constants`]** — 110 `const` values (PI, Avogadro,
 //!   Planck, etc.). With `std`: runtime `Constants` lookup API
 //!   + `ConstantValue` typed enum.
 //! - **[`macros`]** — 14 utility macros for min/max,
@@ -85,7 +85,7 @@ use serde::{Deserialize, Serialize};
 /// and string operations. Available in `no_std`.
 pub mod macros;
 
-/// 55 mathematical, physical, and cryptographic constants as
+/// 110 mathematical, physical, and cryptographic constants as
 /// compile-time `const` values. The `const` values are always
 /// available, even in `no_std`. The runtime `Constants` lookup
 /// API and `ConstantValue` enum require the `std` feature.
