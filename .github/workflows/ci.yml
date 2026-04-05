@@ -33,6 +33,7 @@ jobs:
     uses: sebastienrousseau/pipelines/.github/workflows/security.yml@main
     with:
       language: rust
+      severity-threshold: moderate
 
   docs:
     if: github.ref == 'refs/heads/main'
