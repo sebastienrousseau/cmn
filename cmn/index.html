@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Common (CMN)"><title>cmn - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-77263533.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="cmn" data-themes="" data-resource-suffix="" data-rustdoc-version="1.94.0 (4a4ef493e 2026-03-02)" data-channel="1.94.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-7bab91a1.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-ffcac47a.css"></noscript><link rel="icon" href="https://kura.pro/cmn/images/favicon.ico"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate cmn</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../cmn/index.html"><img src="https://kura.pro/cmn/images/logos/cmn.svg" alt="logo"></a><h2><a href="../cmn/index.html">cmn</a><span class="version">0.0.6</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#common-cmn" title="Common (CMN)">Common (CMN)</a><ul><li><a href="#why-cmn" title="Why CMN?">Why CMN?</a></li><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#quick-start" title="Quick Start">Quick Start</a></li><li><a href="#feature-flags" title="Feature Flags">Feature Flags</a></li><li><a href="#license" title="License">License</a></li></ul></li></ul><h3><a href="#reexports">Crate Items</a></h3><ul class="block"><li><a href="#reexports" title="Re-exports">Re-exports</a></li><li><a href="#modules-1" title="Modules">Modules</a></li><li><a href="#macros" title="Macros">Macros</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>cmn</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/cmn/lib.rs.html#1-199">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="common-cmn"><a class="doc-anchor" href="#common-cmn">§</a>Common (CMN)</h2>
+<p>121 mathematical and cryptographic constants for Rust.
+Zero runtime cost. <code>no_std</code> compatible.</p>
+<h3 id="why-cmn"><a class="doc-anchor" href="#why-cmn">§</a>Why CMN?</h3>
+<p><code>std::f64::consts</code> provides 11 mathematical constants. CMN
+extends that with 44 physical, cryptographic, and series
+constants — plus a runtime lookup API, 14 utility macros,
+and a built-in word-list module. Every constant resolves at
+compile time. Works in <code>no_std</code> environments.</p>
+<h3 id="modules"><a class="doc-anchor" href="#modules">§</a>Modules</h3>
+<ul>
+<li><strong><a href="constants/index.html" title="mod cmn::constants"><code>constants</code></a></strong> — 121 <code>const</code> values (PI, Avogadro,
+Planck, etc.). With <code>std</code>: runtime <code>Constants</code> lookup API
+<ul>
+<li><code>ConstantValue</code> typed enum.</li>
+</ul>
+</li>
+<li><strong><a href="macros/index.html" title="mod cmn::macros"><code>macros</code></a></strong> — 14 utility macros for min/max,
+range-checks, collections, and parsing.</li>
+<li>With <code>std</code> feature: <strong><a href="words/index.html" title="mod cmn::words"><code>words</code></a></strong> module, <strong><a href="datetime/index.html" title="mod cmn::datetime"><code>datetime</code></a></strong>
+utilities, and <strong><code>Common</code></strong> JSON bridge.</li>
+</ul>
+<h3 id="quick-start"><a class="doc-anchor" href="#quick-start">§</a>Quick Start</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Compile-time constants — always available, even in no_std
+</span><span class="kw">use </span>cmn::constants::{PI, EULER, SPEED_OF_LIGHT};
+
+<span class="macro">assert_eq!</span>(PI, core::f64::consts::PI);</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Runtime lookup — requires the `std` feature (default)
+</span><span class="kw">use </span>cmn::Constants;
+<span class="kw">use </span>cmn::Words;
+<span class="kw">use </span>cmn::words::WORD_LIST;
+
+<span class="kw">let </span>constants = Constants::new();
+<span class="kw">let </span>euler = constants.constant(<span class="string">"EULER"</span>).unwrap();
+<span class="macro">assert_eq!</span>(euler.name, <span class="string">"EULER"</span>);
+
+<span class="kw">let </span>words = Words::default();
+<span class="kw">let </span>list = words.words_list();
+<span class="macro">assert_eq!</span>(list.len(), WORD_LIST.len());
+<span class="macro">assert_eq!</span>(list[<span class="number">0</span>], <span class="string">"aboard"</span>);</code></pre></div><h3 id="feature-flags"><a class="doc-anchor" href="#feature-flags">§</a>Feature Flags</h3><div><table><thead><tr><th>Feature</th><th>Default</th><th>Enables</th></tr></thead><tbody>
+<tr><td><code>std</code></td><td>Yes</td><td><code>Constants</code> struct, <code>Words</code>, <code>Common</code>, serde support</td></tr>
+</tbody></table>
+</div>
+<p>For <code>no_std</code>, disable default features:</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+cmn = { version = &quot;0.0.6&quot;, default-features = false }</code></pre></div><h3 id="license"><a class="doc-anchor" href="#license">§</a>License</h3>
+<p>Dual-licensed under
+<a href="https://opensource.org/licenses/Apache-2.0">Apache 2.0</a> or
+<a href="https://opensource.org/licenses/MIT">MIT</a>, at your option.</p>
+</div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><dl class="item-table reexports"><dt id="reexport.Constants"><code>pub use constants::<a class="struct" href="constants/struct.Constants.html" title="struct cmn::constants::Constants">Constants</a>;</code></dt><dt id="reexport.Words"><code>pub use words::<a class="struct" href="words/struct.Words.html" title="struct cmn::words::Words">Words</a>;</code></dt></dl><h2 id="modules-1" class="section-header">Modules<a href="#modules-1" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="constants/index.html" title="mod cmn::constants">constants</a></dt><dd>121 mathematical, physical, and cryptographic constants as
+compile-time <code>const</code> values. The <code>const</code> values are always
+available, even in <code>no_std</code>. The runtime <code>Constants</code> lookup
+API and <code>ConstantValue</code> enum require the <code>std</code> feature.</dd><dt><a class="mod" href="datetime/index.html" title="mod cmn::datetime">datetime</a></dt><dd>Lightweight datetime utilities for ISO 8601 parsing,
+relative time formatting, and duration calculations.
+No external datetime crate required. Requires <code>std</code>.
+Lightweight datetime utilities for ISO 8601 parsing,
+relative time formatting, and duration calculations.</dd><dt><a class="mod" href="macros/index.html" title="mod cmn::macros">macros</a></dt><dd>14 utility macros for assertions, collections, range-checks,
+and string operations. Available in <code>no_std</code>.
+Utility macros that eliminate common Rust boilerplate.</dd><dt><a class="mod" href="words/index.html" title="mod cmn::words">words</a></dt><dd>A word-list module for passphrase generation and text
+processing. Backed by <code>HashSet&lt;String&gt;</code> for O(1) lookups
+with a curated built-in <code>WORD_LIST</code>. Requires <code>std</code>.
+Word-list management for passphrase generation and text processing.</dd></dl><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><dl class="item-table"><dt><a class="macro" href="macro.cmn.html" title="macro cmn::cmn">cmn</a></dt><dd>Parses arguments via <code>Common::parse</code>. Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_assert.html" title="macro cmn::cmn_assert">cmn_<wbr>assert</a></dt><dd>Asserts that the given condition is true.
+Panics with “Assertion failed!” if false.</dd><dt><a class="macro" href="macro.cmn_constants.html" title="macro cmn::cmn_constants">cmn_<wbr>constants</a></dt><dd>Defines a set of <code>f64</code> constants.</dd><dt><a class="macro" href="macro.cmn_contains.html" title="macro cmn::cmn_contains">cmn_<wbr>contains</a></dt><dd>Checks if a string contains a substring.</dd><dt><a class="macro" href="macro.cmn_in_range.html" title="macro cmn::cmn_in_range">cmn_<wbr>in_<wbr>range</a></dt><dd>Checks if a value is within an inclusive range.</dd><dt><a class="macro" href="macro.cmn_join.html" title="macro cmn::cmn_join">cmn_<wbr>join</a></dt><dd>Joins strings together into a single <code>String</code>.
+Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_map.html" title="macro cmn::cmn_map">cmn_map</a></dt><dd>Creates a <code>HashMap</code> from key-value pairs.
+Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_max.html" title="macro cmn::cmn_max">cmn_max</a></dt><dd>Returns the maximum of the given values.</dd><dt><a class="macro" href="macro.cmn_min.html" title="macro cmn::cmn_min">cmn_min</a></dt><dd>Returns the minimum of the given values.</dd><dt><a class="macro" href="macro.cmn_parse.html" title="macro cmn::cmn_parse">cmn_<wbr>parse</a></dt><dd>Parses the given input into a <code>Common</code> value.
+Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_print.html" title="macro cmn::cmn_print">cmn_<wbr>print</a></dt><dd>Prints the arguments to stdout. Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_print_vec.html" title="macro cmn::cmn_print_vec">cmn_<wbr>print_<wbr>vec</a></dt><dd>Prints each element of a slice to stdout.
+Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_split.html" title="macro cmn::cmn_split">cmn_<wbr>split</a></dt><dd>Splits a string into a <code>Vec&lt;String&gt;</code> by whitespace.
+Requires <code>std</code>.</dd><dt><a class="macro" href="macro.cmn_to_num.html" title="macro cmn::cmn_to_num">cmn_<wbr>to_<wbr>num</a></dt><dd>Converts a string to <code>f64</code>, returning <code>0.0</code> on failure.</dd><dt><a class="macro" href="macro.cmn_vec.html" title="macro cmn::cmn_vec">cmn_vec</a></dt><dd>Creates a new <code>Vec</code> with the given elements.
+Requires <code>std</code>.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Common.html" title="struct cmn::Common">Common</a></dt><dd>The <code>Common</code> structure provides a central location to store
+data that is commonly used throughout the library. Requires
+the <code>std</code> feature for serde JSON support.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.run.html" title="fn cmn::run">run</a></dt><dd>Main entry point for the <code>Common (CMN)</code> library.
+Requires <code>std</code>.</dd></dl></section></div></main></body></html>

@@ -1,0 +1,2 @@
+createSrcSidebar('[["cmn",["",[],["constants.rs","datetime.rs","lib.rs","macros.rs","words.rs"]]],["cmn",["",[],["constants.rs","lib.rs","macros.rs","words.rs"]]]]');
+//{"start":19,"fragment_lengths":[78,65]}
