@@ -55,7 +55,6 @@ path = "examples/cmn.rs"
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"], optional = true }
 serde_json = { version = "1.0.149", optional = true }
-commons = { git = "https://github.com/sebastienrousseau/commons", tag = "v0.0.1", default-features = false, features = ["error"], optional = true }
 
 [dev-dependencies]
 # Dependencies for testing
@@ -74,7 +73,7 @@ path = "src/lib.rs"
 
 [features]
 default = ["std"]
-std = ["serde", "serde_json", "commons"]
+std = ["serde", "serde_json"]
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
