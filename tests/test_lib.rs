@@ -22,7 +22,10 @@ mod tests {
         let a = Common::new();
         let b = Common::default();
         // Both should produce equivalent Constants
-        assert_eq!(a.constants().constants().len(), b.constants().constants().len());
+        assert_eq!(
+            a.constants().constants().len(),
+            b.constants().constants().len()
+        );
     }
 
     // ---------------------------------------------------------------
@@ -34,7 +37,10 @@ mod tests {
         let common = Common::default();
         let constants = common.constants();
         assert_eq!(constants.constants().len(), 55);
-        assert_eq!(constants.constants(), Constants::default().constants());
+        assert_eq!(
+            constants.constants(),
+            Constants::default().constants()
+        );
     }
 
     // ---------------------------------------------------------------
@@ -58,7 +64,8 @@ mod tests {
 
     #[test]
     fn words_with_populated_array_returns_words() {
-        let json = r#"{"words": ["delta", "alpha", "charlie", "bravo"]}"#;
+        let json =
+            r#"{"words": ["delta", "alpha", "charlie", "bravo"]}"#;
         let common = Common::parse(json).unwrap();
         let words = common.words();
 

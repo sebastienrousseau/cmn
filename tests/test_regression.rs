@@ -40,12 +40,30 @@ mod regression {
     fn reg_01_float_string_roundtrip_all_constants() {
         let c = Constants::new();
         let float_names = [
-            "APERY", "AVOGADRO", "BOLTZMANN", "CATALAN", "COULOMB",
-            "EULER", "FARADAY", "GAMMA", "GAS_CONSTANT",
-            "GLAISHER_KINKELIN", "GRAVITATIONAL_CONSTANT", "KHINCHIN",
-            "PHI", "PI", "PLANCK", "PLANCK_REDUCED", "SILVER_RATIO",
-            "SPEED_OF_LIGHT", "SQRT2", "SQRT3", "SQRT5", "TAU",
-            "VACUUM_PERMEABILITY", "VACUUM_PERMITTIVITY",
+            "APERY",
+            "AVOGADRO",
+            "BOLTZMANN",
+            "CATALAN",
+            "COULOMB",
+            "EULER",
+            "FARADAY",
+            "GAMMA",
+            "GAS_CONSTANT",
+            "GLAISHER_KINKELIN",
+            "GRAVITATIONAL_CONSTANT",
+            "KHINCHIN",
+            "PHI",
+            "PI",
+            "PLANCK",
+            "PLANCK_REDUCED",
+            "SILVER_RATIO",
+            "SPEED_OF_LIGHT",
+            "SQRT2",
+            "SQRT3",
+            "SQRT5",
+            "TAU",
+            "VACUUM_PERMEABILITY",
+            "VACUUM_PERMITTIVITY",
         ];
 
         for name in &float_names {
@@ -213,20 +231,22 @@ mod regression {
     #[test]
     fn reg_15_constant_json_shape() {
         let c = Constants::new().constant("PI").unwrap();
-        let v: serde_json::Value =
-            serde_json::to_value(&c).unwrap();
+        let v: serde_json::Value = serde_json::to_value(&c).unwrap();
         let obj = v.as_object().unwrap();
         assert!(obj.contains_key("name"), "Missing 'name' key");
         assert!(obj.contains_key("value"), "Missing 'value' key");
-        assert_eq!(obj.len(), 2, "Unexpected extra keys in Constant JSON");
+        assert_eq!(
+            obj.len(),
+            2,
+            "Unexpected extra keys in Constant JSON"
+        );
     }
 
     /// Serialised Constants must have a "constants" array.
     #[test]
     fn reg_16_constants_json_has_array() {
         let c = Constants::new();
-        let v: serde_json::Value =
-            serde_json::to_value(&c).unwrap();
+        let v: serde_json::Value = serde_json::to_value(&c).unwrap();
         assert!(
             v["constants"].is_array(),
             "'constants' must serialise as an array"
@@ -344,8 +364,7 @@ mod regression {
         let handles: Vec<_> = (0..8)
             .map(|i| {
                 std::thread::spawn(move || {
-                    let json =
-                        format!(r#"{{"id":{i}}}"#);
+                    let json = format!(r#"{{"id":{i}}}"#);
                     Common::parse(&json).unwrap()
                 })
             })
@@ -385,37 +404,25 @@ mod regression {
     fn reg_26_phi_satisfies_quadratic() {
         let lhs = PHI * PHI;
         let rhs = PHI + 1.0;
-        assert!(
-            (lhs - rhs).abs() < 1e-14,
-            "PHI^2 must equal PHI + 1"
-        );
+        assert!((lhs - rhs).abs() < 1e-14, "PHI^2 must equal PHI + 1");
     }
 
     /// SQRT2^2 must equal 2.
     #[test]
     fn reg_27_sqrt2_squared_equals_two() {
-        assert!(
-            (SQRT2 * SQRT2 - 2.0).abs() < 1e-15,
-            "SQRT2^2 drift"
-        );
+        assert!((SQRT2 * SQRT2 - 2.0).abs() < 1e-15, "SQRT2^2 drift");
     }
 
     /// SQRT3^2 must equal 3.
     #[test]
     fn reg_28_sqrt3_squared_equals_three() {
-        assert!(
-            (SQRT3 * SQRT3 - 3.0).abs() < 1e-15,
-            "SQRT3^2 drift"
-        );
+        assert!((SQRT3 * SQRT3 - 3.0).abs() < 1e-15, "SQRT3^2 drift");
     }
 
     /// SQRT5^2 must equal 5.
     #[test]
     fn reg_29_sqrt5_squared_equals_five() {
-        assert!(
-            (SQRT5 * SQRT5 - 5.0).abs() < 1e-13,
-            "SQRT5^2 drift"
-        );
+        assert!((SQRT5 * SQRT5 - 5.0).abs() < 1e-13, "SQRT5^2 drift");
     }
 
     /// Boltzmann * Avogadro ≈ Gas constant (R = k_B * N_A).
@@ -432,8 +439,10 @@ mod regression {
     /// (μ₀ * ε₀ * c² = 1 in SI units)
     #[test]
     fn reg_31_electromagnetic_relation() {
-        let product =
-            VACUUM_PERMEABILITY * VACUUM_PERMITTIVITY * SPEED_OF_LIGHT * SPEED_OF_LIGHT;
+        let product = VACUUM_PERMEABILITY
+            * VACUUM_PERMITTIVITY
+            * SPEED_OF_LIGHT
+            * SPEED_OF_LIGHT;
         assert!(
             (product - 1.0).abs() < 1e-4,
             "mu0 * eps0 * c^2 must ≈ 1, got {product}"

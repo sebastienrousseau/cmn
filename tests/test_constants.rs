@@ -13,10 +13,10 @@ mod tests {
         GRAVITATIONAL_CONSTANT, HASH_ALGORITHM, HASH_COST, HASH_LENGTH,
         KHINCHIN, LN_10, LN_2, LOG10_E, LOG2_E, MAGNETIC_FLUX_QUANTUM,
         NEUTRON_MASS, PHI, PI, PLANCK, PLANCK_REDUCED, PROTON_MASS,
-        RYDBERG, SILVER_RATIO, SPECIAL_CHARS, SPEED_OF_LIGHT,
-        STANDARD_ATMOSPHERE, STANDARD_GRAVITY, STEFAN_BOLTZMANN, SQRT2,
-        SQRT3, SQRT5, TAU, VACUUM_PERMEABILITY, VACUUM_PERMITTIVITY,
-        WIEN_DISPLACEMENT,
+        RYDBERG, SILVER_RATIO, SPECIAL_CHARS, SPEED_OF_LIGHT, SQRT2,
+        SQRT3, SQRT5, STANDARD_ATMOSPHERE, STANDARD_GRAVITY,
+        STEFAN_BOLTZMANN, TAU, VACUUM_PERMEABILITY,
+        VACUUM_PERMITTIVITY, WIEN_DISPLACEMENT,
     };
 
     /// Helper: get a Constant by name from a fresh Constants instance.
@@ -75,21 +75,60 @@ mod tests {
         let names: Vec<&str> =
             c.constants().iter().map(|c| c.name).collect();
         let expected = [
-            "APERY", "ATOMIC_MASS_UNIT", "AVOGADRO", "BOHR_RADIUS",
-            "BOLTZMANN", "CATALAN", "CONDUCTANCE_QUANTUM", "COULOMB",
-            "ELECTRON_MASS", "ELEMENTARY_CHARGE", "EULER", "FARADAY",
-            "FINE_STRUCTURE", "FRAC_1_PI", "FRAC_1_SQRT_2",
-            "FRAC_2_PI", "FRAC_2_SQRT_PI", "FRAC_PI_2", "FRAC_PI_3",
-            "FRAC_PI_4", "FRAC_PI_6", "FRAC_PI_8", "GAMMA",
-            "GAS_CONSTANT", "GLAISHER_KINKELIN",
-            "GRAVITATIONAL_CONSTANT", "HASH_ALGORITHM", "HASH_COST",
-            "HASH_LENGTH", "KHINCHIN", "LN_2", "LN_10", "LOG2_E",
-            "LOG10_E", "MAGNETIC_FLUX_QUANTUM", "NEUTRON_MASS", "PHI",
-            "PI", "PLANCK", "PLANCK_REDUCED", "PROTON_MASS", "RYDBERG",
-            "SILVER_RATIO", "SPECIAL_CHARS", "SPEED_OF_LIGHT",
-            "SQRT2", "SQRT3", "SQRT5", "STANDARD_ATMOSPHERE",
-            "STANDARD_GRAVITY", "STEFAN_BOLTZMANN", "TAU",
-            "VACUUM_PERMEABILITY", "VACUUM_PERMITTIVITY",
+            "APERY",
+            "ATOMIC_MASS_UNIT",
+            "AVOGADRO",
+            "BOHR_RADIUS",
+            "BOLTZMANN",
+            "CATALAN",
+            "CONDUCTANCE_QUANTUM",
+            "COULOMB",
+            "ELECTRON_MASS",
+            "ELEMENTARY_CHARGE",
+            "EULER",
+            "FARADAY",
+            "FINE_STRUCTURE",
+            "FRAC_1_PI",
+            "FRAC_1_SQRT_2",
+            "FRAC_2_PI",
+            "FRAC_2_SQRT_PI",
+            "FRAC_PI_2",
+            "FRAC_PI_3",
+            "FRAC_PI_4",
+            "FRAC_PI_6",
+            "FRAC_PI_8",
+            "GAMMA",
+            "GAS_CONSTANT",
+            "GLAISHER_KINKELIN",
+            "GRAVITATIONAL_CONSTANT",
+            "HASH_ALGORITHM",
+            "HASH_COST",
+            "HASH_LENGTH",
+            "KHINCHIN",
+            "LN_2",
+            "LN_10",
+            "LOG2_E",
+            "LOG10_E",
+            "MAGNETIC_FLUX_QUANTUM",
+            "NEUTRON_MASS",
+            "PHI",
+            "PI",
+            "PLANCK",
+            "PLANCK_REDUCED",
+            "PROTON_MASS",
+            "RYDBERG",
+            "SILVER_RATIO",
+            "SPECIAL_CHARS",
+            "SPEED_OF_LIGHT",
+            "SQRT2",
+            "SQRT3",
+            "SQRT5",
+            "STANDARD_ATMOSPHERE",
+            "STANDARD_GRAVITY",
+            "STEFAN_BOLTZMANN",
+            "TAU",
+            "VACUUM_PERMEABILITY",
+            "VACUUM_PERMITTIVITY",
             "WIEN_DISPLACEMENT",
         ];
         for name in &expected {
@@ -105,20 +144,56 @@ mod tests {
     fn get_value_float_constants_table_driven() {
         let c = Constants::new();
         let float_names = [
-            "APERY", "ATOMIC_MASS_UNIT", "AVOGADRO", "BOHR_RADIUS",
-            "BOLTZMANN", "CATALAN", "CONDUCTANCE_QUANTUM", "COULOMB",
-            "ELECTRON_MASS", "ELEMENTARY_CHARGE", "EULER", "FARADAY",
-            "FINE_STRUCTURE", "FRAC_1_PI", "FRAC_1_SQRT_2",
-            "FRAC_2_PI", "FRAC_2_SQRT_PI", "FRAC_PI_2", "FRAC_PI_3",
-            "FRAC_PI_4", "FRAC_PI_6", "FRAC_PI_8", "GAMMA",
-            "GAS_CONSTANT", "GLAISHER_KINKELIN",
-            "GRAVITATIONAL_CONSTANT", "KHINCHIN", "LN_2", "LN_10",
-            "LOG2_E", "LOG10_E", "MAGNETIC_FLUX_QUANTUM",
-            "NEUTRON_MASS", "PHI", "PI", "PLANCK", "PLANCK_REDUCED",
-            "PROTON_MASS", "RYDBERG", "SILVER_RATIO", "SPEED_OF_LIGHT",
-            "SQRT2", "SQRT3", "SQRT5", "STANDARD_ATMOSPHERE",
-            "STANDARD_GRAVITY", "STEFAN_BOLTZMANN", "TAU",
-            "VACUUM_PERMEABILITY", "VACUUM_PERMITTIVITY",
+            "APERY",
+            "ATOMIC_MASS_UNIT",
+            "AVOGADRO",
+            "BOHR_RADIUS",
+            "BOLTZMANN",
+            "CATALAN",
+            "CONDUCTANCE_QUANTUM",
+            "COULOMB",
+            "ELECTRON_MASS",
+            "ELEMENTARY_CHARGE",
+            "EULER",
+            "FARADAY",
+            "FINE_STRUCTURE",
+            "FRAC_1_PI",
+            "FRAC_1_SQRT_2",
+            "FRAC_2_PI",
+            "FRAC_2_SQRT_PI",
+            "FRAC_PI_2",
+            "FRAC_PI_3",
+            "FRAC_PI_4",
+            "FRAC_PI_6",
+            "FRAC_PI_8",
+            "GAMMA",
+            "GAS_CONSTANT",
+            "GLAISHER_KINKELIN",
+            "GRAVITATIONAL_CONSTANT",
+            "KHINCHIN",
+            "LN_2",
+            "LN_10",
+            "LOG2_E",
+            "LOG10_E",
+            "MAGNETIC_FLUX_QUANTUM",
+            "NEUTRON_MASS",
+            "PHI",
+            "PI",
+            "PLANCK",
+            "PLANCK_REDUCED",
+            "PROTON_MASS",
+            "RYDBERG",
+            "SILVER_RATIO",
+            "SPEED_OF_LIGHT",
+            "SQRT2",
+            "SQRT3",
+            "SQRT5",
+            "STANDARD_ATMOSPHERE",
+            "STANDARD_GRAVITY",
+            "STEFAN_BOLTZMANN",
+            "TAU",
+            "VACUUM_PERMEABILITY",
+            "VACUUM_PERMITTIVITY",
             "WIEN_DISPLACEMENT",
         ];
 
@@ -148,7 +223,8 @@ mod tests {
     #[test]
     fn get_value_hash_length_returns_usize() {
         let c = Constants::new();
-        if let Some(ConstantValue::Usize(v)) = c.get_value("HASH_LENGTH")
+        if let Some(ConstantValue::Usize(v)) =
+            c.get_value("HASH_LENGTH")
         {
             assert_eq!(v, HASH_LENGTH);
         } else {
@@ -243,7 +319,11 @@ mod tests {
         let mut set = HashSet::new();
         let _ = set.insert(a);
         let _ = set.insert(b);
-        assert_eq!(set.len(), 1, "Equal constants should hash the same");
+        assert_eq!(
+            set.len(),
+            1,
+            "Equal constants should hash the same"
+        );
     }
 
     #[test]
@@ -259,8 +339,7 @@ mod tests {
     #[test]
     fn constant_deserialize_from_json() {
         // Use a leaked string to satisfy the 'static lifetime on name
-        let json: &'static str =
-            r#"{"name":"TEST","value":"42"}"#;
+        let json: &'static str = r#"{"name":"TEST","value":"42"}"#;
         let c: Constant = serde_json::from_str(json).unwrap();
         assert_eq!(c.name, "TEST");
         assert_eq!(c.value, "42");
@@ -393,10 +472,7 @@ mod tests {
         assert_eq!(FRAC_1_SQRT_2, std::f64::consts::FRAC_1_SQRT_2);
         assert_eq!(FRAC_1_PI, std::f64::consts::FRAC_1_PI);
         assert_eq!(FRAC_2_PI, std::f64::consts::FRAC_2_PI);
-        assert_eq!(
-            FRAC_2_SQRT_PI,
-            std::f64::consts::FRAC_2_SQRT_PI
-        );
+        assert_eq!(FRAC_2_SQRT_PI, std::f64::consts::FRAC_2_SQRT_PI);
         assert_eq!(FRAC_PI_2, std::f64::consts::FRAC_PI_2);
         assert_eq!(FRAC_PI_3, std::f64::consts::FRAC_PI_3);
         assert_eq!(FRAC_PI_4, std::f64::consts::FRAC_PI_4);
@@ -475,9 +551,7 @@ mod tests {
 
     #[test]
     fn frac_1_sqrt2_squared_equals_half() {
-        assert!(
-            (FRAC_1_SQRT_2 * FRAC_1_SQRT_2 - 0.5).abs() < 1e-15
-        );
+        assert!((FRAC_1_SQRT_2 * FRAC_1_SQRT_2 - 0.5).abs() < 1e-15);
     }
 
     #[test]
@@ -501,8 +575,7 @@ mod tests {
         // Φ_0 = h / (2e)
         let computed = PLANCK / (2.0 * ELEMENTARY_CHARGE);
         assert!(
-            (MAGNETIC_FLUX_QUANTUM - computed).abs() / computed
-                < 1e-6
+            (MAGNETIC_FLUX_QUANTUM - computed).abs() / computed < 1e-6
         );
     }
 
@@ -512,8 +585,7 @@ mod tests {
         let computed =
             2.0 * ELEMENTARY_CHARGE * ELEMENTARY_CHARGE / PLANCK;
         assert!(
-            (CONDUCTANCE_QUANTUM - computed).abs() / computed
-                < 1e-6
+            (CONDUCTANCE_QUANTUM - computed).abs() / computed < 1e-6
         );
     }
 

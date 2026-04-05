@@ -38,8 +38,16 @@ use std::fmt;
 /// (`+HH:MM` / `-HH:MM`). All arithmetic is performed in
 /// seconds relative to the Unix epoch (1970-01-01T00:00:00Z).
 #[derive(
-    Clone, Copy, Debug, Eq, Hash, Ord, PartialEq,
-    PartialOrd, Serialize, Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    Serialize,
+    Deserialize,
 )]
 pub struct DateTime {
     year: i32,
@@ -54,8 +62,16 @@ pub struct DateTime {
 
 /// A signed duration between two [`DateTime`] values.
 #[derive(
-    Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd,
-    Serialize, Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    Serialize,
+    Deserialize,
 )]
 pub struct Duration {
     /// Total seconds (signed).
@@ -140,39 +156,33 @@ impl DateTime {
         if b.len() < 20 {
             return Err(ParseError::InvalidFormat);
         }
-        let year = parse_u32(b, 0, 4)
-            .ok_or(ParseError::InvalidFormat)?
-            as i32;
+        let year =
+            parse_u32(b, 0, 4).ok_or(ParseError::InvalidFormat)? as i32;
         if b[4] != b'-' {
             return Err(ParseError::InvalidFormat);
         }
-        let month = parse_u32(b, 5, 2)
-            .ok_or(ParseError::InvalidFormat)?
-            as u8;
+        let month =
+            parse_u32(b, 5, 2).ok_or(ParseError::InvalidFormat)? as u8;
         if b[7] != b'-' {
             return Err(ParseError::InvalidFormat);
         }
-        let day = parse_u32(b, 8, 2)
-            .ok_or(ParseError::InvalidFormat)?
-            as u8;
+        let day =
+            parse_u32(b, 8, 2).ok_or(ParseError::InvalidFormat)? as u8;
         if b[10] != b'T' {
             return Err(ParseError::InvalidFormat);
         }
-        let hour = parse_u32(b, 11, 2)
-            .ok_or(ParseError::InvalidFormat)?
-            as u8;
+        let hour =
+            parse_u32(b, 11, 2).ok_or(ParseError::InvalidFormat)? as u8;
         if b[13] != b':' {
             return Err(ParseError::InvalidFormat);
         }
-        let minute = parse_u32(b, 14, 2)
-            .ok_or(ParseError::InvalidFormat)?
-            as u8;
+        let minute =
+            parse_u32(b, 14, 2).ok_or(ParseError::InvalidFormat)? as u8;
         if b[16] != b':' {
             return Err(ParseError::InvalidFormat);
         }
-        let second = parse_u32(b, 17, 2)
-            .ok_or(ParseError::InvalidFormat)?
-            as u8;
+        let second =
+            parse_u32(b, 17, 2).ok_or(ParseError::InvalidFormat)? as u8;
 
         let offset_minutes = match b[19] {
             b'Z' => {
@@ -265,11 +275,7 @@ impl DateTime {
                 self.second,
             )
         } else {
-            let sign = if self.offset_minutes >= 0 {
-                '+'
-            } else {
-                '-'
-            };
+            let sign = if self.offset_minutes >= 0 { '+' } else { '-' };
             let abs = self.offset_minutes.unsigned_abs();
             let oh = abs / 60;
             let om = abs % 60;
@@ -292,9 +298,7 @@ impl DateTime {
     /// Converts this datetime to a Unix timestamp (seconds
     /// since 1970-01-01T00:00:00Z), adjusted for offset.
     pub fn to_unix_timestamp(&self) -> i64 {
-        let days = days_from_civil(
-            self.year, self.month, self.day,
-        );
+        let days = days_from_civil(self.year, self.month, self.day);
         let secs = days * 86400
             + i64::from(self.hour) * 3600
             + i64::from(self.minute) * 60
@@ -462,8 +466,7 @@ fn days_from_civil(y: i32, m: u8, d: u8) -> i64 {
     let era = if y >= 0 { y } else { y - 399 } / 400;
     let yoe = (y - era * 400) as u64;
     let m_adj = if m > 2 { m - 3 } else { m + 9 };
-    let doy =
-        (153 * m_adj as u64 + 2) / 5 + d as u64 - 1;
+    let doy = (153 * m_adj as u64 + 2) / 5 + d as u64 - 1;
     let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
     era * 146097 + doe as i64 - 719468
 }

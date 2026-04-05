@@ -158,18 +158,12 @@ impl Common {
     }
     /// Parses a string of JSON data and returns a new
     /// instance of the `Common` structure.
-    pub fn parse(
-        input: &str,
-    ) -> Result<Self, serde_json::Error> {
+    pub fn parse(input: &str) -> Result<Self, serde_json::Error> {
         match serde_json::from_str::<Common>(input) {
             Ok(common) => {
                 if common.fields.is_null()
                     || common.fields.is_object()
-                        && common
-                            .fields
-                            .as_object()
-                            .unwrap()
-                            .is_empty()
+                        && common.fields.as_object().unwrap().is_empty()
                 {
                     Ok(Common::default())
                 } else {
@@ -195,9 +189,7 @@ impl Default for Common {
 /// Requires `std`.
 #[cfg(feature = "std")]
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
-    if std::env::var("CMN_TEST_MODE").unwrap_or_default()
-        == "1"
-    {
+    if std::env::var("CMN_TEST_MODE").unwrap_or_default() == "1" {
         return Err("Simulated error".into());
     }
     let name = "cmn";

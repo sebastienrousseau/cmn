@@ -5,9 +5,9 @@
 mod tests {
     use cmn::Common;
     use cmn::{
-        cmn_assert, cmn_constants, cmn_contains, cmn_in_range, cmn_join,
-        cmn_map, cmn_max, cmn_min, cmn_parse, cmn_print, cmn_print_vec,
-        cmn_split, cmn_to_num, cmn_vec, constants::*,
+        cmn_assert, cmn_constants, cmn_contains, cmn_in_range,
+        cmn_join, cmn_map, cmn_max, cmn_min, cmn_parse, cmn_print,
+        cmn_print_vec, cmn_split, cmn_to_num, cmn_vec, constants::*,
     };
 
     // ===============================================================
@@ -94,13 +94,19 @@ mod tests {
     }
 
     #[test]
-    #[allow(clippy::assertions_on_constants, clippy::double_comparisons)]
+    #[allow(
+        clippy::assertions_on_constants,
+        clippy::double_comparisons
+    )]
     fn cmn_in_range_equal_min_max_at_value_returns_true() {
         debug_assert!(cmn_in_range!(5, 5, 5));
     }
 
     #[test]
-    #[allow(clippy::assertions_on_constants, clippy::double_comparisons)]
+    #[allow(
+        clippy::assertions_on_constants,
+        clippy::double_comparisons
+    )]
     fn cmn_in_range_equal_min_max_not_at_value_returns_false() {
         debug_assert!(!cmn_in_range!(6, 5, 5));
     }

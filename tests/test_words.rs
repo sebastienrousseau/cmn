@@ -201,7 +201,10 @@ mod tests {
     #[test]
     fn word_list_contains_no_empty_strings() {
         for word in WORD_LIST {
-            assert!(!word.is_empty(), "WORD_LIST should not contain empty strings");
+            assert!(
+                !word.is_empty(),
+                "WORD_LIST should not contain empty strings"
+            );
         }
     }
 }
