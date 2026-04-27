@@ -76,7 +76,7 @@ serde_json = { version = "1.0.149", optional = true }
 
 [dev-dependencies]
 # Dependencies for testing
-assert_cmd = "2.2.0"
+assert_cmd = "2.2.1"
 criterion = "0.8.2"
 
 [[bin]]
