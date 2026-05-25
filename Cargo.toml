@@ -72,11 +72,11 @@ path = "examples/macros_demo.rs"
 
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"], optional = true }
-serde_json = { version = "1.0.149", optional = true }
+serde_json = { version = "1.0.150", optional = true }
 
 [dev-dependencies]
 # Dependencies for testing
-assert_cmd = "2.2.0"
+assert_cmd = "2.2.2"
 criterion = "0.8.2"
 
 [[bin]]
