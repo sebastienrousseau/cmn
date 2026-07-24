@@ -32,7 +32,7 @@ name = "cmn"
 readme = "README.md"
 repository = "https://github.com/sebastienrousseau/cmn/"
 rust-version = "1.72"
-version = "0.0.6"
+version = "0.0.7"
 
 [[bench]]
 name = "benchmark"
