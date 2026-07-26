@@ -13,7 +13,7 @@
   <a href="https://crates.io/crates/cmn"><img src="https://img.shields.io/crates/v/cmn.svg?style=for-the-badge&color=fc8d62&logo=rust" alt="Crates.io" /></a>
   <a href="https://docs.rs/cmn"><img src="https://img.shields.io/badge/docs.rs-cmn-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" alt="Docs.rs" /></a>
   <a href="https://codecov.io/gh/sebastienrousseau/cmn"><img src="https://img.shields.io/codecov/c/github/sebastienrousseau/cmn?style=for-the-badge&logo=codecov" alt="Coverage" /></a>
-  <a href="https://lib.rs/crates/cmn"><img src="https://img.shields.io/badge/lib.rs-v0.0.6-orange.svg?style=for-the-badge" alt="lib.rs" /></a>
+  <a href="https://lib.rs/crates/cmn"><img src="https://img.shields.io/badge/lib.rs-v0.0.7-orange.svg?style=for-the-badge" alt="lib.rs" /></a>
 </p>
 
 ---
@@ -69,13 +69,13 @@ Add to `Cargo.toml`:
 
 ```toml
 [dependencies]
-cmn = "0.0.6"
+cmn = "0.0.7"
 ```
 
 For `no_std` (constants + 7 macros only, zero dependencies):
 
 ```toml
-cmn = { version = "0.0.6", default-features = false }
+cmn = { version = "0.0.7", default-features = false }
 ```
 
 Requires [Rust](https://rustup.rs/) 1.72+. Works on macOS, Linux, Windows, and WASM.
@@ -408,7 +408,7 @@ Mathematical constants use `core::f64::consts` where available (PI, E, TAU, SQRT
 **Does CMN support `no_std`?**
 Yes. Disable default features to get all 121 `const` values, `CONSTANTS_TABLE` with `Category` filtering, and 7 macros with zero dependencies:
 ```toml
-cmn = { version = "0.0.6", default-features = false }
+cmn = { version = "0.0.7", default-features = false }
 ```
 The `Constants` runtime API, `Words`, `Common`, `datetime`, and 8 std macros require the `std` feature (enabled by default).
 
