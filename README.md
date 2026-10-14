@@ -57,7 +57,7 @@ cargo add cmn
 | **License** | MIT / Apache-2.0 | GPL-3.0 | MIT | stdlib |
 | **Test coverage** | 100% (295 tests) | Unknown | Unknown | N/A |
 | **Documentation** | 100% | 100% | 29% | stdlib |
-| **MSRV** | 1.72 | Unspecified | Unspecified | N/A |
+| **MSRV** | 1.89 | Unspecified | Unspecified | N/A |
 
 `physical_constants` has the most values but is **GPL-3.0** — incompatible with MIT/Apache projects. `natural_constants` spans the most disciplines but is 29% documented and stale since 2022. CMN is the only crate combining constants, typed runtime lookup, category filtering, `no_std`/WASM support, utility macros, a datetime module, and a word list under a permissive license with 100% test coverage.
 
@@ -78,7 +78,7 @@ For `no_std` (constants + 7 macros only, zero dependencies):
 cmn = { version = "0.0.7", default-features = false }
 ```
 
-Requires [Rust](https://rustup.rs/) 1.72+. Works on macOS, Linux, Windows, and WASM.
+Requires [Rust](https://rustup.rs/) 1.89+. Works on macOS, Linux, Windows, and WASM.
 
 ---
 
@@ -416,7 +416,7 @@ The `Constants` runtime API, `Words`, `Common`, `datetime`, and 8 std macros req
 Yes. `cargo build --target wasm32-unknown-unknown --no-default-features` compiles cleanly.
 
 **What is the MSRV?**
-Rust **1.72**. Tested on stable. No nightly features required.
+Rust **1.89**. Tested on stable. No nightly features required.
 
 **How does CMN compare to other Rust constants crates?**
 `physical_constants` has 354 values but is **GPL-3.0** — incompatible with MIT/Apache projects. `natural_constants` covers more disciplines but is only 29% documented and unmaintained since 2022. `std::f64::consts` provides 11 math constants with no physical values. CMN is the only crate combining 121 constants with typed runtime lookup, category filtering, `no_std`/WASM support, 15 utility macros, a datetime module, and a word list under a permissive license with 100% test coverage. See the [comparison table](#how-cmn-compares-to-other-constants-crates) above.
@@ -468,7 +468,7 @@ cargo bench
 | Symptom | Fix |
 |:---|:---|
 | `rustup: command not found` | Install Rust via [rustup.rs](https://rustup.rs/) |
-| `error[E0658]: unstable library feature` | `rustup update stable` (MSRV is 1.72) |
+| `error[E0658]: unstable library feature` | `rustup update stable` (MSRV is 1.89) |
 | `linker 'cc' not found` (Linux/WSL) | `sudo apt-get install -y build-essential` |
 | `cargo test` fails on fresh clone | Open an [issue](https://github.com/sebastienrousseau/cmn/issues) with `rustc --version` |
 

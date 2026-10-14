@@ -10,7 +10,7 @@ Thank you for your interest in contributing. This guide covers setup, commit pol
 | **Linux / WSL** | Same as above, plus `sudo apt-get install -y build-essential` (Debian/Ubuntu) |
 | **Windows** | Download [rustup-init.exe](https://rustup.rs/) and install the MSVC toolchain |
 
-Minimum Rust version: **1.72**
+Minimum Rust version: **1.89**
 
 ## Getting Started
 
